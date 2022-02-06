@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 11:56:29 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/06 14:09:54 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,26 @@
 
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>
+# include <fcntl.h>
+# include <signal.h>
 
-enum	e_redirection {
+//	~~	Enums ------------------------------------------------------------------
+
+enum e_redirection {
 	HEREDOC,
 	SIMPLE,
 	TRUNC,
-	APPEND
+	APPEND,
 };
 
-typedef struct s_command
-{
+//	~~	Typedefs ---------------------------------------------------------------
+
+typedef struct s_command	t_command;
+typedef struct s_minishell	t_minishell;
+
+//	~~	Structures -------------------------------------------------------------
+
+struct s_command {
 	char	**cmd;
 	char	*args;
 	char	*path;
@@ -37,15 +46,18 @@ typedef struct s_command
 	char	*path_file_out;
 	int		filedescriptor_in;
 	int		filedescriptor_out;
-	int 	type_of_infile;
-	int 	type_of_outfile;
-}	t_command;
-
-struct	minishell {
-	int 		last_exit_code;
-	int			nb_cmds;
-	char		**env;
-	t_command	*cmds;
+	int		type_of_infile;
+	int		type_of_outfile;
 };
+
+struct	s_minishell {
+	t_command	*cmds;
+	bool		is_running;
+	char		**env;
+	int			nb_cmds;
+	int			last_exit_code;
+};
+
+//	~~	Prototypes -------------------------------------------------------------
 
 #endif
