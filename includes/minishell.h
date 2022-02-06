@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 17:33:22 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 18:05:52 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct	s_minishell {
 //	~~	Prototypes -------------------------------------------------------------
 
 bool	init_minishell(t_minishell *minishell, char	**envp);
+bool	free_minishell(t_minishell *minishell);
 char	**add_env(char	**env, char	*add_to_env);
 char	**copy_env(char **envp, int opt);
 int		find_env(char **env, char *name);
