@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:16:15 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 15:40:57 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:18:11 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ char	**add_env(char	**env, char	*add_to_env)
 
 	i = 0;
 	j = -1;
+	if (find_env(env, get_env_name(add_to_env)) != -1)
+	{
+		return (replace_env(env, find_env(env, get_env_name(add_to_env)),
+				get_env_value(add_to_env)));
+	}
 	new_env = copy_env(env, 1);
 	if (!new_env)
 		return (NULL);

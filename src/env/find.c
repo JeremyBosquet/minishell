@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:45:13 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 16:55:23 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:19:39 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_env_name(char *line)
 	char	*name;
 
 	j = 0;
-	while (line[j] != '=')
+	while (line[j] && line[j] != '=')
 		j++;
 	name = ft_calloc(sizeof(char), j + 1);
 	if (!name)
@@ -46,7 +46,24 @@ char	*get_env_name(char *line)
 	j = -1;
 	while (line[++j] != '=')
 		name[j] = line[j];
-	name[j] = '=';
+	return (name);
+}
+
+char	*get_env_value(char *line)
+{
+	int		i;
+	int		j;
+	char	*name;
+
+	i = 0;
+	j = 0;
+	while (line[j] && line[j] != '=')
+		j++;
+	name = ft_calloc(sizeof(char), ft_strlen(line) - j + 1);
+	if (!name)
+		return (NULL);
+	while (line[++j])
+		name[i++] = line[j];
 	return (name);
 }
 

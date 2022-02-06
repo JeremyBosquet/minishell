@@ -13,6 +13,7 @@ override	LIBS		:=		\
 
 override	SOURCES	:=	\
 	minishell.c \
+	init/init.c \
 	env/add.c \
 	env/copy.c \
 	env/find.c \

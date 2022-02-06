@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 16:27:27 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:13:54 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char
 
 	i = 0;
 	j = 0;
-	while (env[line][i] != '=')
+	while (env[line][i] && env[line][i] != '=')
 		i++;
 	new_line = ft_calloc(sizeof(char), (i + ft_strlen(value) + 1));
 	i = -1;
