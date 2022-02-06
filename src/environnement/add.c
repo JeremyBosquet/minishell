@@ -6,37 +6,34 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:16:15 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 17:18:11 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:45:38 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**add_env(char	**env, char	*add_to_env)
+char
+	**add_to_environnement(char **environnement, char *new)
 {
-	char	**new_env;
+	char	**new_environnement;
+	char	*name;
+	int		line;
 	int		i;
-	int		j;
 
-	i = 0;
-	j = -1;
-	if (find_env(env, get_env_name(add_to_env)) != -1)
-	{
-		return (replace_env(env, find_env(env, get_env_name(add_to_env)),
-				get_env_value(add_to_env)));
-	}
-	new_env = copy_env(env, 1);
-	if (!new_env)
+	name = get_name_of_line(new);
+	line = find_line_of_name(environnement, name);
+	if (line != -1)
+		return (replace_line_in_environnement(environnement, line, \
+		get_value_of_line(new)));
+	new_environnement = copy_environnement(environnement, 1);
+	if (new_environnement == NULL)
 		return (NULL);
-	while (new_env[i])
-		i++;
-	new_env[i] = malloc(sizeof(char) * ft_strlen(add_to_env) + 1);
-	if (!new_env)
+	i = size_of_array(new_environnement);
+	new_environnement[i] = ft_calloc(ft_strlen(new) + 1, sizeof(char));
+	if (new_environnement[i] == NULL)
 		return (NULL);
-	while (add_to_env[++j])
-		new_env[i][j] = add_to_env[j];
-	new_env[i][j] = 0;
-	new_env[i + 1] = 0;
-	free_array((void **) env, i);
-	return (new_env);
+	ft_strcpy(new_environnement[i], new);
+	new_environnement[i + 1] = NULL;
+	free_array((void **) environnement, i);
+	return (new_environnement);
 }

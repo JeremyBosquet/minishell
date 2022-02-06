@@ -6,36 +6,38 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 15:59:58 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 16:51:58 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:13:16 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**delete_env(char **env, char *name)
+char
+	**delete_line_in_environnement(char **environnement, char *name)
 {
 	int		i;
 	int		j;
-	int		k;
-	int		tmp;
-	char	**new_env;
+	int		size;
+	int		line;
+	char	**new_environnement;
 
-	i = 0;
-	k = 0;
-	while (env[i])
-		i++;
-	new_env = ft_calloc(sizeof(char *), i);
-	if (!new_env)
+	size = size_of_array(environnement);
+	new_environnement = ft_calloc(size, sizeof(char));
+	if (new_environnement == NULL)
 		return (NULL);
+	line = find_line_of_name(environnement, name);
+	i = 0;
 	j = 0;
-	tmp = find_env(env, name);
-	while (env[j])
+	while (environnement[i] != NULL)
 	{
-		if (j == tmp && j != i)
-			j++;
+		if (i == line AND i != size)
+			i += 1;
 		else
-			new_env[k++] = ft_strdup(env[j++]);
+		{
+			new_environnement[j] = ft_strdup(environnement[i]);
+			i += 1;
+		}
 	}
-	free_array((void **) env, i);
-	return (new_env);
+	free_array((void **) environnement, size);
+	return (new_environnement);
 }

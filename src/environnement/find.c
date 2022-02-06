@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 20:00:36 by mmosca           ###   ########.fr       */
+/*   Created: 2022/02/06 14:45:13 by jbosquet          #+#    #+#             */
+/*   Updated: 2022/02/06 19:14:54 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int
-	main(int argc, char **argv, char **envp)
+	find_line_of_name(char **environnement, char *name)
 {
-	t_minishell	minishell;
-	char		*new_line;
+	int	i;
 
-	(void) argv;
-	check_argument(argc);
-	if (!init_minishell(&minishell, envp))
-		error("initialization error", 1);
-	while (minishell.is_running == true)
+	name = ft_strjoin(name, "=");
+	i = 0;
+	while (environnement[i] != NULL)
 	{
-		new_line = readline(ORANGE"couscous-0.1$ "END);
-		minishell.is_running = false;
+		if (ft_strncmp(environnement[i], name, ft_strlen(name)) == 0)
+			return (i);
+		i += 1;
 	}
-	free(new_line);
-	clean_minishell(&minishell);
-	return (0);
+	return (-1);
 }

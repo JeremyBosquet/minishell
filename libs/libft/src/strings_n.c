@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:35:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 15:59:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/06 19:26:25 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ int
 	AND first_string[i] == second_string[i] AND i < size - 1)
 		i += 1;
 	return ((unsigned char)first_string[i] - (unsigned char)second_string[i]);
+}
+
+char
+	*ft_strncpy(char *destination, char *source, int size)
+{
+	int	i;
+
+	i = 0;
+	while (source[i] != EOS AND i < size)
+	{
+		destination[i] = source[i];
+		i += 1;
+	}
+	while (i < size)
+	{
+		destination[i] = EOS;
+		i += 1;
+	}
+	return (destination);
 }
 
 char

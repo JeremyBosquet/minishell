@@ -7,6 +7,7 @@ override	HEADERS	:=	\
 
 override	SOURCES	:=	\
 	alloc.c				\
+	array.c				\
 	char.c				\
 	convert.c			\
 	debug.c				\

@@ -6,32 +6,37 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 17:13:54 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:28:47 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char
-	**replace_env(char **env, int line, char *value)
+	**replace_line_in_environnement(char **environnement, int line, char *value)
 {
-	char	*new_line;
+	char	*new;
 	int		i;
 	int		j;
 
 	i = 0;
+	while (environnement != NULL AND environnement[line][i] != EOS \
+	AND environnement[line][i] != '=')
+		i += 1;
+	i += 1;
+	new = ft_calloc(ft_strlen(value) + i, sizeof(char));
+	if (new == NULL)
+		return (NULL);
+	ft_strncpy(new, environnement[line], i);
 	j = 0;
-	while (env[line][i] && env[line][i] != '=')
-		i++;
-	new_line = ft_calloc(sizeof(char), (i + ft_strlen(value) + 1));
-	i = -1;
-	while (env[line][++i] != '=')
-		new_line[i] = env[line][i];
-	new_line[i++] = '=';
-	while (value[j])
-		new_line[i++] = value[j++];
-	free(env[line]);
-	env[line] = ft_strdup(new_line);
-	free(new_line);
-	return (env);
+	while (value[j] != EOS)
+	{
+		new[i] = value[j];
+		i += 1;
+		j += 1;
+	}
+	free(environnement[line]);
+	environnement[line] = ft_strdup(new);
+	free(new);
+	return (environnement);
 }

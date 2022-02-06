@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 18:05:52 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:02:38 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_minishell	t_minishell;
 //	~~	Structures -------------------------------------------------------------
 
 struct s_command {
-	char	**cmd;
-	char	*args;
+	char	**command;
+	char	*arguments;
 	char	*path;
 	char	*path_file_in;
 	char	*path_file_out;
@@ -51,23 +51,61 @@ struct s_command {
 };
 
 struct	s_minishell {
-	t_command	*cmds;
+	t_command	*commands;
 	bool		is_running;
-	char		**env;
-	int			nb_cmds;
-	int			last_exit_code;
+	char		**environnement;
+	int			number_of_commands;
+	int			exit_code;
 };
 
 //	~~	Prototypes -------------------------------------------------------------
 
-bool	init_minishell(t_minishell *minishell, char	**envp);
-bool	free_minishell(t_minishell *minishell);
-char	**add_env(char	**env, char	*add_to_env);
-char	**copy_env(char **envp, int opt);
-int		find_env(char **env, char *name);
-char	**replace_env(char **env, int line, char *value);
-char	**delete_env(char **env, char *name);
-char	*get_env_name(char *line);
-char	*get_env_value(char *line);
+//	~	environnement/add.c ------------
+
+char
+**add_to_environnement(char **environnement, char *new);
+
+//	~	environnement/copy.c -----------
+
+char
+**copy_environnement(char **environnement, int option);
+
+//	~	environnement/delete.c ---------
+
+char
+**delete_line_in_environnement(char **environnement, char *name);
+
+//	~	environnement/find.c -----------
+
+int
+find_line_of_name(char **environnement, char *name);
+
+//	~	environnement/get.c ------------
+
+char
+*get_name_of_line(char *line);
+
+char
+*get_value_of_line(char *line);
+
+//	~	environnement/replace.c --------
+
+char
+**replace_line_in_environnement(char **environnement, int line, char *value);
+
+//	~	parsing/arguments.c ------------
+
+void
+check_argument(int number_of_arguments);
+
+//	~	structures/clean.c -------------
+
+bool
+clean_minishell(t_minishell *minishell);
+
+//	~	structures/init.c --------------
+
+bool
+init_minishell(t_minishell *minishell, char	**envp);
 
 #endif

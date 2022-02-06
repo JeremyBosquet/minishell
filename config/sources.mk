@@ -11,11 +11,14 @@ override	LIBS		:=		\
 
 ##	~~	Sources ----------------------------------------------------------------
 
-override	SOURCES	:=	\
-	minishell.c \
-	init/init.c \
-	env/add.c \
-	env/copy.c \
-	env/find.c \
-	env/replace.c \
-	env/delete.c
+override	SOURCES	:=			\
+	environnement/add.c			\
+	environnement/copy.c		\
+	environnement/delete.c		\
+	environnement/find.c		\
+	environnement/get.c			\
+	environnement/replace.c		\
+	parsing/arguments.c			\
+	structures/clean.c			\
+	structures/init.c			\
+	minishell.c

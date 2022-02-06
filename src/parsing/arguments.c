@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/05 16:44:06 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 19:55:30 by mmosca           ###   ########.fr       */
+/*   Created: 2022/02/06 19:34:20 by mmosca            #+#    #+#             */
+/*   Updated: 2022/02/06 19:41:43 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 void
-	error(char *message, int exit_status)
+	check_argument(int number_of_arguments)
 {
-	fputstring(STDERR, ORANGE);
-	fputstring(STDERR, "couscous: ");
-	fputstring(STDERR, RED);
-	fputstring(STDERR, "error: ");
-	fputstring(STDERR, END);
-	fputstring(STDERR, message);
-	fputchar(STDERR, '\n');
-	exit(exit_status);
+	if (number_of_arguments > 1)
+		error("too many arguments", 1);
 }

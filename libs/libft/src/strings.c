@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.le-101.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 15:11:08 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/06 18:49:52 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ char
 		return (NULL);
 	ft_strlcpy(new, string, size);
 	return (new);
+}
+
+char
+	*ft_strcpy(char *destination, char *source)
+{
+	int	i;
+
+	i = 0;
+	while (source[i] != '\0')
+	{
+		destination[i] = source[i];
+		i += 1;
+	}
+	destination[i] = '\0';
+	return (destination);
 }

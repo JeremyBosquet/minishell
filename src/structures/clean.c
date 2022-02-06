@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/05 16:44:06 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 19:55:30 by mmosca           ###   ########.fr       */
+/*   Created: 2022/02/06 20:00:48 by mmosca            #+#    #+#             */
+/*   Updated: 2022/02/06 20:03:17 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void
-	error(char *message, int exit_status)
+bool
+	clean_minishell(t_minishell *minishell)
 {
-	fputstring(STDERR, ORANGE);
-	fputstring(STDERR, "couscous: ");
-	fputstring(STDERR, RED);
-	fputstring(STDERR, "error: ");
-	fputstring(STDERR, END);
-	fputstring(STDERR, message);
-	fputchar(STDERR, '\n');
-	exit(exit_status);
+	free_array((void **) minishell->environnement, \
+	size_of_array(minishell->environnement));
+	return (true);
 }

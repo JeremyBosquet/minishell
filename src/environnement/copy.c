@@ -6,50 +6,32 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:56:38 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 15:48:12 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:11:27 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**copy_env2(char **envp, char **env)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (envp[i])
-	{
-		j = -1;
-		while (envp[i][++j])
-			env[i][j] = envp[i][j];
-		i++;
-	}
-	return (env);
-}
-
-char	**copy_env(char **envp, int opt)
+char
+	**copy_environnement(char **environnement, int option)
 {
 	int		i;
 	int		j;
-	char	**env;
+	char	**new_environnement;
 
-	i = 0;
-	while (envp[i])
-		i++;
-	env = ft_calloc(sizeof(char *), (i + 1 + opt));
-	if (!env)
+	i = size_of_array(environnement);
+	new_environnement = ft_calloc(i + option + 1, sizeof(char *));
+	if (new_environnement == NULL)
 		return (NULL);
 	i = 0;
-	while (envp[i])
+	while (environnement[i] != NULL)
 	{
-		j = 0;
-		while (envp[i][j])
-			j++;
-		env[i] = ft_calloc(sizeof(char), j + 1);
-		if (!env[i])
+		j = ft_strlen(environnement[i]);
+		new_environnement[i] = ft_calloc(j + 1, sizeof(char));
+		if (new_environnement[i] == NULL)
 			return (NULL);
-		i++;
+		ft_strcpy(new_environnement[i], environnement[i]);
+		i += 1;
 	}
-	return (copy_env2(envp, env));
+	return (new_environnement);
 }

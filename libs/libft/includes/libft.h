@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.le-101.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 10:28:07 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/06 19:57:00 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 
 # define debug(x) print_debug(x, __LINE__, __FILE__)
 
-# define RED "\033[1;31m"
-# define PURPLE "\033[1;35m"
+# define RED "\033[0;31m"
+# define ORANGE "\033[0;33m"
+# define PURPLE "\033[0;35m"
 # define END "\033[0m"
 
 //	~~	Enums ------------------------------------------------------------------
@@ -82,6 +83,11 @@ void
  */
 void
 free_array(void **pointer, int size);
+
+//	~	array.c ------------------------
+
+int
+size_of_array(char **array);
 
 //	~	char.c -------------------------
 
@@ -392,6 +398,9 @@ ft_strlen(const char *string);
 char
 *ft_strdup(const char *string);
 
+char
+*ft_strcpy(char *destination, char *source);
+
 //	~	strings_l.c --------------------
 
 /**
@@ -434,6 +443,9 @@ ft_strlcpy(char *destination, const char *source, int size);
  */
 int
 ft_strncmp(const char *first_string, const char *second_string, int size);
+
+char
+*ft_strncpy(char *destination, char *source, int size);
 
 /**
  * Duplicate the string passed in parameter where size is passed in parameter.
