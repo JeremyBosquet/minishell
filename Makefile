@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+         #
+#    By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/05 17:07:00 by mmosca            #+#    #+#              #
-#    Updated: 2022/02/06 12:08:25 by mmosca           ###   ########.fr        #
+#    Updated: 2022/02/06 15:58:42 by jbosquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,11 @@ re:	fclean all
 
 .PHONY: run # Run the program with value of test
 run:	header all
+ifeq (${DEBUG_MODE}, yes)
 	./${BUILD_DIRECTORY}/${NAME}
+else
+	leaks -atExit -q -- ./${BUILD_DIRECTORY}/${NAME}
+endif
 
 .PHONY: header # Display the header with properties about the project.
 header:

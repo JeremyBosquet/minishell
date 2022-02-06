@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 14:09:54 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/06 16:50:34 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ struct	s_minishell {
 
 //	~~	Prototypes -------------------------------------------------------------
 
+char	**add_env(char	**env, char	*add_to_env);
+char	**copy_env(char **envp, int opt);
+int		find_env(char **env, char *name);
+char	**replace_env(char **env, int line, char *value);
+char	**delete_env(char **env, char *name);
+char	*get_env_name(char *line);
 #endif

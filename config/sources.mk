@@ -12,4 +12,9 @@ override	LIBS		:=		\
 ##	~~	Sources ----------------------------------------------------------------
 
 override	SOURCES	:=	\
-	minishell.c
+	minishell.c \
+	env/add.c \
+	env/copy.c \
+	env/find.c \
+	env/replace.c \
+	env/delete.c
