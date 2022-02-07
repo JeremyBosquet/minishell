@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 11:08:19 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:19:35 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int
 	}
 	free(new_line);
 	clean_minishell(&minishell);
+	printf("exit\n");
 	return (0);
 }
