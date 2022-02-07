@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 10:55:03 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 14:47:06 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ struct s_command {
 
 struct	s_minishell {
 	t_command	*commands;
+	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
 	int			number_of_commands;
