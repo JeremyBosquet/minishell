@@ -21,4 +21,5 @@ override	SOURCES	:=			\
 	parsing/arguments.c			\
 	structures/clean.c			\
 	structures/init.c			\
-	minishell.c
+	minishell.c					\
+	signals.c

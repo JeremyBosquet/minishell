@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 10:05:13 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/07 10:55:03 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,10 @@ clean_minishell(t_minishell *minishell);
 
 bool
 init_minishell(t_minishell *minishell, char	**envp);
+
+//	~	signals.c ----------------------
+
+void
+my_signal(void);
 
 #endif

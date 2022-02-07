@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 10:10:24 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/07 11:08:19 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ int
 	check_number_of_argument(argc);
 	if (init_minishell(&minishell, envp) == false)
 		error("initialization error", 1);
+	my_signal();
 	while (minishell.is_running == true)
 	{
 		new_line = readline(ORANGE"couscous-0.1$ "END);
+		if (new_line == NULL)
+			break ;
 		minishell.is_running = false;
 	}
 	free(new_line);
