@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.le-101.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 19:57:00 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/07 09:49:10 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 # define OR ||
 # define EOS '\0'
 
-# define debug(x) print_debug(x, __LINE__, __FILE__)
+# define debug print_debug(__LINE__, __FILE__)
+# define sdebug(x) print_debug_str(x, __LINE__, __FILE__)
+# define idebug(x) print_debug_int(x, __LINE__, __FILE__)
 
 # define RED "\033[0;31m"
 # define ORANGE "\033[0;33m"
@@ -166,7 +168,13 @@ char
  * @param value the message to display
  */
 void
-print_debug(char *value, int line, char *file);
+print_debug(int line, char *file);
+
+void
+print_debug_str(char *value, int line, char *file);
+
+void
+print_debug_int(int value, int line, char *file);
 
 //	~	error.c ------------------------
 
