@@ -19,6 +19,13 @@
 
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <dirent.h>
+# include <sys/ioctl.h>
+# include <curses.h>
+# include <term.h>
+# include <termios.h>
 # include <fcntl.h>
 # include <signal.h>
 

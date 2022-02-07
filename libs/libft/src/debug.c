@@ -15,17 +15,17 @@
 void
 	print_debug(int line, char *file)
 {
-	dprintf(2, PURPLE"%s: %d: "END"this is a debug message!\n", file, line);
+	dprintf(2, PURPLE"%s:%d "END"this is a debug message!\n", file, line);
 }
 
 void
 	print_debug_str(char *value, int line, char *file)
 {
-	dprintf(2, PURPLE"%s: %d: "END"%s\n", file, line, value);
+	dprintf(2, PURPLE"%s:%d "END"%s\n", file, line, value);
 }
 
 void
 	print_debug_int(int value, int line, char *file)
 {
-	dprintf(2, PURPLE"%s: %d: "END"%d\n", file, line, value);
+	dprintf(2, PURPLE"%s:%d "END"%d\n", file, line, value);
 }
