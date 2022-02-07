@@ -20,7 +20,7 @@ int
 
 	(void) argv;
 	check_argument(argc);
-	if (!init_minishell(&minishell, envp))
+	if (init_minishell(&minishell, envp) == false)
 		error("initialization error", 1);
 	while (minishell.is_running == true)
 	{
