@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 15:35:40 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:37:13 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int
 		if (new_line == NULL)
 			break ;
 		add_history(new_line);
-		parse_new_line(new_line);
+		parse_new_line(&minishell, new_line);
 		free(new_line);
+		//FREE minishell.commands et tous ce qui est a l'interieur
 	}
 	clean_minishell(&minishell);
 	printf("exit\n");

@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 16:43:11 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:23:37 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,8 +364,6 @@ char
 **ft_split(const char *string, char charset);
 char
 **ft_split_with_quotes(const char *string, char charset);
-char
-**ft_split_with_quotes_for_pipe(char const *s, char c);
 int
 return_value_after_quote(const char *string, int i);
 

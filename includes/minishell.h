@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 15:32:49 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:10:50 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ check_number_of_argument(int number_of_arguments);
 
 //	~	parsing/parse_new_line.c -------
 
-int
-parse_new_line(char *new_line);
+void
+parse_new_line(t_minishell *minishell, char *new_line);
 
 //	~	structures/clean.c -------------
 

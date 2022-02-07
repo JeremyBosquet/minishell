@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 17:29:02 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:11:12 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ int
 	type = string[i];
 	tmp = i;
 	i++;
-	// sdebug("couscous");
-	// printf("\n\n\ni: %d, taille: %d\n\n\n", i, ft_strlen(string));
 	while (string[i] != EOS AND string[i] != type)
 		i++;
-	if (i == ft_strlen(string))
-		error("quotes", 1);
 	return (i - tmp + 1);
 }

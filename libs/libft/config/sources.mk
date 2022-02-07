@@ -21,7 +21,6 @@ override	SOURCES	:=	\
 	memory.c						\
 	split.c							\
 	split_with_quotes.c				\
-	split_with_quotes_for_pipe.c	\
 	split_with_quotes_utils.c		\
 	strchr.c						\
 	strings.c						\
