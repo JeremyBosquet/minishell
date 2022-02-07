@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 20:00:36 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/07 10:10:24 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int
 	char		*new_line;
 
 	(void) argv;
-	check_argument(argc);
+	check_number_of_argument(argc);
 	if (init_minishell(&minishell, envp) == false)
 		error("initialization error", 1);
 	while (minishell.is_running == true)

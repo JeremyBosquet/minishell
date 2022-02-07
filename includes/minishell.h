@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 20:02:38 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/07 10:05:13 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char
 //	~	parsing/arguments.c ------------
 
 void
-check_argument(int number_of_arguments);
+check_number_of_argument(int number_of_arguments);
 
 //	~	structures/clean.c -------------
 
