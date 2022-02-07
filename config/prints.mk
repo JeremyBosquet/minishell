@@ -33,6 +33,7 @@ endef
 
 define	PRINT_CREATING
 	printf "[ ${ORANGE}creating${END} ]\t${LIGHTBLUE}$@${END}\n"
+	printf "Execute ${PURPLE}${BOLD}make run${END} to execute the program.\n\n"
 endef
 
 define LINE
