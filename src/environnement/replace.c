@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/08 11:13:17 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 12:09:23 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ char
 	ft_strncpy(new, environnement[line], i);
 	j = 0;
 	while (value[j] != EOS)
-	{
-		new[i] = value[j];
-		i += 1;
-		j += 1;
-	}
+		new[i++] = value[j++];
 	free(environnement[line]);
 	environnement[line] = ft_strdup(new);
 	free(new);

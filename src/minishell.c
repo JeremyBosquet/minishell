@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 11:03:06 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 12:08:44 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell2.h"
 
 static void
-	cleanup(t_minishell *minishell)
+	cleanup(t_minishell *minishell, char *line)
 {
 	int	i;
 
@@ -26,6 +26,7 @@ static void
 		i++;
 	}
 	free(minishell->commands);
+	free(line);
 }
 
 //TODO: Free les commandes et tout ce qu'il y a dedans.
@@ -48,8 +49,7 @@ int
 		add_history(new_line);
 		parse_new_line(&minishell, new_line);
 		execute(&minishell);
-		cleanup(&minishell);
-		free(new_line);
+		cleanup(&minishell, new_line);
 	}
 	clean_minishell(&minishell);
 	printf("exit\n");
