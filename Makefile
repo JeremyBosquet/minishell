@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/05 17:07:00 by mmosca            #+#    #+#              #
-#    Updated: 2022/02/06 15:58:42 by jbosquet         ###   ########.fr        #
+#    Updated: 2022/02/08 09:23:46 by mmosca           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ include		config/compilations.mk
 include		config/prints.mk
 include		config/properties.mk
 include		config/sources.mk
+include		config/sources2.mk
 
 ##	~~	Configurations ---------------------------------------------------------
 
