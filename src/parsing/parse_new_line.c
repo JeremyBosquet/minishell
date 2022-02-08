@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_new_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/07 20:28:22 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:06:49 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void
 	{
 		while (i < i1)
 		{
-			free_array((void *)commands_splitted[i], size_of_array(commands_splitted[i]));
+			free_array((void *)commands_splitted[i], \
+			size_of_array(commands_splitted[i]));
 			i++;
 		}
 		free(commands_splitted);
@@ -50,7 +51,10 @@ char	**ft_dup_2array(char **src)
 	i = 0;
 	dest = ft_calloc(sizeof(char *), size_of_array(src) + 1);
 	if (src == NULL)
-		return (NULL); //FREE dest
+	{
+		free(dest);
+		return (NULL);
+	}
 	while (src[i])
 	{
 		dest[i] = ft_strdup(src[i]);
@@ -68,7 +72,8 @@ void	fill_struct(t_minishell *minishell, char ***cmds)
 	int	i;
 
 	i = 0;
-	minishell->commands = ft_calloc(sizeof(t_command), size_of_3array(cmds) + 1);
+	minishell->commands = ft_calloc(sizeof(t_command), \
+	size_of_3array(cmds) + 1);
 	if (!minishell->commands)
 		return ;
 	minishell->number_of_commands = size_of_3array(cmds);
@@ -79,6 +84,12 @@ void	fill_struct(t_minishell *minishell, char ***cmds)
 	}
 }
 
+/*
+ * Vérifier que les quotes et les pipes soit bien fermés, ou s'il y a deux pipes
+ * à la suite.
+ * Parser le triple tableau.
+ * Regarder le triple tableau.
+*/
 void	
 	parse_new_line(t_minishell *minishell, char *new_line)
 {
@@ -87,7 +98,6 @@ void
 	char	***cmds_split;
 
 	i = 0;
-	// CHECK QUOTES NON FERME OU PIPE A LA FIN OU DEUX D'AFFILER
 	line_cmds = ft_split_with_quotes(new_line, '|');
 	if (!line_cmds)
 		return ;
@@ -104,6 +114,5 @@ void
 	}
 	free(line_cmds);
 	cmds_split[i] = 0;
-	// FONCTIONS POUR PARSER ET REGARDER LE TRIPLE TABLEAU
 	fill_struct(minishell, cmds_split);
 }

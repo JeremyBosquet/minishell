@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 10:16:59 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 11:03:06 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static void
 	i = 0;
 	while (i < minishell->number_of_commands)
 	{
-		free_array((void **)minishell->commands[i].command, \
-		size_of_array(minishell->commands[i].command));	
+		free_array((void **) minishell->commands[i].command, \
+		size_of_array(minishell->commands[i].command));
 		i++;
 	}
 	free(minishell->commands);
 }
 
+//TODO: Free les commandes et tout ce qu'il y a dedans.
 int
 	main(int argc, char **argv, char **envp)
 {
@@ -49,9 +50,8 @@ int
 		execute(&minishell);
 		cleanup(&minishell);
 		free(new_line);
-		//FREE minishell.commands et tous ce qui est a l'interieur
 	}
 	clean_minishell(&minishell);
 	printf("exit\n");
-	return (0);
+	return (minishell.exit_code);
 }

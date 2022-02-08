@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 20:10:50 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:01:09 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ struct	s_minishell {
 
 char
 **add_to_environnement(char **environnement, char *new);
+
+//	~	environnement/clean.c ----------
+
+void
+clean_environnement(char **environnement, int size);
 
 //	~	environnement/copy.c -----------
 

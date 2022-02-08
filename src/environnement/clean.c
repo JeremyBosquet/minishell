@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 10:30:39 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 10:52:31 by mmosca           ###   ########lyon.fr   */
+/*   Created: 2022/02/08 10:59:37 by mmosca            #+#    #+#             */
+/*   Updated: 2022/02/08 11:00:23 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 void
-	builtins_pwd(t_minishell *minishell)
+	clean_environnement(char **environnement, int size)
 {
-	char	*working_directory;
-	int		line;
-
-	line = find_line_of_name(minishell->environnement, "PWD");
-	if (line == -1)
-		return ;
-	working_directory = get_value_of_line(minishell->environnement[line]);
-	printf("%s\n", working_directory);
-	free(working_directory);
-	minishell->exit_code = 0;
+	free_array((void **) environnement, size);
+	error("out of memory!", 1);
 }

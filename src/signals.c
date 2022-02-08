@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:47:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 09:25:41 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 11:02:07 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void
 	handle_signals(int signo)
 {
 	(void) signo;
-	// kill ?
 	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();

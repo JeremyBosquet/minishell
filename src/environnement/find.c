@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:45:13 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/08 10:47:39 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 10:54:38 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int
 	if (tmp == NULL)
 		error("out of memory!", 1);
 	ft_strcpy(tmp, name);
-	name = ft_strfjoin(tmp, "=", 1);
+	name = ft_strjoin(tmp, "=");
+	free(tmp);
 	i = 0;
 	while (environnement[i] != NULL)
 	{
