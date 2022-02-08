@@ -6,7 +6,7 @@
 #    By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/05 17:07:00 by mmosca            #+#    #+#              #
-#    Updated: 2022/02/08 09:23:46 by mmosca           ###   ########lyon.fr    #
+#    Updated: 2022/02/08 10:24:06 by mmosca           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,19 @@ override	CFLAGS			+=	${RL_INC}
 override	OBJS			:=	$(addprefix ${BINARIES_DIRECTORY}/, ${SOURCES:.c=.o})
 override	OBJS_DIRECTORY	:=	$(sort $(dir ${OBJS}))
 
+override	EXTENSIONS		:=	\
+	config/compilations.mk		\
+	config/prints.mk			\
+	config/properties.mk		\
+	config/sources.mk
+
 ##	~~	Rules ------------------------------------------------------------------
 
 .PHONY: all # Compile sources files to create the executable file.
 all:	header libft ${BUILD_DIRECTORY}/${NAME}
 
 
-${BINARIES_DIRECTORY}/%.o:	${SOURCES_DIRECTORY}/%.c ${HEADERS} Makefile ${LIBS}
+${BINARIES_DIRECTORY}/%.o:	${SOURCES_DIRECTORY}/%.c ${HEADERS} Makefile ${LIBS} ${EXTENSIONS}
 	${CC} ${CFLAGS} -c $< -o $@
 	${PRINT_COMPILING}
 
