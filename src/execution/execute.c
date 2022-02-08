@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 10:09:33 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 10:30:29 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void
 {
 	if (ft_strcmp(command, "exit") == 0 AND minishell->number_of_commands == 1)
 		builtins_exit(minishell);
+	else if (ft_strcmp(command, "pwd") == 0)
+		builtins_pwd(minishell);
 }
 
 static void
