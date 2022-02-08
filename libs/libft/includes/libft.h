@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 20:23:37 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/08 09:35:07 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,6 +412,9 @@ char
 
 char
 *ft_strcpy(char *destination, char *source);
+
+int
+ft_strcmp(char *first_string, char *second_string);
 
 //	~	strings_l.c --------------------
 

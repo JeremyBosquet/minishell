@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 20:37:13 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/08 09:41:31 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "minishell2.h"
 
 int
 	main(int argc, char **argv, char **envp)
@@ -30,6 +31,7 @@ int
 			break ;
 		add_history(new_line);
 		parse_new_line(&minishell, new_line);
+		execute(&minishell);
 		free(new_line);
 		//FREE minishell.commands et tous ce qui est a l'interieur
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.le-101.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 18:49:52 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/08 09:34:51 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ char
 	}
 	destination[i] = '\0';
 	return (destination);
+}
+
+int
+	ft_strcmp(char *first_string, char *second_string)
+{
+	int	i;
+
+	i = 0;
+	while (first_string[i] != EOS AND second_string[i] != EOS \
+	AND first_string[i] == second_string[i])
+		i += 1;
+	return (first_string[i] - second_string[i]);
 }
