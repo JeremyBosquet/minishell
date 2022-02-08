@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 10:32:04 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 14:59:54 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@ builtins_exit(t_minishell *minishell);
 
 void
 builtins_pwd(t_minishell *minishell);
+
+bool
+is_special_builtins(char *command);
+
+void
+execute_special_builtins(t_minishell *minishell);
 
 #endif

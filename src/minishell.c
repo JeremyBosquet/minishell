@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 12:46:19 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 18:22:33 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int
 			break ;
 		add_history(new_line);
 		parse_new_line(&minishell, new_line);
-		execute(&minishell);
+		if (minishell.number_of_commands == 1 \
+		AND is_special_builtins(minishell.commands[0].command[0]) == true)
+			execute_special_builtins(&minishell);
+		else
+			execute(&minishell);
 		cleanup(&minishell, new_line);
 	}
 	clean_minishell(&minishell);

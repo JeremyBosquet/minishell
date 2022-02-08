@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 12:41:14 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 18:30:46 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ static void
 }
 
 static void
-	execute_command(char *command)
+	execute_command(t_minishell *minishell, int i)
 {
-	(void) command;
+	execve(minishell->commands[i].command[0], minishell->commands[i].command, \
+	minishell->environnement);
 }
 
-void
-	execute(t_minishell *minishell)
+static void
+	execute2(t_minishell *minishell)
 {
 	int	i;
 	int	j;
@@ -45,9 +46,47 @@ void
 				execute_builtins(minishell, \
 				minishell->commands[i].command[j]);
 			else
-				execute_command(minishell->commands[i].command[j]);
+				execute_command(minishell, i);
 			j += 1;
 		}
 		i += 1;
 	}
+	exit(1);
+}
+
+void
+	execute(t_minishell *minishell)
+{
+	int	i;
+
+	minishell->pids = malloc(minishell->number_of_commands * sizeof(pid_t));
+	if (minishell->pids == NULL)
+		return ;
+	i = 0;
+	while (i < minishell->number_of_commands)
+	{
+		minishell->pids[i] = fork();
+		if (minishell->pids < 0)
+			error("fork fail", 1);
+		else if (minishell->pids[i] == 0)
+			execute2(minishell);
+		i += 1;
+	}
+	i = 0;
+	while (i < minishell->number_of_commands)
+		waitpid(minishell->pids[i++], NULL, 0);
+	free(minishell->pids);
+}
+
+void
+	execute_special_builtins(t_minishell *minishell)
+{
+	if (ft_strcmp(minishell->commands[0].command[0], "exit") == 0)
+		builtins_exit(minishell);
+	else if (ft_strcmp(minishell->commands[0].command[0], "unset") == 0)
+		return ;
+	else if (ft_strcmp(minishell->commands[0].command[0], "export") == 0)
+		return ;
+	else if (ft_strcmp(minishell->commands[0].command[0], "cd") == 0)
+		return ;
 }
