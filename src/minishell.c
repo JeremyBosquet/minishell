@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 12:08:44 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 12:46:19 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void
 	}
 	free(minishell->commands);
 	free(line);
+	minishell->number_of_commands = 0;
 }
 
 //TODO: Free les commandes et tout ce qu'il y a dedans.

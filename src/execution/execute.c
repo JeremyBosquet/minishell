@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 10:30:29 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 12:41:14 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,21 @@ void
 	int	i;
 	int	j;
 
-	if (minishell->number_of_commands != 0)
+	if (minishell->number_of_commands <= 0)
+		return ;
+	i = 0;
+	while (i < minishell->number_of_commands)
 	{
-		i = 0;
-		while (i < minishell->number_of_commands)
+		j = 0;
+		while (minishell->commands[i].command[j])
 		{
-			j = 0;
-			while (minishell->commands[i].command[j])
-			{
-				if (is_builtins(minishell->commands[i].command[j]) == true)
-					execute_builtins(minishell, \
-					minishell->commands[i].command[j]);
-				else
-					execute_command(minishell->commands[i].command[j]);
-				j += 1;
-			}
-			i += 1;
+			if (is_builtins(minishell->commands[i].command[j]) == true)
+				execute_builtins(minishell, \
+				minishell->commands[i].command[j]);
+			else
+				execute_command(minishell->commands[i].command[j]);
+			j += 1;
 		}
+		i += 1;
 	}
 }
