@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 15:59:58 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 19:13:16 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/08 11:11:17 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char
 	size = size_of_array(environnement);
 	new_environnement = ft_calloc(size, sizeof(char));
 	if (new_environnement == NULL)
-		return (NULL);
+		clean_environnement(environnement, size);
 	line = find_line_of_name(environnement, name);
 	i = 0;
 	j = 0;
@@ -35,6 +35,8 @@ char
 		else
 		{
 			new_environnement[j] = ft_strdup(environnement[i]);
+			if (new_environnement[j] == NULL)
+				clean_environnement(environnement, size);
 			i += 1;
 		}
 	}

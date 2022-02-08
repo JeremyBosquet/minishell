@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/06 19:28:47 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/08 11:13:17 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char
 	i += 1;
 	new = ft_calloc(ft_strlen(value) + i, sizeof(char));
 	if (new == NULL)
-		return (NULL);
+		clean_environnement(environnement, size_of_array(environnement));
 	ft_strncpy(new, environnement[line], i);
 	j = 0;
 	while (value[j] != EOS)
@@ -38,5 +38,7 @@ char
 	free(environnement[line]);
 	environnement[line] = ft_strdup(new);
 	free(new);
+	if (environnement[line] == NULL)
+		clean_environnement(environnement, size_of_array(environnement));
 	return (environnement);
 }

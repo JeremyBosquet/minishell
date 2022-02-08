@@ -13,6 +13,7 @@ override	LIBS		:=		\
 
 override	SOURCES	:=			\
 	environnement/add.c			\
+	environnement/clean.c		\
 	environnement/copy.c		\
 	environnement/delete.c		\
 	environnement/find.c		\
