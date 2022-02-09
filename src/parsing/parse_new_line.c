@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 10:20:09 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:24:33 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	fill_struct(t_minishell *minishell, char ***cmds)
 		minishell->commands[i].command = ft_dup_2array(cmds[i]);
 		i += 1;
 	}
+	idebug(minishell->number_of_commands);
 }
 
 /*
@@ -182,7 +183,7 @@ static char *
 		}
 		new_line = ft_strjoin(new_line, heredoc);
 		// free(heredoc);
-		check_new_line(new_line);
+		new_line = check_new_line(new_line);
 	}
 	return (new_line);
 }
@@ -198,6 +199,7 @@ void
 	new_line = check_new_line(new_line);
 	if (new_line == NULL)
 		return ;
+	sdebug(new_line);
 	line_cmds = ft_split_with_quotes(new_line, '|');
 	if (!line_cmds)
 		return ;
