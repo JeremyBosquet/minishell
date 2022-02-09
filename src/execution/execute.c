@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 15:42:39 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 17:23:36 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static void
 static void
 	execute_command(t_minishell *minishell, int i)
 {
-	execve(minishell->commands[i].command[0], minishell->commands[i].command, \
+	execve(check_path(minishell->commands[i].command[0], \
+	minishell->environnement), minishell->commands[i].command, \
 	minishell->environnement);
 	perror(minishell->commands[i].command[0]);
-	exit(1);
+	exit(errno);
 }
 
 /*

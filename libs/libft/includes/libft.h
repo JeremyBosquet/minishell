@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:15:32 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:19:18 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,9 @@ return_value_after_quote(const char *string, int i);
  */
 char
 *ft_strchr(const char *string, int character);
+
+char
+*ft_strnchr(char *string, char character, int number);
 
 /**
  * Searches for the last occurrence of the character passed in parameter in the

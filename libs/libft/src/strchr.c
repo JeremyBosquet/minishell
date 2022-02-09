@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:12:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 16:18:51 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:17:26 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ char
 	}
 	if (string[i] == character)
 		return ((char *) &string[i]);
+	return (NULL);
+}
+
+char
+	*ft_strnchr(char *string, char character, int number)
+{
+	int	index;
+
+	index = 0;
+	while (string[index] != '\0' && string[index] != character \
+	&& index < number)
+		index += 1;
+	if (string[index] == character && index != number)
+		return (string + index);
 	return (NULL);
 }
 
