@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:48:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 15:07:49 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:02:42 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,4 @@ int
 		i += 1;
 	}
 	return (result * sign);
-}
-
-static int
-	length_of_number(int number)
-{
-	int	length;
-
-	length = 1;
-	if (ft_isnegative(number) == true)
-		number = (-number);
-	while (number > 9)
-	{
-		number /= 10;
-		length += 1;
-	}
-	return (length);
-}
-
-char
-	*ft_itoa(int number)
-{
-	int		size_of_number;
-	char	*string;
-
-	if (number == INT_MIN)
-		return (ft_strdup("-2147483648"));
-	size_of_number = length_of_number(number);
-	if (ft_isnegative(number) == true)
-	{
-		number = (-number);
-		size_of_number += 1;
-	}
-	string = ft_calloc(size_of_number + 1, sizeof(char));
-	if (string == NULL)
-		return (NULL);
-	string[size_of_number] = EOS;
-	while (number > 9)
-	{
-		string[size_of_number - 1] = number % 10 + '0';
-		size_of_number -= 1;
-		number /= 10;
-	}
-	string[size_of_number-- - 1] = number % 10 + '0';
-	if (size_of_number > 0)
-		string[size_of_number - 1] = '-';
-	return (string);
 }

@@ -6,14 +6,14 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:01:19 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:26:27 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:28:41 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char
-	**raw_path(char **environnement)
+	**raw_path(char **environnement, t_list *garbage)
 {
 	int		index;
 	char	**path;
@@ -22,25 +22,25 @@ static char
 	while (environnement[index] != (void *) 0 \
 	AND ft_strnstr(environnement[index], "PATH=", PATH_MAX) == (void *) 0)
 		index += 1;
-	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':');
+	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':', garbage);
 	if (!path)
 		return ((void *) 0);
 	return (path);
 }
 
 static char
-	**get_path(char **environnement)
+	**get_path(char **environnement, t_list *garbage)
 {
 	int		index;
 	char	**path;
 
 	index = 0;
-	path = raw_path(environnement);
+	path = raw_path(environnement, garbage);
 	if (!path)
 		return ((void *) 0);
 	while (path[index] != (void *) 0)
 	{
-		path[index] = ft_strfjoin(path[index], "/", 1);
+		path[index] = ft_strfjoin(path[index], "/", 1, garbage);
 		if (!path[index])
 			return ((void *) 0);
 		index += 1;
@@ -49,7 +49,7 @@ static char
 }
 
 char
-	*check_path(char *command, char **environnement)
+	*check_path(char *command, char **environnement, t_list *garbage)
 {
 	int		index;
 	char	**paths;
@@ -58,15 +58,15 @@ char
 	if (access(command, X_OK) == 0)
 		return (command);
 	index = 0;
-	paths = get_path(environnement);
+	paths = get_path(environnement, garbage);
 	if (!paths)
 		exit(EXIT_FAILURE);
 	while (paths[index] != (void *) 0)
 	{
-		paths[index] = ft_strfjoin(paths[index], command, 1);
+		paths[index] = ft_strfjoin(paths[index], command, 1, garbage);
 		if (access(paths[index], X_OK) == 0)
 		{
-			path = ft_strndup(paths[index], ft_strlen(paths[index]) + 1);
+			path = ft_strndup(paths[index], ft_strlen(paths[index]) + 1, garbage);
 			free_array((void **) paths, index);
 			return (path);
 		}

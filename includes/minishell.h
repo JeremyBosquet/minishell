@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 15:34:13 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:24:23 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct s_command {
 
 struct	s_minishell {
 	t_command	*commands;
+	t_list		*garbage;
 	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
@@ -74,7 +75,7 @@ struct	s_minishell {
 //	~	environnement/add.c ------------
 
 char
-**add_to_environnement(char **environnement, char *new);
+**add_to_environnement(char **environnement, char *new, t_list *garbage);
 
 //	~	environnement/clean.c ----------
 
@@ -84,30 +85,30 @@ clean_environnement(char **environnement, int size);
 //	~	environnement/copy.c -----------
 
 char
-**copy_environnement(char **environnement, int option);
+**copy_environnement(char **environnement, int option, t_list *garbage);
 
 //	~	environnement/delete.c ---------
 
 char
-**delete_line_in_environnement(char **environnement, char *name);
+**delete_line_in_environnement(char **environnement, char *name, t_list *garbage);
 
 //	~	environnement/find.c -----------
 
 int
-find_line_of_name(char **environnement, char *name);
+find_line_of_name(char **environnement, char *name, t_list *garbage);
 
 //	~	environnement/get.c ------------
 
 char
-*get_name_of_line(char *line);
+*get_name_of_line(char *line, t_list *garbage);
 
 char
-*get_value_of_line(char *line);
+*get_value_of_line(char *line, t_list *garbage);
 
 //	~	environnement/replace.c --------
 
 char
-**replace_line_in_environnement(char **environnement, int line, char *value);
+**replace_line_in_environnement(char **environnement, int line, char *value, t_list *garbage);
 
 //	~	parsing/arguments.c ------------
 
@@ -122,7 +123,7 @@ parse_new_line(t_minishell *minishell, char *new_line);
 //	~	parsing/parse_new_line.c -------
 
 char
-*check_new_line(char *new_line);
+*check_new_line(char *new_line, t_list *garbage);
 
 //	~	structures/clean.c -------------
 

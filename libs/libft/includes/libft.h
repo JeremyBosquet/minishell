@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:19:18 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:31:21 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ struct s_list
  * return NULL pointer
  */
 void
-*ft_calloc(int count, int size);
+*ft_calloc(int count, int size, t_list *garbage);
 
 /**
  * Free memory space.
@@ -151,16 +151,6 @@ ft_isprintable(int character);
 int
 ft_atoi(const char *string);
 
-/**
- * Allows and returns a string of characters representing the integer received
- * in parameter, negative numbers must be handled.
- * @param number the integer to convert
- * @return the string representing the number passed in parameter, otherwise,
- * NULL is returned
- */
-char
-*ft_itoa(int number);
-
 //	~	debug.c ------------------------
 
 /**
@@ -226,7 +216,7 @@ fputstring(int filedescriptor, char *string);
  * @return if succesful, return the new string, otherwise return NULL pointer
  */
 char
-*ft_strjoin(const char *first_string, const char *second_string);
+*ft_strjoin(const char *first_string, const char *second_string, t_list *garbage);
 
 /**
  * Allocate and return a new string, which is result of the concatenation of
@@ -237,7 +227,7 @@ char
  * @return if succesful, return the new string, otherwise return NULL pointer
  */
 char
-*ft_strfjoin(const char *first_string, const char *second_string, int nfree);
+*ft_strfjoin(const char *first_string, const char *second_string, int nfree, t_list *garbage);
 
 //	~	list_clean.c -------------------
 
@@ -364,9 +354,9 @@ void
  * allocation failed
  */
 char
-**ft_split(const char *string, char charset);
+**ft_split(const char *string, char charset, t_list *garbage);
 char
-**ft_split_with_quotes(const char *string, char charset);
+**ft_split_with_quotes(const char *string, char charset, t_list *garbage);
 int
 return_value_after_quote(const char *string, int i);
 
@@ -414,7 +404,7 @@ ft_strlen(const char *string);
  * the address of the duplicated string, otherwise NULL is return
  */
 char
-*ft_strdup(const char *string);
+*ft_strdup(const char *string, t_list *garbage);
 
 char
 *ft_strcpy(char *destination, char *source);
@@ -475,7 +465,7 @@ char
  * the address of the duplicated string, otherwise NULL is return
  */
 char
-*ft_strndup(const char *string, int size);
+*ft_strndup(const char *string, int size, t_list *garbage);
 
 /**
  * Locate the first occurrence of the NUL-terminated string to_find in the

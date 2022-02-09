@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 09:34:51 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 17:59:10 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int
 }
 
 char
-	*ft_strdup(const char *string)
+	*ft_strdup(const char *string, t_list *garbage)
 {
 	char	*new;
 	int		size;
 
 	size = ft_strlen(string) + 1;
-	new = ft_calloc(size, sizeof(char));
+	new = ft_calloc(size, sizeof(char), garbage);
 	if (new == NULL)
 		return (NULL);
 	ft_strlcpy(new, string, size);

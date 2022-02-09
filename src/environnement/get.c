@@ -6,14 +6,14 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:37:48 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 18:29:25 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:21:40 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char
-	*get_name_of_line(char *line)
+	*get_name_of_line(char *line, t_list *garbage)
 {
 	int		i;
 	char	*name;
@@ -21,7 +21,7 @@ char
 	i = 0;
 	while (line != NULL AND line[i] != EOS AND line[i] != '=')
 		i += 1;
-	name = ft_calloc(i + 1, sizeof(char));
+	name = ft_calloc(i + 1, sizeof(char), garbage);
 	if (name == NULL)
 		return (NULL);
 	i = 0;
@@ -34,7 +34,7 @@ char
 }
 
 char
-	*get_value_of_line(char *line)
+	*get_value_of_line(char *line, t_list *garbage)
 {
 	int		i;
 	int		j;
@@ -44,7 +44,8 @@ char
 	j = 0;
 	while (line[j] && line[j] != '=')
 		j++;
-	value = ft_calloc(sizeof(char), ft_strlen(line) - j + 1);
+	value = ft_calloc(sizeof(char), ft_strlen(line) - j + 1, \
+	garbage);
 	if (!value)
 		return (NULL);
 	while (line[++j])

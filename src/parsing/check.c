@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 16:18:16 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:06:46 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int
 }
 
 char *
-	check_new_line(char *new_line)
+	check_new_line(char *new_line, t_list *garbage)
 {
 	char	*heredoc;
 
@@ -99,8 +99,8 @@ char *
 		heredoc = readline("> ");
 		if (heredoc == NULL)
 			rerror("syntax error: ", "unexpected end of file", 0);
-		new_line = ft_strjoin(new_line, heredoc);
-		new_line = check_new_line(new_line);
+		new_line = ft_strjoin(new_line, heredoc, garbage);
+		new_line = check_new_line(new_line, garbage);
 	}
 	return (new_line);
 }

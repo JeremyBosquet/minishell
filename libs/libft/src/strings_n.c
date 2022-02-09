@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_n.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:35:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/06 19:26:25 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:10:42 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ char
 }
 
 char
-	*ft_strndup(const char *string, int size)
+	*ft_strndup(const char *string, int size, t_list *garbage)
 {
 	char	*new;
 
-	new = ft_calloc(size, sizeof(char));
+	new = ft_calloc(size, sizeof(char), garbage);
 	if (new == NULL)
 		return (NULL);
 	ft_strlcpy(new, string, size);

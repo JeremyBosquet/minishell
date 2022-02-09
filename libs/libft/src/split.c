@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 15:49:22 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:16:52 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@
 // 	return (array);
 // }
 
-static char	*ft_word_dup(const char *str, int start, int finish)
+static char	*ft_word_dup(const char *str, int start, int finish, t_list *g)
 {
 	char	*word;
 	int		i;
 
 	i = 0;
-	word = malloc((finish - start + 1) * sizeof(char));
+	word = ft_calloc((finish - start + 1), sizeof(char), g);
 	while (start < finish)
 		word[i++] = str[start++];
 	word[i] = '\0';
@@ -131,7 +131,7 @@ static char	**ft_clear_split(int n, char **split)
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, t_list *garbage)
 {
 	char	**str_split;
 	size_t	i;
@@ -141,7 +141,8 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (0);
-	str_split = (char **)ft_calloc((ft_count_words(s, c) + 1), sizeof(char *));
+	str_split = (char **)ft_calloc((ft_count_words(s, c) + 1), sizeof(char *), \
+	garbage);
 	if (!str_split)
 		return (0);
 	while (i <= ft_count_words(s, c))
@@ -150,7 +151,7 @@ char	**ft_split(char const *s, char c)
 			j++;
 		if (s[j])
 		{
-			str_split[i] = ft_word_dup(s, j, j + ft_len_word(&s[j], c));
+			str_split[i] = ft_word_dup(s, j, j + ft_len_word(&s[j], c), garbage);
 			if (!str_split[i])
 				return (ft_clear_split(i, str_split));
 			j += ft_len_word(&s[j], c);

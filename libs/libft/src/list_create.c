@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:20:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 16:28:06 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:30:40 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list
 {
 	t_list	*new;
 
-	new = ft_calloc(1, sizeof(t_list));
+	new = malloc(1 * sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
 	new->content = content;

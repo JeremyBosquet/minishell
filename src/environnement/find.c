@@ -6,23 +6,23 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:45:13 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/08 12:07:01 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:20:18 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int
-	find_line_of_name(char **environnement, char *name)
+	find_line_of_name(char **environnement, char *name, t_list *garbage)
 {
 	int		i;
 	char	*tmp;
 
-	tmp = ft_calloc(ft_strlen(name) + 1, sizeof(char));
+	tmp = ft_calloc(ft_strlen(name) + 1, sizeof(char), garbage);
 	if (tmp == NULL)
 		error("out of memory!", 1);
 	ft_strcpy(tmp, name);
-	name = ft_strjoin(tmp, "=");
+	name = ft_strjoin(tmp, "=", garbage);
 	free(tmp);
 	i = 0;
 	while (environnement[i] != NULL)

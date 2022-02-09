@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:21:19 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 18:28:53 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void
 execute_special_builtins(t_minishell *minishell);
 
 char
-*check_path(char *command, char **environnement);
+*check_path(char *command, char **environnement, t_list *garbage);
 
 #endif
