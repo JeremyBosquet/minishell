@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 19:06:46 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 19:35:59 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char *
 		heredoc = readline("> ");
 		if (heredoc == NULL)
 			rerror("syntax error: ", "unexpected end of file", 0);
-		new_line = ft_strjoin(new_line, heredoc, garbage);
+		new_line = ft_strfjoin(new_line, heredoc, 3, garbage);
 		new_line = check_new_line(new_line, garbage);
 	}
 	return (new_line);

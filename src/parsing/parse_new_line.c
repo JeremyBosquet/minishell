@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:55:09 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 19:35:47 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void
 	char	***cmds_split;
 
 	i = 0;
+	if (new_line == NULL)
+		return ;
 	new_line = check_new_line(new_line, minishell->garbage);
 	if (new_line == NULL)
 		return ;
@@ -121,4 +123,5 @@ void
 	free(line_cmds);
 	cmds_split[i] = 0;
 	fill_struct(minishell, cmds_split, minishell->garbage);
+	free(new_line);
 }
