@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 19:35:47 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 19:42:35 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void
 		i++;
 	}
 	free(line_cmds);
-	cmds_split[i] = 0;
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
 }

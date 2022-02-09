@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:16:52 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 19:41:00 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,7 @@ char	**ft_split(char const *s, char c, t_list *garbage)
 	i = 0;
 	if (!s)
 		return (0);
-	str_split = (char **)ft_calloc((ft_count_words(s, c) + 1), sizeof(char *), \
-	garbage);
+	str_split = ft_calloc((ft_count_words(s, c) + 1), sizeof(char *), garbage);
 	if (!str_split)
 		return (0);
 	while (i <= ft_count_words(s, c))
