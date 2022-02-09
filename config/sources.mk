@@ -20,6 +20,7 @@ override	SOURCES	:=			\
 	environnement/get.c			\
 	environnement/replace.c		\
 	parsing/arguments.c			\
+	parsing/check.c				\
 	parsing/parse_new_line.c	\
 	structures/clean.c			\
 	structures/init.c			\

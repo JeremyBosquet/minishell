@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 17:29:10 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:44:08 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ static int
 		if (string[words_length] != charset)
 		{
 			if (string[words_length] == '\'' OR string[words_length] == '"')
-			{
-				// idebug(words_length);
 				words_length += return_value_after_quote(string, words_length);
-				// idebug(words_length);
-			}
 			else
 				words_length += 1;
 		}

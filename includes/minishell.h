@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 11:01:09 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 14:05:09 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,11 @@ check_number_of_argument(int number_of_arguments);
 
 void
 parse_new_line(t_minishell *minishell, char *new_line);
+
+//	~	parsing/parse_new_line.c -------
+
+char
+*check_new_line(char *new_line);
 
 //	~	structures/clean.c -------------
 
