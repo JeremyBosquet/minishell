@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 15:31:01 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:18:16 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ static int
 	double_quotes = 1;
 	check_quotes2(new_line, &i, &simple_quotes, &double_quotes);
 	if (simple_quotes != 1 OR double_quotes != 1)
-	{
-		printf("couscous-0.1: syntax error on quotes\n");
-		return (EXIT_FAILURE);
-	}
+		rerror("syntax error: ", "near unclosed quotes", 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -75,10 +72,7 @@ static int
 		if (new_line[i] == '|')
 		{
 			if (only_space_before_pipe == 1)
-			{
-				printf("couscous-0.1: syntax error near unexpected token `|'\n");
-				return (EXIT_FAILURE);
-			}
+				rerror("syntax error: ", "near unexpected token `|'", 0);
 			else
 				only_space_before_pipe = 1;
 		}
@@ -104,10 +98,7 @@ char *
 	{
 		heredoc = readline("> ");
 		if (heredoc == NULL)
-		{
-			printf("couscous-0.1: syntax error: unexpected end of file\n");
-			return (NULL);
-		}
+			rerror("syntax error: ", "unexpected end of file", 0);
 		new_line = ft_strjoin(new_line, heredoc);
 		new_line = check_new_line(new_line);
 	}

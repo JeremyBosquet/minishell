@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:44:06 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 15:35:32 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 16:15:08 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static void
-	print_error_message(char *message)
+	print_error_message(char *prefix, char *message)
 {
 	fputstring(STDERR, ORANGE);
 	fputstring(STDERR, "couscous: ");
 	fputstring(STDERR, RED);
-	fputstring(STDERR, "error: ");
+	fputstring(STDERR, prefix);
 	fputstring(STDERR, END);
 	fputstring(STDERR, message);
 	fputchar(STDERR, '\n');
@@ -27,14 +27,14 @@ static void
 void
 	error(char *message, int exit_status)
 {
-	print_error_message(message);
+	print_error_message("error: ", message);
 	exit(exit_status);
 }
 
 int
-	rerror(char *message, int return_code)
+	rerror(char *prefix, char *message, int return_code)
 {
-	print_error_message(message);
+	print_error_message(prefix, message);
 	return (return_code);
 }
 
