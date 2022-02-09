@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 18:30:46 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 15:42:39 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void
 		builtins_exit(minishell);
 	else if (ft_strcmp(command, "pwd") == 0)
 		builtins_pwd(minishell);
+	exit(0);
 }
 
 static void
@@ -26,32 +27,28 @@ static void
 {
 	execve(minishell->commands[i].command[0], minishell->commands[i].command, \
 	minishell->environnement);
+	perror(minishell->commands[i].command[0]);
+	exit(1);
 }
 
+/*
+ * For pwd command, get current directory without variable in environnement
+ */
 static void
-	execute2(t_minishell *minishell)
+	execute2(t_minishell *minishell, int i)
 {
-	int	i;
 	int	j;
 
-	if (minishell->number_of_commands <= 0)
-		return ;
-	i = 0;
-	while (i < minishell->number_of_commands)
+	j = 0;
+	while (minishell->commands[i].command[j])
 	{
-		j = 0;
-		while (minishell->commands[i].command[j])
-		{
-			if (is_builtins(minishell->commands[i].command[j]) == true)
-				execute_builtins(minishell, \
-				minishell->commands[i].command[j]);
-			else
-				execute_command(minishell, i);
-			j += 1;
-		}
-		i += 1;
+		if (is_builtins(minishell->commands[i].command[j]) == true)
+			execute_builtins(minishell, \
+			minishell->commands[i].command[j]);
+		else
+			execute_command(minishell, i);
+		j += 1;
 	}
-	exit(1);
 }
 
 void
@@ -69,7 +66,7 @@ void
 		if (minishell->pids < 0)
 			error("fork fail", 1);
 		else if (minishell->pids[i] == 0)
-			execute2(minishell);
+			execute2(minishell, i);
 		i += 1;
 	}
 	i = 0;

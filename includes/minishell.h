@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 14:05:09 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:34:13 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ struct s_command {
 	int		filedescriptor_out;
 	int		type_of_infile;
 	int		type_of_outfile;
+	bool	do_run;
+	int		pipes[2];
 };
 
 struct	s_minishell {
@@ -62,6 +64,7 @@ struct	s_minishell {
 	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
+	char		*current_pwd;
 	int			number_of_commands;
 	int			exit_code;
 };

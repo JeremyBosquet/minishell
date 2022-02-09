@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 09:35:07 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 10:53:04 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,9 @@ print_debug_int(int value, int line, char *file);
  */
 void
 error(char *message, int exit_status);
+
+int
+rerror(char *message, int return_code);
 
 //	~	fputs.c ------------------------
 

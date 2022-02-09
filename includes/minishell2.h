@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/08 14:59:54 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 11:05:04 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL2_H
 
 # include "minishell.h"
+# include <errno.h>
 
 bool
 is_builtins(char *command);
