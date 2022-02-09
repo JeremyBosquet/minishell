@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 10:07:47 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:25:55 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void
 		size_of_array(minishell->commands[i].command));
 		i++;
 	}
-	free(minishell->commands);
+	if (minishell->number_of_commands > 0)
+		free(minishell->commands);
 	if (*line)
 		free(line);
 	minishell->number_of_commands = 0;
