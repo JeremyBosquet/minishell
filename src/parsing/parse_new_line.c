@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 19:42:35 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:19:02 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char	**ft_dup_2array(char **src, t_list *garbage)
 	char	**dest;
 
 	i = 0;
-	dest = ft_calloc(sizeof(char *), size_of_array(src) + 1, garbage);
+	dest = ft_calloc(sizeof(char *), size_of_array(src) + 1, \
+	garbage);
 	if (src == NULL)
 	{
 		free(dest);

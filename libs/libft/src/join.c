@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:34:30 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:04:15 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:14:38 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char
 }
 
 char
-	*ft_strfjoin(const char *first_string, const char *second_string, int nfree, t_list *garbage)
+	*ft_strfjoin(const char *first_string, const char *second_string, int nfree,
+	t_list *garbage)
 {
 	int		i;
 	int		j;

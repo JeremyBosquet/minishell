@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:24:23 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:17:43 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char
 //	~	environnement/delete.c ---------
 
 char
-**delete_line_in_environnement(char **environnement, char *name, t_list *garbage);
+**delete_line_in_environnement(char **environnement, char *name, t_list *g);
 
 //	~	environnement/find.c -----------
 
@@ -108,7 +108,8 @@ char
 //	~	environnement/replace.c --------
 
 char
-**replace_line_in_environnement(char **environnement, int line, char *value, t_list *garbage);
+**replace_line_in_environnement(char **environnement, int line, char *value,
+	t_list *garbage);
 
 //	~	parsing/arguments.c ------------
 

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:01:19 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:28:41 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:18:44 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static char
 	while (environnement[index] != (void *) 0 \
 	AND ft_strnstr(environnement[index], "PATH=", PATH_MAX) == (void *) 0)
 		index += 1;
-	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':', garbage);
+	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':', \
+	garbage);
 	if (!path)
 		return ((void *) 0);
 	return (path);
@@ -66,7 +67,8 @@ char
 		paths[index] = ft_strfjoin(paths[index], command, 1, garbage);
 		if (access(paths[index], X_OK) == 0)
 		{
-			path = ft_strndup(paths[index], ft_strlen(paths[index]) + 1, garbage);
+			path = ft_strndup(paths[index], ft_strlen(paths[index]) + 1, \
+			garbage);
 			free_array((void **) paths, index);
 			return (path);
 		}

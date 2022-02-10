@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 19:20:58 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:18:07 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell2.h"
 
 static void
-	cleanup(t_minishell *minishell, char *line)
+	cleanup(t_minishell *minishell)
 {
 	int	i;
 
@@ -28,8 +28,6 @@ static void
 	}
 	if (minishell->number_of_commands > 0)
 		free(minishell->commands);
-	// if (*line)
-	// 	free(line);
 	minishell->number_of_commands = 0;
 }
 
@@ -57,7 +55,7 @@ int
 			execute_special_builtins(&minishell);
 		else
 			execute(&minishell);
-		cleanup(&minishell, new_line);
+		cleanup(&minishell);
 	}
 	clean_minishell(&minishell);
 	printf("exit\n");

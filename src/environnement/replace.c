@@ -6,14 +6,15 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:23:06 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:18:29 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char
-	**replace_line_in_environnement(char **environnement, int line, char *value, t_list *garbage)
+	**replace_line_in_environnement(char **environnement, int line, char *value,
+	t_list *garbage)
 {
 	char	*new;
 	int		i;

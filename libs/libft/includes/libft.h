@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:31:21 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:19:35 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ fputstring(int filedescriptor, char *string);
  * @return if succesful, return the new string, otherwise return NULL pointer
  */
 char
-*ft_strjoin(const char *first_string, const char *second_string, t_list *garbage);
+*ft_strjoin(const char *first_string, const char *second_string, t_list *g);
 
 /**
  * Allocate and return a new string, which is result of the concatenation of
@@ -227,7 +227,8 @@ char
  * @return if succesful, return the new string, otherwise return NULL pointer
  */
 char
-*ft_strfjoin(const char *first_string, const char *second_string, int nfree, t_list *garbage);
+*ft_strfjoin(const char *first_string, const char *second_string, int nfree,
+	t_list *garbage);
 
 //	~	list_clean.c -------------------
 
