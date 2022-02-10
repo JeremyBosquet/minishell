@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:29:15 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:22:50 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void
 	}
 	i = 0;
 	while (i < minishell->number_of_commands)
-		waitpid(minishell->pids[i++], NULL, 0);
+		waitpid(minishell->pids[i++], NULL, WUNTRACED);
 	free(minishell->pids);
 }
 
