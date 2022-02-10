@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 11:18:07 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:22:08 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void
 	int	i;
 
 	i = 0;
-	(void) line;
 	while (i < minishell->number_of_commands)
 	{
 		free_array((void **) minishell->commands[i].command, \
