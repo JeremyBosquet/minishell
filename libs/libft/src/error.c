@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:44:06 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:15:08 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:13:15 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,15 @@ int
 	return (return_code);
 }
 
-// void
-// 	error_exe(char *command, int error_code)
-// {
-// 	print_error_message(command);
-// }
+void
+	error_exe(char *command, char *arg, char *message, int error_code)
+{
+	fputstring(STDERR, "couscous: ");
+	fputstring(STDERR, command);
+	fputstring(STDERR, ": ");
+	fputstring(STDERR, arg);
+	fputstring(STDERR, ": ");
+	fputstring(STDERR, message);
+	fputchar(STDERR, '\n');
+	exit(error_code);
+}

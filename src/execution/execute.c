@@ -6,19 +6,19 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 11:22:50 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 13:03:25 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 
 static void
-	execute_builtins(t_minishell *minishell, char *command)
+	execute_builtins(t_minishell *minishell, char *command, int i)
 {
 	if (ft_strcmp(command, "exit") == 0 AND minishell->number_of_commands == 1)
 		builtins_exit(minishell);
 	else if (ft_strcmp(command, "pwd") == 0)
-		builtins_pwd(minishell);
+		builtins_pwd(minishell, i);
 	exit(0);
 }
 
@@ -45,7 +45,7 @@ static void
 	{
 		if (is_builtins(minishell->commands[i].command[j]) == true)
 			execute_builtins(minishell, \
-			minishell->commands[i].command[j]);
+			minishell->commands[i].command[j], i);
 		else
 			execute_command(minishell, i);
 		j += 1;

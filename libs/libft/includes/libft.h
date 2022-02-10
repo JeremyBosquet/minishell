@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 11:19:35 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 13:11:07 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,9 @@ error(char *message, int exit_status);
 
 int
 rerror(char *prefix, char *message, int return_code);
+
+void
+error_exe(char *command, char *arg, char *message, int error_code);
 
 //	~	fputs.c ------------------------
 
