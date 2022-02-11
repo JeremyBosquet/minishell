@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 11:48:46 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:04:42 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ ft_isprintable(int character);
  * 0 will be returned, otherwise, a value of type int equivalent to the string
  * passed in parameter
  */
-int
+long
 ft_atoi(const char *string);
 
 //	~	debug.c ------------------------

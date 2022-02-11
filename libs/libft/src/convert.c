@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:48:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:02:42 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 16:04:52 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int
+long
 	ft_atoi(const char *string)
 {
 	int	i;
