@@ -44,8 +44,11 @@ void
 	fputstring(STDERR, "couscous: ");
 	fputstring(STDERR, command);
 	fputstring(STDERR, ": ");
-	fputstring(STDERR, arg);
-	fputstring(STDERR, ": ");
+	if (arg != NULL)
+	{
+		fputstring(STDERR, arg);
+		fputstring(STDERR, ": ");
+	}
 	fputstring(STDERR, message);
 	fputchar(STDERR, '\n');
 	exit(error_code);
