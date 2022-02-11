@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:34:30 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 11:14:38 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,4 @@ char
 	string[i] = EOS;
 	strjoin_free((char *) first_string, (char *) second_string, nfree);
 	return (string);
-}
-
-char
-	*add_char(char *str, char c, t_list *garbage)
-{
-	char	*newstr;
-	int		i;
-
-	i = ft_strlen(str);
-	newstr = ft_calloc(sizeof(char), i + 2, garbage);
-	if (!newstr)
-		return (NULL);
-	newstr[i] = c;
-	return (newstr);
 }

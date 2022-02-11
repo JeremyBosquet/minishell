@@ -6,32 +6,50 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:40:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 15:42:07 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 
+static void
+	check_numeric_argument(char **command)
+{
+	int	i;
+
+	i = 1;
+	while (command[1][i] != EOS)
+	{
+		if (ft_isdigit(command[1][i]) == false)
+		{
+			printf("exit\n");
+			error_exe(command[0], command[1], "numeric argument required", 255);
+		}
+		i += 1;
+	}
+}
+
 void
 	builtins_exit(t_minishell *minishell, int i)
 {
-	int	j;
+	int		nb_args;
 
-	j = 0;
-	while (minishell->commands[i].command[j])
-		j += 1;
-	if (j > 2)
-	{
-		printf("exit\ncouscous: exit: too many arguments\n");
-		return ;
-	}
+	nb_args = 0;
+	while (minishell->commands[i].command[nb_args] != NULL)
+		nb_args += 1;
 	if (minishell->commands[i].command[1] != NULL)
 	{
-		minishell->exit_code = ft_atoi(minishell->commands[i].command[1]);
-		while (minishell->exit_code > 255)
-			minishell->exit_code -= 256;
+		check_numeric_argument(minishell->commands[i].command);
+		if (nb_args > 2)
+		{
+			printf("exit\ncouscous: too many arguments\n");
+			return ;
+		}
+		minishell->exit_code = ft_atoi(minishell->commands[i].command[1]) % 256;
+		if (minishell->exit_code < 0)
+			minishell->exit_code += 256;
 	}
 	else
 		minishell->exit_code = 0;
-	minishell->is_running = false;
+	exit(minishell->exit_code);
 }

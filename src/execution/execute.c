@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 15:28:16 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,50 @@ static void
 	errno);
 }
 
+static void
+	duplicate_filedescriptor(t_minishell *minishell, int i, int standard)
+{
+	if (i == 0)
+	{
+		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].filedescriptor_in);
+	}
+	else
+	{
+		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
+			error("dup fail1", 1);
+		close(minishell->commands[i - 1].pipes[0]);
+	}
+	if (i == minishell->number_of_commands - 1)
+	{
+		if (dup2(standard, STDOUT_FILENO) == -1)
+			error("dup error", 1);
+		close(standard);
+	}
+	else
+	{
+		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].pipes[1]);
+	}
+}
+
 /*
  * For pwd command, get current directory without variable in environnement
+ * For pipes, use command[i - 1]
  */
 static void
 	execute2(t_minishell *minishell, int i)
 {
 	int	j;
+	int	standard;
 
 	j = 0;
+	standard = dup(STDOUT_FILENO);
+	if (pipe(minishell->commands[i].pipes) == -1)
+		error("pipe failed", 1);
+	duplicate_filedescriptor(minishell, i, standard);
 	while (minishell->commands[i].command[j])
 	{
 		if (is_builtins(minishell->commands[i].command[j]) == true)

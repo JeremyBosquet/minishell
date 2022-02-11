@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:30:39 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 13:14:21 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void
 	char	*pwd;
 
 	if (minishell->commands[i].command[1] != NULL)
-		error_exe(minishell->commands[i].command[0], \
-		minishell->commands[i].command[1], "invalid option", 1);
+		if (minishell->commands[i].command[1][0] == '-')
+			error_exe(minishell->commands[i].command[0], \
+			minishell->commands[i].command[1], "invalid option", 1);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return ;
