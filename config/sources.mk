@@ -11,18 +11,20 @@ override	LIBS		:=		\
 
 ##	~~	Sources ----------------------------------------------------------------
 
-override	SOURCES	:=			\
-	environnement/add.c			\
-	environnement/clean.c		\
-	environnement/copy.c		\
-	environnement/delete.c		\
-	environnement/find.c		\
-	environnement/get.c			\
-	environnement/replace.c		\
-	parsing/arguments.c			\
-	parsing/check.c				\
-	parsing/parse_new_line.c	\
-	structures/clean.c			\
-	structures/init.c			\
-	minishell.c					\
+override	SOURCES	:=						\
+	environnement/add.c						\
+	environnement/clean.c					\
+	environnement/copy.c					\
+	environnement/delete.c					\
+	environnement/find.c					\
+	environnement/get.c						\
+	environnement/replace.c					\
+	parsing/arguments.c						\
+	parsing/check.c							\
+	parsing/parse_new_line.c				\
+	parsing/parse_and_replace_in_quotes.c	\
+	parsing/print.c							\
+	structures/clean.c						\
+	structures/init.c						\
+	minishell.c								\
 	signals.c

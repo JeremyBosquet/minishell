@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   isspace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 20:19:23 by jbosquet         ###   ########.fr       */
+/*   Created: 2022/02/11 11:46:31 by jbosquet          #+#    #+#             */
+/*   Updated: 2022/02/11 11:52:56 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-bool
-	init_minishell(t_minishell *minishell, char	**envp)
+int
+	ft_isspace(char c)
 {
-	minishell->commands = NULL;
-	minishell->pids = NULL;
-	minishell->number_of_commands = 0;
-	minishell->garbage = NULL;
-	minishell->environnement = copy_environnement(envp, 0, \
-	minishell->garbage);
-	minishell->exit_code = 0;
-	minishell->is_running = true;
-	return (true);
+	return (c == 32 || (c >= 9 && c <= 13));
 }

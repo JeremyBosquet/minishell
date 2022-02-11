@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_new_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/10 11:19:02 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 14:48:43 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,6 @@ void
 	free(line_cmds);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
+	replace_env(minishell);
+	print_commands(minishell);
 }

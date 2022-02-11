@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 19:35:59 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 16:15:38 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int
 	double_quotes = 1;
 	check_quotes2(new_line, &i, &simple_quotes, &double_quotes);
 	if (simple_quotes != 1 OR double_quotes != 1)
-		rerror("syntax error: ", "near unclosed quotes", 0);
+		return (rerror("syntax error: ", "near unclosed quotes", 1));
 	return (EXIT_SUCCESS);
 }
 
@@ -72,7 +72,7 @@ static int
 		if (new_line[i] == '|')
 		{
 			if (only_space_before_pipe == 1)
-				rerror("syntax error: ", "near unexpected token `|'", 0);
+				return (rerror("syntax error: ", "near unexpected token `|'", 1));
 			else
 				only_space_before_pipe = 1;
 		}

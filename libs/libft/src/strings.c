@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 17:59:10 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 16:29:38 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,33 @@ int
 	AND first_string[i] == second_string[i])
 		i += 1;
 	return (first_string[i] - second_string[i]);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len, t_list *g)
+{
+	char			*newstr;
+	unsigned int	i;
+	unsigned int	j;
+
+	i = start;
+	j = 0;
+	newstr = NULL;
+	if (!s)
+		return (0);
+	if (len > (size_t)ft_strlen(s))
+		len = ft_strlen(s);
+	newstr = (char *)ft_calloc(sizeof(char), (len + 1), g);
+	if (!newstr)
+		return (0);
+	if (start < (unsigned char)ft_strlen((char *)s))
+	{
+		while (i < (start + len) && s[i])
+		{
+			newstr[j] = s[i];
+			j++;
+			i++;
+		}
+	}
+	newstr[j] = 0;
+	return (newstr);
 }

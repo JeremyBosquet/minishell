@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 11:17:43 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 16:56:14 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ char
 char
 *get_value_of_line(char *line, t_list *garbage);
 
+char
+*get_env_value(char *name, t_minishell *minishell);
+
 //	~	environnement/replace.c --------
 
 char
@@ -126,6 +129,11 @@ parse_new_line(t_minishell *minishell, char *new_line);
 char
 *check_new_line(char *new_line, t_list *garbage);
 
+//	~	parsing/parse_and_replace_in_quotes.c
+
+void
+replace_env(t_minishell *minishell);
+
 //	~	structures/clean.c -------------
 
 bool
@@ -140,5 +148,10 @@ init_minishell(t_minishell *minishell, char	**envp);
 
 void
 my_signal(void);
+
+// A SUPPRIMER A LA FIN
+
+void	print_commands(t_minishell *minishell);
+void	print_command(char **str);
 
 #endif

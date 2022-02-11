@@ -85,3 +85,17 @@ char
 	strjoin_free((char *) first_string, (char *) second_string, nfree);
 	return (string);
 }
+
+char
+	*add_char(char *str, char c, t_list *garbage)
+{
+	char	*newstr;
+	int		i;
+
+	i = ft_strlen(str);
+	newstr = ft_calloc(sizeof(char), i + 2, garbage);
+	if (!newstr)
+		return (NULL);
+	newstr[i] = c;
+	return (newstr);
+}

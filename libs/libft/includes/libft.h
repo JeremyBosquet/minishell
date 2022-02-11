@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 13:11:07 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 11:48:46 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,9 @@ char
 char
 *ft_strfjoin(const char *first_string, const char *second_string, int nfree,
 	t_list *garbage);
+
+char
+*add_char(char *str, char c, t_list *garbage);
 
 //	~	list_clean.c -------------------
 
@@ -483,5 +486,11 @@ char
  */
 char
 *ft_strnstr(const char *string, const char *to_find, int size);
+
+char
+*ft_substr(char const *s, unsigned int start, size_t len, t_list *g);
+
+int
+ft_isspace(char c);
 
 #endif

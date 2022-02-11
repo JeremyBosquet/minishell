@@ -25,4 +25,5 @@ override	SOURCES	:=	\
 	strchr.c						\
 	strings.c						\
 	strings_l.c						\
-	strings_n.c
+	strings_n.c						\
+	isspace.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:37:48 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 18:21:40 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 16:58:10 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,21 @@ char
 		return (NULL);
 	while (line[++j])
 		value[i++] = line[j];
+	return (value);
+}
+
+char
+	*get_env_value(char *name, t_minishell *minishell)
+{
+	char	*value;
+	int		line;
+
+	value = NULL;
+	line = find_line_of_name(minishell->environnement, name, \
+	minishell->garbage);
+	if (line == -1)
+		return (NULL);
+	value = get_value_of_line(minishell->environnement[line], \
+	minishell->garbage);
 	return (value);
 }
