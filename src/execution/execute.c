@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/11 19:19:35 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,35 @@ static void
 }
 
 static void
-	duplicate_filedescriptor(t_minishell *minishell, int i, int standard)
+	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
-	if (i == 0)
+	if (i != 0)
 	{
-		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
-			error("dup fail", 1);
-		close(minishell->commands[i].filedescriptor_in);
-	}
-	else
-	{
+		close(minishell->commands[i - 1].pipes[1]);
 		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
 			error("dup fail1", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
-	if (i == minishell->number_of_commands - 1)
+	if (i != minishell->number_of_commands - 1)
 	{
-		if (dup2(standard, STDOUT_FILENO) == -1)
-			error("dup error", 1);
-		close(standard);
-	}
-	else
-	{
+		close(minishell->commands[i].pipes[0]);
 		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
-			error("dup fail", 1);
+			error("dup fail2", 1);
 		close(minishell->commands[i].pipes[1]);
+	}
+}
+
+static void
+	closefd(t_minishell *minishell, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i - 1)
+	{
+		close(minishell->commands[j].pipes[0]);
+		close(minishell->commands[j].pipes[1]);
+		j += 1;
 	}
 }
 
@@ -69,13 +73,10 @@ static void
 	execute2(t_minishell *minishell, int i)
 {
 	int	j;
-	int	standard;
 
 	j = 0;
-	standard = dup(STDOUT_FILENO);
-	if (pipe(minishell->commands[i].pipes) == -1)
-		error("pipe failed", 1);
-	duplicate_filedescriptor(minishell, i, standard);
+	closefd(minishell, i);
+	duplicate_filedescriptor(minishell, i);
 	while (minishell->commands[i].command[j])
 	{
 		if (is_builtins(minishell->commands[i].command[j]) == true)
@@ -98,6 +99,8 @@ void
 	i = 0;
 	while (i < minishell->number_of_commands)
 	{
+		if (pipe(minishell->commands[i].pipes) == -1)
+			error("pipe failed", 1);
 		minishell->pids[i] = fork();
 		if (minishell->pids < 0)
 			error("fork fail", 1);
@@ -107,7 +110,14 @@ void
 	}
 	i = 0;
 	while (i < minishell->number_of_commands)
-		waitpid(minishell->pids[i++], NULL, WUNTRACED);
+	{
+		close(minishell->commands[i].pipes[0]);
+		close(minishell->commands[i].pipes[1]);
+		i += 1;
+	}
+	i = 0;
+	while (i < minishell->number_of_commands)
+		waitpid(minishell->pids[i++], NULL, 0); // ici bug
 	free(minishell->pids);
 }
 
