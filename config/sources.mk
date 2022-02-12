@@ -22,7 +22,7 @@ override	SOURCES	:=						\
 	parsing/arguments.c						\
 	parsing/check.c							\
 	parsing/parse_new_line.c				\
-	parsing/parse_and_replace_in_quotes.c	\
+	parsing/parse_and_replace.c	\
 	parsing/print.c							\
 	structures/clean.c						\
 	structures/init.c						\
