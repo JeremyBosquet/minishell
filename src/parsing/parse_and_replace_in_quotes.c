@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/11 15:48:46 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/12 12:52:33 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,70 @@
 // 	return (tmp);
 // }
 
-// static int
-// 	env_allow(char c)
-// {
-// 	if (((c >= 'a' && c <= 'z')
-// 			|| (c >= 'A' && c <= 'Z'))
-// 		|| (c == '_')
-// 		|| (c >= '0' && c <= '9'))
-// 	{
-// 		return (1);
-// 	}
-// 	else
-// 		return (0);
-// }
-
-static void
-	parse_when_dollar(char **string, int *i, t_minishell *minishell)
+static int
+	env_allow(char c)
 {
-	printf("%c\n", *string[*i + 1]);
-	if (*string[*i + 1] == '$')
+	if (((c >= 'a' && c <= 'z')
+	|| (c >= 'A' && c <= 'Z'))
+	|| (c == '_')
+	|| (c >= '0' && c <= '9'))
 	{
-		printf("%d\n", minishell->exit_code);
-	}
-	else if (ft_isspace(*string[*i + 1]))
-	{
-		add_char(*string, *string[*i], minishell->garbage);
+		return (1);
 	}
 	else
+		return (0);
+}
+
+static char
+	*parse_when_dollar(char *string, int *i, t_minishell *minishell)
+{
+	int		tmp;
+	char	*memo;
+
+	tmp = *i + 1;
+	memo = NULL;
+	if (string[tmp] && (env_allow(string[tmp]) || string[tmp] == '?'))
 	{
-		*string = ft_strfjoin(*string, get_env_value("SHELL", minishell), 1, minishell->garbage);
+		if (string[tmp] == '?')
+		{
+			*i += 2;
+			if (*i < ft_strlen(string))
+				memo = ft_substr(string, *i, ft_strlen(string) - *i, minishell->garbage);
+			string[tmp - 1] = EOS;
+			string = ft_strfjoin(string, ft_itoa(minishell->exit_code), 3, minishell->garbage);
+			*i = ft_strlen(string);
+			if (memo)
+				string = ft_strfjoin(string, memo, 2, minishell->garbage);
+		}
+		else if (string[*i + 1] && ft_isspace(string[*i + 1]))
+		{
+			string = add_char(string, string[*i], minishell->garbage);
+			*i += 1;
+		}
+		else
+		{
+			if (string[*i])
+			{
+				char *subline;
+
+				*i += 1;
+				while (string[*i] && env_allow(string[*i]))
+					*i += 1;
+				if (*i < ft_strlen(string))
+					memo = ft_substr(string, *i, ft_strlen(string) - *i, minishell->garbage);
+				subline = ft_substr(string, tmp, (size_t)*i - tmp, minishell->garbage);
+				string[tmp - 1] = EOS;
+				if (get_env_value(subline, minishell))
+					string = ft_strfjoin(string, get_env_value(subline, minishell), 2, minishell->garbage);
+				*i = ft_strlen(string);
+				if (memo)
+					string = ft_strfjoin(string, memo, 2, minishell->garbage);
+			}
+		}
 	}
+	else
+		*i += 1;
+	return (string);
 }
 
 static char
@@ -81,7 +115,6 @@ static char
 		string[*i] = EOS;
 		string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
 	}
-	*i -= 1;
 	return (string);
 }
 
@@ -92,16 +125,16 @@ static char
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
 	while (string[*i] != '"')
 	{
-		if (string[*i] == '$')
-			parse_when_dollar(&string, i, minishell);
-		*i += 1;
+		if (string[*i] == '$' && string[*i + 1] != '"' && env_allow(string[*i + 1]))
+			string = parse_when_dollar(string, i, minishell);
+		else
+			*i += 1;
 	}
 	if (string[*i] == '"')
 	{
 		string[*i] = EOS;
 		string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
 	}
-	*i -= 1;
 	return (string);
 }
 
@@ -115,12 +148,24 @@ static char
 	new_line = NULL;
 	while (string[++i])
 	{
-		if (string[i] == '\'')
-			string = simple_quote_replace(string, &i, minishell);
-		else if (string[i] == '"')
-			string = double_quotes_replace(string, &i, minishell);
-		else if (string[i] && string[i + 1] && string[i] == '$')
-			parse_when_dollar(&string, &i, minishell);
+		while (string[i] == '$' || string[i] == '\'' || string[i] == '"')
+		{
+			printf("i: %d, char: |%c|\n", i, string[i]);
+			if (string[i] && string[i] == '$')
+				string = parse_when_dollar(string, &i, minishell);
+			if (string[i] == '\'')
+			{
+				printf("i: %d\n", i);
+				string = simple_quote_replace(string, &i, minishell);
+				printf("i: %d\n", i);
+			}
+			if (string[i] == '"')
+				string = double_quotes_replace(string, &i, minishell);
+			if (i >= ft_strlen(string))
+				break;
+		}
+		if (i >= ft_strlen(string))
+			break;
 	}
 	return (string);
 }

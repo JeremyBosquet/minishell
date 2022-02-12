@@ -26,4 +26,5 @@ override	SOURCES	:=	\
 	strings.c						\
 	strings_l.c						\
 	strings_n.c						\
-	isspace.c
+	isspace.c						\
+	itoa.c

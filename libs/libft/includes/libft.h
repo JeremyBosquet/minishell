@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:19:37 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 12:17:22 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,5 +492,8 @@ char
 
 int
 ft_isspace(char c);
+
+char
+*ft_itoa(int n);
 
 #endif
