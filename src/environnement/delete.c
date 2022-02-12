@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 15:59:58 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:20:48 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/12 17:49:14 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char
 	char	**new_environnement;
 
 	size = size_of_array(environnement);
-	new_environnement = ft_calloc(size + 1, sizeof(char), g);
+	new_environnement = ft_calloc(size + 1, sizeof(char *), g);
 	if (new_environnement == NULL)
 		return (NULL);
 	i = 0;
