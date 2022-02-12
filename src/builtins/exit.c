@@ -30,7 +30,7 @@ static void
 }
 
 void
-	builtins_exit(t_minishell *minishell, int i)
+	builtin_exit(t_minishell *minishell, int i)
 {
 	int		nb_args;
 

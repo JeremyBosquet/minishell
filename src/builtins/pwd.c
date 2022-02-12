@@ -13,7 +13,7 @@
 #include "minishell2.h"
 
 void
-	builtins_pwd(t_minishell *minishell, int i)
+	builtin_pwd(t_minishell *minishell, int i)
 {
 	char	*pwd;
 
