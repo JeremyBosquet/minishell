@@ -101,6 +101,6 @@ void
 	closefd(minishell, i);
 	i = 0;
 	while (i < minishell->number_of_commands)
-		waitpid(minishell->pids[i++], NULL, 0);
+		waitpid(minishell->pids[i++], NULL, WUNTRACED);
 	free(minishell->pids);
 }
