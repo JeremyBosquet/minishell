@@ -6,36 +6,13 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/12 12:52:33 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/12 13:25:38 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int
-// 	return_value_af_quotes(const char *string, int i)
-// {
-// 	int		tmp;
-// 	char	type;
-
-// 	type = string[i];
-// 	tmp = i;
-// 	i++;
-// 	while (string[i] != EOS AND string[i] != type)
-// 		i++;
-// 	return (i - tmp + 1);
-// }
-
-// static int
-// 	len_to_next_char(char *line, char c, int *i)
-// {
-// 	int	tmp;
-
-// 	tmp = 0;
-// 	while (line[*i + tmp] AND line[*i + tmp] != c)
-// 		tmp++;
-// 	return (tmp);
-// }
+//Probleme si $'test' et "$'test'" pas le même resultat
 
 static int
 	env_allow(char c)
@@ -98,6 +75,16 @@ static char
 			}
 		}
 	}
+	else if (string[*i + 1] == '\'' || string[*i + 1] == '"')
+	{
+		*i += 1;
+		if (*i < ft_strlen(string))
+			memo = ft_substr(string, *i, ft_strlen(string) - *i, minishell->garbage);
+		string[tmp - 1] = EOS;
+		*i = ft_strlen(string);
+		if (memo)
+			string = ft_strfjoin(string, memo, 2, minishell->garbage);
+	}
 	else
 		*i += 1;
 	return (string);
@@ -150,15 +137,10 @@ static char
 	{
 		while (string[i] == '$' || string[i] == '\'' || string[i] == '"')
 		{
-			printf("i: %d, char: |%c|\n", i, string[i]);
 			if (string[i] && string[i] == '$')
 				string = parse_when_dollar(string, &i, minishell);
 			if (string[i] == '\'')
-			{
-				printf("i: %d\n", i);
 				string = simple_quote_replace(string, &i, minishell);
-				printf("i: %d\n", i);
-			}
 			if (string[i] == '"')
 				string = double_quotes_replace(string, &i, minishell);
 			if (i >= ft_strlen(string))
