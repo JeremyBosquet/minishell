@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/10 13:14:44 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/12 09:38:04 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool
 is_builtins(char *command);
 
 void
-execute(t_minishell *minishell);
+child(t_minishell *minishell);
 
 void
 builtins_exit(t_minishell *minishell, int i);
@@ -33,6 +33,9 @@ is_special_builtins(char *command);
 
 void
 execute_special_builtins(t_minishell *minishell);
+
+void
+execute_builtins(t_minishell *minishell, char *command, int i);
 
 char
 *check_path(char *command, char **environnement, t_list *garbage);

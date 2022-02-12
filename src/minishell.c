@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 09:38:14 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void
 	minishell->number_of_commands = 0;
 }
 
-//TODO: Free les commandes et tout ce qu'il y a dedans.
 int
 	main(int argc, char **argv, char **envp)
 {
@@ -53,7 +52,7 @@ int
 		AND is_special_builtins(minishell.commands[0].command[0]) == true)
 			execute_special_builtins(&minishell);
 		else
-			execute(&minishell);
+			child(&minishell);
 		cleanup(&minishell);
 	}
 	clean_minishell(&minishell);

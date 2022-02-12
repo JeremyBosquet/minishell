@@ -6,21 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 19:21:59 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 09:42:03 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
-
-static void
-	execute_builtins(t_minishell *minishell, char *command, int i)
-{
-	if (ft_strcmp(command, "exit") == 0 AND minishell->number_of_commands == 1)
-		builtins_exit(minishell, i);
-	else if (ft_strcmp(command, "pwd") == 0)
-		builtins_pwd(minishell, i);
-	exit(0);
-}
 
 static void
 	execute_command(t_minishell *minishell, int i)
@@ -39,14 +29,14 @@ static void
 	{
 		close(minishell->commands[i - 1].pipes[1]);
 		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
-			error("dup fail1", 1);
+			error("dup fail", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
 	if (i != minishell->number_of_commands - 1)
 	{
 		close(minishell->commands[i].pipes[0]);
 		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
-			error("dup fail2", 1);
+			error("dup fail", 1);
 		close(minishell->commands[i].pipes[1]);
 	}
 }
@@ -70,7 +60,7 @@ static void
  * For pipes, use command[i - 1]
  */
 static void
-	execute2(t_minishell *minishell, int i)
+	execute(t_minishell *minishell, int i)
 {
 	int	j;
 
@@ -89,7 +79,7 @@ static void
 }
 
 void
-	execute(t_minishell *minishell)
+	child(t_minishell *minishell)
 {
 	int	i;
 
@@ -100,36 +90,17 @@ void
 	while (i < minishell->number_of_commands)
 	{
 		if (pipe(minishell->commands[i].pipes) == -1)
-			error("pipe failed", 1);
+			error("pipe fail", 1);
 		minishell->pids[i] = fork();
 		if (minishell->pids < 0)
 			error("fork fail", 1);
 		else if (minishell->pids[i] == 0)
-			execute2(minishell, i);
+			execute(minishell, i);
 		i += 1;
 	}
-	i = 0;
-	while (i < minishell->number_of_commands)
-	{
-		close(minishell->commands[i].pipes[0]);
-		close(minishell->commands[i].pipes[1]);
-		i += 1;
-	}
+	closefd(minishell, i);
 	i = 0;
 	while (i < minishell->number_of_commands)
 		waitpid(minishell->pids[i++], NULL, 0);
 	free(minishell->pids);
-}
-
-void
-	execute_special_builtins(t_minishell *minishell)
-{
-	if (ft_strcmp(minishell->commands[0].command[0], "exit") == 0)
-		builtins_exit(minishell, 0);
-	else if (ft_strcmp(minishell->commands[0].command[0], "unset") == 0)
-		return ;
-	else if (ft_strcmp(minishell->commands[0].command[0], "export") == 0)
-		return ;
-	else if (ft_strcmp(minishell->commands[0].command[0], "cd") == 0)
-		return ;
 }
