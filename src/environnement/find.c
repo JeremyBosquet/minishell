@@ -34,5 +34,6 @@ int
 		}
 		i += 1;
 	}
+	free(name);
 	return (-1);
 }

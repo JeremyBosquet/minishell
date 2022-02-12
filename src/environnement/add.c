@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:16:15 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:23:52 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/12 19:12:06 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char
 		return (replace_line_in_environnement(environnement, line, \
 		get_value_of_line(new, garbage), garbage));
 	}
+	free(name);
 	new_environnement = copy_environnement(environnement, 1, garbage);
 	if (new_environnement == NULL)
 		clean_environnement(environnement, size_of_array(environnement));

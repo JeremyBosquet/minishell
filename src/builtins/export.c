@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 18:32:07 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 19:08:30 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void
 		value = get_value_of_line(minishell->environnement[i], \
 		minishell->garbage);
 		printf("declare -x %s=\"%s\"\n", name, value);
-		free(name);
-		free(value);
 		i += 1;
 	}
 }
