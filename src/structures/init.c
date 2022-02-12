@@ -21,6 +21,8 @@ bool
 	minishell->garbage = NULL;
 	minishell->environnement = copy_environnement(envp, 0, \
 	minishell->garbage);
+	minishell->environnement = delete_line_in_environnement(\
+	minishell->environnement, "OLDPWD", minishell->garbage);
 	minishell->exit_code = 0;
 	minishell->is_running = true;
 	return (true);

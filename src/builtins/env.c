@@ -6,11 +6,26 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 09:44:58 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 10:03:19 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:20:04 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
+
+static bool
+	is_path_in_env(t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	while (minishell->environnement[i] != NULL)
+	{
+		if (ft_strncmp(minishell->environnement[i], "PATH=", 5) == 0)
+			return (true);
+		i += 1;
+	}
+	return (false);
+}
 
 static void
 	check_arguments_or_option(char **command)
@@ -32,6 +47,9 @@ void
 {
 	int	j;
 
+	if (is_path_in_env(minishell) == false)
+		error_exe(minishell->commands[i].command[0], NULL, \
+		"No such file or directory", 127);
 	if (size_of_array(minishell->commands[i].command) > 1)
 		check_arguments_or_option(minishell->commands[i].command);
 	j = 0;

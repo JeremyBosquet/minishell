@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 12:45:31 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:26:54 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void
 	minishell->environnement, minishell->garbage), \
 	minishell->commands[i].command, minishell->environnement);
 	error_exe(minishell->commands[i].command[0], NULL, "command not found", \
-	errno);
+	127);
 }
 
 static void
@@ -102,5 +102,6 @@ void
 	i = 0;
 	while (i < minishell->number_of_commands)
 		waitpid(minishell->pids[i++], &minishell->exit_code, WUNTRACED);
+	minishell->exit_code /= 256;
 	free(minishell->pids);
 }

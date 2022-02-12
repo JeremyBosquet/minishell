@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:24:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 17:31:49 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:41:31 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int
 		j = 0;
 		while (command[i][j] != EOS)
 		{
-			if (command[i][j] != '_' AND ft_isalpha(command[i][j]) == false)
+			if (command[i][0] != '_' AND ft_isalpha(command[i][0]) == false)
 			{
 				printf("couscous: unset: %s: not a valid identifer\n", \
 				command[i]);
@@ -60,6 +60,7 @@ static int
 int
 	builtin_unset(t_minishell *minishell, int i)
 {
+	int		j;
 	int		size_of_arg;
 	int		return_value;
 
@@ -69,8 +70,13 @@ int
 	return_value = check_arguments_or_options(minishell->commands[i].command);
 	if (return_value == 1 OR return_value == 2)
 		return (return_value);
-	minishell->environnement = delete_line_in_environnement(\
-	minishell->environnement, minishell->commands[i].command[1], \
+	j = 1;
+	while (j < size_of_arg)
+	{
+		minishell->environnement = delete_line_in_environnement(\
+	minishell->environnement, minishell->commands[i].command[j], \
 	minishell->garbage);
+		j += 1;
+	}
 	return (0);
 }

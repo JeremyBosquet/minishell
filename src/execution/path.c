@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:01:19 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:13:17 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ static char
 {
 	int		index;
 	char	**path;
+	char	*pos;
 
 	index = 0;
 	while (environnement != NULL && environnement[index] != (void *) 0 \
 	AND ft_strnstr(environnement[index], "PATH=", PATH_MAX) == (void *) 0)
 		index += 1;
-	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':', \
-	garbage);
+	pos = ft_strnchr(environnement[index], '=', 5);
+	if (pos == NULL)
+		return (NULL);
+	path = ft_split(pos + 1, ':', garbage);
 	if (!path)
 		return ((void *) 0);
 	return (path);
@@ -61,7 +64,7 @@ char
 	index = 0;
 	paths = get_path(environnement, garbage);
 	if (!paths)
-		exit(EXIT_FAILURE);
+		error_exe(command, NULL, "No such file or directory", 127);
 	while (paths[index] != (void *) 0)
 	{
 		paths[index] = ft_strfjoin(paths[index], command, 1, garbage);

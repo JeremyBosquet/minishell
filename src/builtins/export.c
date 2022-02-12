@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 16:08:00 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:32:07 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,42 @@ static void
 }
 
 static int
-	check_arguments_or_options(t_minishell *minishell, char **command)
+	error_arg(char **command, int i)
 {
-	char	*pos;
-
-	if (command[1][0] == '_' OR ft_isalpha(command[1][0]) == true)
+	if (command[i][0] == '-')
 	{
-		pos = ft_strchr(command[1], '=');
-		if (pos == NULL)
-			return (0);
-		minishell->environnement = add_to_environnement(\
-		minishell->environnement, command[1], minishell->garbage);
-		return (0);
+		printf("couscous: export: -%c: invalid option\n", command[i][1]);
+		return (2);
 	}
 	else
 	{
-		if (command[1][0] == '-')
+		printf("couscous: export: '%s': not a valid identifier\n", command[i]);
+		return (1);
+	}
+}
+
+static int
+	check_arguments_or_options(t_minishell *minishell, char **command)
+{
+	char	*pos;
+	int		i;
+
+	i = 1;
+	while (command[i] != NULL)
+	{
+		if (command[i][0] == '_' OR ft_isalpha(command[i][0]) == true)
 		{
-			printf("couscous: export: -%c: invalid option\n", command[1][1]);
-			return (2);
+			pos = ft_strchr(command[i], '=');
+			if (pos == NULL)
+				return (0);
+			minishell->environnement = add_to_environnement(\
+		minishell->environnement, command[i], minishell->garbage);
 		}
 		else
-		{
-			printf("couscous: export: '%s': not a valid identifier\n", \
-			command[1]);
-			return (1);
-		}
+			return (error_arg(command, i));
+		i += 1;
 	}
+	return (0);
 }
 
 int

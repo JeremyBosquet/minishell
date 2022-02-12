@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:12:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/09 16:17:26 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/12 18:10:48 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char
 	int	index;
 
 	index = 0;
+	if (string == NULL)
+		return (NULL);
 	while (string[index] != '\0' && string[index] != character \
 	&& index < number)
 		index += 1;
