@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:34:10 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,18 @@ void
 		return ;
 	new_line = check_new_line(new_line, minishell->garbage);
 	if (new_line == NULL)
+	{
+		minishell->exit_code = 258;
 		return ;
+	}
 	line_cmds = ft_split_with_quotes(new_line, '|', minishell->garbage);
 	if (!line_cmds)
 		return ;
 	cmds_split = ft_calloc(sizeof(char **), size_of_array(line_cmds) + 1, minishell->garbage);
 	// if (cmds_split == NULL)
 		// free_parse(cmds_split, line_cmds, 0, size_of_array(line_cmds));
+	//FAIRE LE PARSING DES REDIRECTIONS ICI
+	//line_cmds = redirections(line_cmds, minishell);
 	while (line_cmds[i])
 	{
 		cmds_split[i] = ft_split_with_quotes(line_cmds[i], ' ', minishell->garbage);

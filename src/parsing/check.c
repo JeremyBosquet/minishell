@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 18:17:30 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,36 @@ static int
 		return (2);
 	return (EXIT_SUCCESS);
 }
+
+// static int
+// 	check_simple_redirect(char *new_line)
+// {
+// 	int	i;
+// 	int	not_text_after;
+
+// 	i = 0;
+// 	not_text_after = 1;
+// 	while (new_line[i])
+// 	{
+// 		if (new_line[i] == '\'' || new_line[i] == '"')
+// 			i += return_value_after_quote(new_line, i);
+// 		if ((new_line[i] != '>' || new_line[i] != '<'))
+// 		{
+// 			if (new_line[i - 1] && (new_line[i - 1] == '<' || new_line[i - 1] == '>'))
+			
+// 			not_text_after = -1;
+// 		}
+// 		if (new_line[i] == '>' || new_line[i] != '<')
+// 		{
+// 			if (not_text_after == 1)
+// 				return (rerror("syntax error: ", "near unexpected token `>'", 1));
+// 			else
+// 				not_text_after = 1;
+// 		}
+// 		i++;
+// 	}
+// 	return (EXIT_SUCCESS);
+// }
 
 char *
 	check_new_line(char *new_line, t_list *garbage)
