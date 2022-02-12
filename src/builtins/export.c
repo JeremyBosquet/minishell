@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 11:09:49 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/12 16:08:00 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ static void
 }
 
 static int
-	check_arguments_or_options(char **command)
+	check_arguments_or_options(t_minishell *minishell, char **command)
 {
+	char	*pos;
+
 	if (command[1][0] == '_' OR ft_isalpha(command[1][0]) == true)
 	{
-		debug ;
+		pos = ft_strchr(command[1], '=');
+		if (pos == NULL)
+			return (0);
+		minishell->environnement = add_to_environnement(\
+		minishell->environnement, command[1], minishell->garbage);
 		return (0);
 	}
 	else
@@ -71,7 +77,8 @@ int
 	}
 	else
 	{
-		check_arg = check_arguments_or_options(minishell->commands[i].command);
+		check_arg = check_arguments_or_options(minishell, \
+		minishell->commands[i].command);
 		if (check_arg == 1 || check_arg == 2)
 			return (check_arg);
 		return (0);

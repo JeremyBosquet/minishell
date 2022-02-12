@@ -19,7 +19,7 @@ static char
 	char	**path;
 
 	index = 0;
-	while (environnement[index] != (void *) 0 \
+	while (environnement != NULL && environnement[index] != (void *) 0 \
 	AND ft_strnstr(environnement[index], "PATH=", PATH_MAX) == (void *) 0)
 		index += 1;
 	path = ft_split(((ft_strnchr(environnement[index], '=', 5)) + 1), ':', \
