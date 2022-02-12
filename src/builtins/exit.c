@@ -34,9 +34,7 @@ void
 {
 	int		nb_args;
 
-	nb_args = 0;
-	while (minishell->commands[i].command[nb_args] != NULL)
-		nb_args += 1;
+	nb_args = size_of_array(minishell->commands[i].command);
 	if (minishell->commands[i].command[1] != NULL)
 	{
 		check_numeric_argument(minishell->commands[i].command);

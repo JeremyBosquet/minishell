@@ -52,5 +52,7 @@ void
 		builtins_exit(minishell, i);
 	else if (ft_strcmp(command, "pwd") == 0)
 		builtins_pwd(minishell, i);
+	else if (ft_strcmp(command, "env") == 0)
+		builtin_env(minishell, i);
 	exit(0);
 }
