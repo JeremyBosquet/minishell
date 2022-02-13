@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:32:32 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 16:33:14 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/13 11:43:37 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void
 	else if (ft_strcmp(minishell->commands[0].command[0], "export") == 0)
 		minishell->exit_code = builtin_export(minishell, 0);
 	else if (ft_strcmp(minishell->commands[0].command[0], "cd") == 0)
-		return ;
+		minishell->exit_code = builtin_cd(minishell, 0);
 }
 
 void
@@ -65,5 +65,7 @@ void
 		return_value = builtin_unset(minishell, i);
 	else if (ft_strcmp(command, "echo") == 0)
 		builtin_echo(minishell, i);
+	else if (ft_strcmp(command, "cd") == 0)
+		return_value = builtin_cd(minishell, i);
 	exit(return_value);
 }

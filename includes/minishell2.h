@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 16:27:48 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/13 12:23:01 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ is_builtins(char *command);
 
 void
 child(t_minishell *minishell);
+
+int
+builtin_cd(t_minishell *minishell, int i);
 
 void
 builtin_echo(t_minishell *minishell, int i);

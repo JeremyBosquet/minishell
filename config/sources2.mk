@@ -1,4 +1,5 @@
 override	SOURCES	+=		\
+	builtins/cd.c			\
 	builtins/echo.c			\
 	builtins/env.c			\
 	builtins/exit.c			\

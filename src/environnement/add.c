@@ -22,13 +22,10 @@ char
 
 	name = get_name_of_line(new, garbage);
 	line = find_line_of_name(environnement, name, garbage);
+	free(name);
 	if (line != -1)
-	{
-		free(name);
 		return (replace_line_in_environnement(environnement, line, \
 		get_value_of_line(new, garbage), garbage));
-	}
-	free(name);
 	new_environnement = copy_environnement(environnement, 1, garbage);
 	if (new_environnement == NULL)
 		clean_environnement(environnement, size_of_array(environnement));
