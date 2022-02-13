@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/12 18:38:28 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/13 18:49:40 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,21 @@ static int
 // 	return (EXIT_SUCCESS);
 // }
 
+int
+	check_space(char *new_line)
+{
+	int	i;
+
+	i = 0;
+	while (new_line[i])
+	{
+		if (new_line[i] != ' ')
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
+
 char *
 	check_new_line(char *new_line, t_list *garbage)
 {
@@ -123,6 +138,8 @@ char *
 	if (check_pipe(new_line) == EXIT_FAILURE)
 		return (NULL);
 	if (check_quotes(new_line) == EXIT_FAILURE)
+		return (NULL);
+	if (check_space(new_line) == EXIT_FAILURE)
 		return (NULL);
 	if (check_pipe(new_line) == 2)
 	{

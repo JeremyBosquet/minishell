@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_and_replace_in_quotes.c                      :+:      :+:    :+:   */
+/*   parse_and_replace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/12 13:25:38 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/13 18:57:44 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int
 	env_allow(char c)
 {
 	if (((c >= 'a' && c <= 'z')
-	|| (c >= 'A' && c <= 'Z'))
-	|| (c == '_')
-	|| (c >= '0' && c <= '9'))
+		|| (c >= 'A' && c <= 'Z'))
+		|| (c == '_')
+		|| (c >= '0' && c <= '9'))
 	{
 		return (1);
 	}
@@ -112,7 +112,7 @@ static char
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
 	while (string[*i] != '"')
 	{
-		if (string[*i] == '$' && string[*i + 1] != '"' && env_allow(string[*i + 1]))
+		if (string[*i] == '$' && string[*i + 1] != '"' && (env_allow(string[*i + 1]) || string[*i + 1] == '?'))
 			string = parse_when_dollar(string, i, minishell);
 		else
 			*i += 1;
@@ -144,10 +144,10 @@ static char
 			if (string[i] == '"')
 				string = double_quotes_replace(string, &i, minishell);
 			if (i >= ft_strlen(string))
-				break;
+				break ;
 		}
 		if (i >= ft_strlen(string))
-			break;
+			break ;
 	}
 	return (string);
 }
