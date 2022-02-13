@@ -23,6 +23,9 @@ void
 child(t_minishell *minishell);
 
 void
+builtin_echo(t_minishell *minishell, int i);
+
+void
 builtin_exit(t_minishell *minishell, int i);
 
 void

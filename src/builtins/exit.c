@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:40:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/13 11:39:08 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void
 	}
 	else
 		minishell->exit_code = 0;
+	printf("exit\n");
 	exit(minishell->exit_code);
 }
