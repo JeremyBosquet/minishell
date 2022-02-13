@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:24:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 18:41:31 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/13 17:27:22 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int
 	j = 1;
 	while (j < size_of_arg)
 	{
+		if (ft_strcmp(minishell->commands[i].command[j], "PWD") == 0)
+		{
+			minishell->environnement = delete_line_in_environnement(\
+			minishell->environnement, "OLDPWD", minishell->garbage);
+		}
 		minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, minishell->commands[i].command[j], \
 	minishell->garbage);
