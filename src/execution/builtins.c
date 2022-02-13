@@ -63,5 +63,7 @@ void
 	else if (ft_strcmp(command, "unset") == 0 \
 	AND minishell->number_of_commands == 1)
 		return_value = builtin_unset(minishell, i);
+	else if (ft_strcmp(command, "echo") == 0)
+		builtin_echo(minishell, i);
 	exit(return_value);
 }
