@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:58:37 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/10 11:18:29 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/13 16:53:00 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char
 	AND environnement[line][i] != '=')
 		i += 1;
 	i += 1;
-	new = ft_calloc(ft_strlen(value) + i, sizeof(char), garbage);
+	new = ft_calloc(ft_strlen(value) + i + 1, sizeof(char), garbage);
 	if (new == NULL)
 		clean_environnement(environnement, size_of_array(environnement));
 	ft_strncpy(new, environnement[line], i);
@@ -37,5 +37,6 @@ char
 	free(new);
 	if (environnement[line] == NULL)
 		clean_environnement(environnement, size_of_array(environnement));
+	free(value);
 	return (environnement);
 }
