@@ -19,6 +19,9 @@
 bool
 is_builtins(char *command);
 
+char
+**ft_dup_2array(char **src, t_list *garbage);
+
 void
 child(t_minishell *minishell);
 

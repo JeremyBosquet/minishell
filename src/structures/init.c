@@ -35,6 +35,7 @@ static void
 		return ;
 	minishell->environnement = add_to_environnement(minishell->environnement, \
 	line, minishell->garbage);
+	free(line);
 }
 
 bool

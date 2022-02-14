@@ -6,28 +6,30 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 19:08:30 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 17:19:01 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 
 static void
-	display_env(t_minishell *minishell)
+	display_env(t_minishell *minishell, char **array)
 {
 	int		i;
 	char	*name;
 	char	*value;
 
 	i = 0;
-	while (minishell->environnement[i] != NULL)
+	while (array[i] != NULL)
 	{
-		name = get_name_of_line(minishell->environnement[i], \
+		name = get_name_of_line(array[i], \
 		minishell->garbage);
-		value = get_value_of_line(minishell->environnement[i], \
+		value = get_value_of_line(array[i], \
 		minishell->garbage);
 		printf("declare -x %s=\"%s\"\n", name, value);
 		i += 1;
+		free(name);
+		free(value);
 	}
 }
 
@@ -70,16 +72,48 @@ static int
 	return (0);
 }
 
+static void
+	sort_ascii(char **command)
+{
+	int		i;
+	int		size;
+	bool	find;
+	char	*tmp;
+
+	size = size_of_array(command);
+	find = true;
+	while (find == true)
+	{
+		find = false;
+		i = 0;
+		while (i < size - 1)
+		{
+			if (ft_strcmp(command[i], command[i + 1]) > 0)
+			{
+				tmp = command[i];
+				command[i] = command[i + 1];
+				command[i + 1] = tmp;
+				find = true;
+			}
+			i += 1;
+		}
+	}
+}
+
 int
 	builtin_export(t_minishell *minishell, int i)
 {
-	int	size_of_arg;
-	int	check_arg;
+	int		size_of_arg;
+	int		check_arg;
+	char	**tmp;
 
 	size_of_arg = size_of_array(minishell->commands[i].command);
 	if (size_of_arg < 2)
 	{
-		display_env(minishell);
+		tmp = ft_dup_2array(minishell->environnement, minishell->garbage);
+		sort_ascii(tmp);
+		display_env(minishell, tmp);
+		free_array((void **) tmp, size_of_array(tmp));
 		return (0);
 	}
 	else
