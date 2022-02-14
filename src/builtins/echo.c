@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 11:34:47 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 13:09:46 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 08:53:25 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,48 @@ static bool
 	check_option(char **command)
 {
 	int	i;
+	int	j;
 
 	i = 1;
-	if (command[1][0] == '-')
+	j = 1;
+	while (command[j] != NULL)
 	{
-		while (command[1][i] != EOS AND command[1][i] == 'n')
-			i += 1;
-		if (ft_strlen(command[1]) == i)
-			return (true);
-		else
-			return (false);
+		if (command[j][0] == '-')
+		{
+			while (command[j][i] != EOS AND command[j][i] == 'n')
+				i += 1;
+			if (ft_strlen(command[j]) == i)
+				return (true);
+			else
+				return (false);
+		}
+		j += 1;
 	}
 	return (false);
+}
+
+static int
+	get_how_mani_option(char **command)
+{
+	int	i;
+	int	j;
+	int	nb_option;
+
+	i = 1;
+	j = 1;
+	nb_option = 0;
+	while (command[j] != NULL)
+	{
+		if (command[j][0] == '-')
+		{
+			while (command[j][i] != EOS AND command[j][i] == 'n')
+				i += 1;
+			if (ft_strlen(command[j]) == i)
+				nb_option += 1;
+		}
+		j += 1;
+	}
+	return (nb_option);
 }
 
 static void
@@ -36,17 +66,7 @@ static void
 	int	i;
 
 	i = 1;
-	if (type == 1)
-	{
-		while (command[++i] != NULL)
-		{
-			if (i == size_of_command - 1)
-				printf("%s", command[i]);
-			else
-				printf("%s ", command[i]);
-		}
-	}
-	if (type == 2)
+	if (type == 0)
 	{
 		while (command[i] != NULL)
 		{
@@ -55,6 +75,17 @@ static void
 			else
 				printf("%s ", command[i]);
 			i += 1;
+		}
+	}
+	else if (type > 0)
+	{
+		i = type;
+		while (command[++i] != NULL)
+		{
+			if (i == size_of_command - 1)
+				printf("%s", command[i]);
+			else
+				printf("%s ", command[i]);
 		}
 	}
 }
@@ -68,8 +99,9 @@ void
 	if (size_of_cmd < 2)
 		printf("\n");
 	else if (check_option(minishell->commands[i].command) == true)
-		print_result(minishell->commands[i].command, size_of_cmd, 1);
+		print_result(minishell->commands[i].command, size_of_cmd, \
+		get_how_mani_option(minishell->commands[i].command));
 	else
-		print_result(minishell->commands[i].command, size_of_cmd, 2);
+		print_result(minishell->commands[i].command, size_of_cmd, 0);
 	exit(0);
 }
