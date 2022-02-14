@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 18:04:45 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	size_of_3array(char ***str)
 	return (i);
 }
 
-char	**ft_dup_2array(char **src, t_list *garbage)
+char	**ft_dup_2array(char **src, t_list *garbage, int opt)
 {
 	int		i;
 	char	**dest;
@@ -59,12 +59,14 @@ char	**ft_dup_2array(char **src, t_list *garbage)
 	while (src[i])
 	{
 		dest[i] = ft_strdup(src[i], garbage);
-		free(src[i]);
+		if (opt == 1)
+			free(src[i]);
 		if (!dest[i])
 			return (NULL);
 		i++;
 	}
-	free(src);
+	if (opt == 1)
+		free(src);
 	return (dest);
 }
 
@@ -81,7 +83,7 @@ static void
 	minishell->number_of_commands = size_of_3array(cmds);
 	while (cmds[i])
 	{
-		minishell->commands[i].command = ft_dup_2array(cmds[i], garbage);
+		minishell->commands[i].command = ft_dup_2array(cmds[i], garbage, 1);
 		i += 1;
 	}
 	free(cmds);

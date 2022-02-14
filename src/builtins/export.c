@@ -110,7 +110,7 @@ int
 	size_of_arg = size_of_array(minishell->commands[i].command);
 	if (size_of_arg < 2)
 	{
-		tmp = ft_dup_2array(minishell->environnement, minishell->garbage);
+		tmp = ft_dup_2array(minishell->environnement, minishell->garbage, 0);
 		sort_ascii(tmp);
 		display_env(minishell, tmp);
 		free_array((void **) tmp, size_of_array(tmp));

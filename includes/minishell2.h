@@ -20,7 +20,7 @@ bool
 is_builtins(char *command);
 
 char
-**ft_dup_2array(char **src, t_list *garbage);
+**ft_dup_2array(char **src, t_list *garbage, int opt);
 
 void
 child(t_minishell *minishell);
