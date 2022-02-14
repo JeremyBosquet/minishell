@@ -22,6 +22,9 @@ is_builtins(char *command);
 void
 child(t_minishell *minishell);
 
+void
+handle_signals(int signo);
+
 int
 builtin_cd(t_minishell *minishell, int i);
 

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 18:26:54 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 14:21:22 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void
 	int	j;
 
 	j = 0;
+	signal(SIGINT, NULL);
 	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
 	while (minishell->commands[i].command[j])
@@ -87,6 +88,7 @@ void
 	if (minishell->pids == NULL)
 		return ;
 	i = 0;
+	signal(SIGINT, SIG_IGN);
 	while (i < minishell->number_of_commands)
 	{
 		if (pipe(minishell->commands[i].pipes) == -1)
@@ -102,6 +104,7 @@ void
 	i = 0;
 	while (i < minishell->number_of_commands)
 		waitpid(minishell->pids[i++], &minishell->exit_code, WUNTRACED);
+	signal(SIGINT, handle_signals);
 	minishell->exit_code /= 256;
 	free(minishell->pids);
 }
