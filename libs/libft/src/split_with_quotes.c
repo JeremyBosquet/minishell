@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_with_quotes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:42:22 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,34 @@ static int
 	int	words_length;
 
 	words_length = 0;
-	while (string[words_length] != EOS)
+	while (string[words_length] != '\0')
 	{
 		if (string[words_length] != charset)
 		{
-			if (string[words_length] == '\'' OR string[words_length] == '"')
+			if (string[words_length] == '\'' || string[words_length] == '"')
 				words_length += return_value_after_quote(string, words_length);
+			else if ((string[words_length] == '>' || string[words_length] == '<') && charset != '|' && words_length > 0)
+				break ;
+			else if (string[words_length] == '>' && charset != '|')
+			{
+				if (string[words_length + 1] == '>')
+					words_length += 2;
+				else
+					if (string[words_length + 1] != '<')
+						words_length += 1;
+				break ;
+			}
+			else if (string[words_length] == '<' && charset != '|')
+			{
+				if (string[words_length + 1] == '<')
+					words_length += 2;
+				else
+					if (string[words_length + 1] != '>')
+						words_length += 1;
+					else if (string[words_length + 1] == '>')
+						words_length += 1;
+				break ;
+			}
 			else
 				words_length += 1;
 		}

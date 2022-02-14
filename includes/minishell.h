@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 17:22:37 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ typedef struct s_minishell	t_minishell;
 
 struct s_command {
 	char	**command;
-	char	*arguments;
-	char	*path;
-	char	*path_file_in;
-	char	*path_file_out;
 	int		filedescriptor_in;
 	int		filedescriptor_out;
 	int		type_of_infile;
@@ -65,7 +61,6 @@ struct	s_minishell {
 	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
-	char		*current_pwd;
 	int			number_of_commands;
 	int			exit_code;
 };
@@ -132,8 +127,10 @@ char
 //	~	parsing/parse_and_replace_in_quotes.c
 
 void
-replace_env(t_minishell *minishell);
+replace_env(char **tabs, t_minishell *minishell);
 
+void
+replace_quotes(char ***tabs, t_minishell *minishell);
 //	~	structures/clean.c -------------
 
 bool

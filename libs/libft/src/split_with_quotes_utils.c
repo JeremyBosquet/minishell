@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_with_quotes_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/07 18:11:12 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/14 18:32:25 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int
 	type = string[i];
 	tmp = i;
 	i++;
-	while (string[i] != EOS AND string[i] != type)
+	while (string[i] != 0 && string[i] != type)
 		i++;
 	return (i - tmp + 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/13 20:31:19 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:04:45 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void
 		// free_parse(cmds_split, line_cmds, 0, size_of_array(line_cmds));
 	//FAIRE LE PARSING DES REDIRECTIONS ICI
 	//line_cmds = redirections(line_cmds, minishell);
+	print_command(line_cmds);
+	replace_env(line_cmds, minishell);
 	while (line_cmds[i])
 	{
 		cmds_split[i] = ft_split_with_quotes(line_cmds[i], ' ', minishell->garbage);
@@ -127,8 +129,8 @@ void
 		i++;
 	}
 	free(line_cmds);
+	replace_quotes(cmds_split, minishell);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
-	replace_env(minishell);
 	print_commands(minishell);
 }

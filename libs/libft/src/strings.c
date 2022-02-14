@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 17:02:24 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:24:51 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int
 	int	i;
 
 	i = 0;
+	if (!first_string)
+		return (EXIT_FAILURE);
 	while (first_string[i] != EOS AND second_string[i] != EOS \
 	AND first_string[i] == second_string[i])
 		i += 1;

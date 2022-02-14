@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/13 20:31:19 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:15:11 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,7 @@ static char
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
 	while (string[*i] != '"')
 	{
-		if (string[*i] == '$' && string[*i + 1] != '"' && (env_allow(string[*i + 1]) || string[*i + 1] == '?'))
-			string = parse_when_dollar(string, i, minishell);
-		else
-			*i += 1;
+		*i += 1;
 	}
 	if (string[*i] == '"')
 	{
@@ -135,14 +132,10 @@ static char
 	new_line = NULL;
 	while (string[++i])
 	{
-		while (string[i] == '$' || string[i] == '\'' || string[i] == '"')
+		while (string[i] == '$')
 		{
 			if (string[i] && string[i] == '$')
 				string = parse_when_dollar(string, &i, minishell);
-			if (string[i] == '\'')
-				string = simple_quote_replace(string, &i, minishell);
-			if (string[i] == '"')
-				string = double_quotes_replace(string, &i, minishell);
 			if (i >= ft_strlen(string))
 				break ;
 		}
@@ -163,19 +156,70 @@ char
 }
 
 void
-	replace_env(t_minishell *minishell)
+	replace_env(char **tabs, t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	while (tabs[i])
+	{
+		tabs[i] = ft_parse_and_replace(tabs[i], minishell);
+		i++;
+	}
+}
+
+//
+//QUOTES
+//
+
+static char
+	*replace_values_quotes(char *string, t_minishell *minishell)
+{
+	int		i;
+	char	*new_line;
+
+	i = -1;
+	new_line = NULL;
+	while (string[++i])
+	{
+		while (string[i] == '\'' || string[i] == '"')
+		{
+			if (string[i] == '\'')
+				string = simple_quote_replace(string, &i, minishell);
+			if (string[i] == '"')
+				string = double_quotes_replace(string, &i, minishell);
+			if (i >= ft_strlen(string))
+				break ;
+		}
+		if (i >= ft_strlen(string))
+			break ;
+	}
+	return (string);
+}
+
+char
+	*ft_parse_and_replace_quotes(char *line, t_minishell *minishell)
+{
+	char	*new_line;
+
+	new_line = NULL;
+	line = replace_values_quotes(line, minishell);
+	return (line);
+}
+
+void
+	replace_quotes(char ***tabs, t_minishell *minishell)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < minishell->number_of_commands)
+	while (tabs[i])
 	{
 		j = 0;
-		while (minishell->commands[i].command[j])
+		while (tabs[i][j])
 		{
-			minishell->commands[i].command[j] = \
-			ft_parse_and_replace(minishell->commands[i].command[j], minishell);
+			tabs[i][j] = ft_parse_and_replace_quotes(tabs[i][j], minishell);
 			j++;
 		}
 		i++;
