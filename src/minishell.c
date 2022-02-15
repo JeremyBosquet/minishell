@@ -52,7 +52,7 @@ int
 		AND is_special_builtins(minishell.commands[0].command[0]) == true)
 			execute_special_builtins(&minishell);
 		else
-			child(&minishell);
+			execute(&minishell);
 		cleanup(&minishell);
 	}
 	clean_minishell(&minishell);

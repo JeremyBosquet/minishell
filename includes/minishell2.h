@@ -23,7 +23,7 @@ char
 **ft_dup_2array(char **src, t_list *garbage, int opt);
 
 void
-child(t_minishell *minishell);
+execute(t_minishell *minishell);
 
 void
 handle_signals(int signo);

@@ -6,33 +6,45 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/14 14:21:22 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 09:30:05 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 
 static void
-	execute_command(t_minishell *minishell, int i)
+	duplicate_redirection(t_minishell *minishell, int i, int type)
 {
-	execve(check_path(minishell->commands[i].command[0], \
-	minishell->environnement, minishell->garbage), \
-	minishell->commands[i].command, minishell->environnement);
-	error_exe(minishell->commands[i].command[0], NULL, "command not found", \
-	127);
+	if (type == 0)
+	{
+		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].filedescriptor_in);
+	}
+	else if (type == 1)
+	{
+		if (dup2(minishell->commands[i].filedescriptor_out, \
+		STDOUT_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].filedescriptor_out);
+	}
 }
 
 static void
 	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
-	if (i != 0)
+	if (minishell->commands[i].filedescriptor_in != 0)
+		duplicate_redirection(minishell, i, 0);
+	else if (i != 0)
 	{
 		close(minishell->commands[i - 1].pipes[1]);
 		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
 			error("dup fail", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
-	if (i != minishell->number_of_commands - 1)
+	if (minishell->commands[i].filedescriptor_out != 1)
+		duplicate_redirection(minishell, i, 1);
+	else if (i != minishell->number_of_commands - 1)
 	{
 		close(minishell->commands[i].pipes[0]);
 		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
@@ -55,12 +67,8 @@ static void
 	}
 }
 
-/*
- * For pwd command, get current directory without variable in environnement
- * For pipes, use command[i - 1]
- */
 static void
-	execute(t_minishell *minishell, int i)
+	child(t_minishell *minishell, int i)
 {
 	int	j;
 
@@ -74,13 +82,19 @@ static void
 			execute_builtins(minishell, \
 			minishell->commands[i].command[j], i);
 		else
-			execute_command(minishell, i);
+		{
+			execve(check_path(minishell->commands[i].command[0], \
+			minishell->environnement, minishell->garbage), \
+			minishell->commands[i].command, minishell->environnement);
+			error_exe(minishell->commands[i].command[0], NULL, \
+			"command not found", 127);
+		}
 		j += 1;
 	}
 }
 
 void
-	child(t_minishell *minishell)
+	execute(t_minishell *minishell)
 {
 	int	i;
 
@@ -97,7 +111,7 @@ void
 		if (minishell->pids < 0)
 			error("fork fail", 1);
 		else if (minishell->pids[i] == 0)
-			execute(minishell, i);
+			child(minishell, i);
 		i += 1;
 	}
 	closefd(minishell, i);

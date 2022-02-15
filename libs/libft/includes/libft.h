@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/12 15:38:55 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 10:36:20 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ char
  */
 char
 *ft_strfjoin(const char *first_string, const char *second_string, int nfree,
-			 t_list *garbage);
+	t_list *garbage);
 
 char
 *add_char(char *str, char c, t_list *garbage);

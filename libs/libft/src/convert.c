@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:48:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:20:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 10:36:45 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ long
 	result = 0;
 	sign = 1;
 	while (string[i] == ' ' OR (string[i] >= '\t' AND string[i] <= '\r'))
-	i += 1;
+		i += 1;
 	if (string[i] == '-' OR string[i] == '+')
-	if (string[i++] == '-')
-		sign = -1;
+		if (string[i++] == '-')
+			sign = -1;
 	while (ft_isdigit(string[i]))
 	{
 		result = result * 10 + (string[i] - '0');
