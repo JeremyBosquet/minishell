@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 20:18:38 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,8 @@ char *
 {
 	char	*heredoc;
 
+	if (new_line == NULL)
+		return (NULL);
 	if (ft_strlen(new_line) == 0)
 		return (NULL);
 	if (check_pipe(new_line) == EXIT_FAILURE)

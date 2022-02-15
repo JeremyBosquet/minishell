@@ -6,32 +6,12 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/14 20:21:06 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void
-// 	free_parse(char ***commands_splitted, char **line_commands, int i1, int i2)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (i1 != 0)
-// 	{
-// 		while (i < i1)
-// 		{
-// 			free_array((void *)commands_splitted[i], \
-// 			size_of_array(commands_splitted[i]));
-// 			i++;
-// 		}
-// 		free(commands_splitted);
-// 	}
-// 	if (i2 != 0)
-// 		free_array((void *)line_commands, i2);
-// 	error("out of memory", EXIT_FAILURE);
-// }
+#include "minishell2.h"
 
 static int	size_of_3array(char ***str)
 {
@@ -89,13 +69,6 @@ static void
 	free(cmds);
 }
 
-/*
- * Vérifier que les quotes et les pipes soit bien fermés, ou s'il y a deux pipes
- * à la suite.
- * Parser le triple tableau.
- * Regarder le triple tableau.
-*/
-
 void
 	parse_new_line(t_minishell *minishell, char *new_line)
 {
@@ -104,8 +77,6 @@ void
 	char	***cmds_split;
 
 	i = 0;
-	if (new_line == NULL)
-		return ;
 	new_line = check_new_line(new_line, minishell->garbage);
 	if (new_line == NULL)
 	{
@@ -118,9 +89,6 @@ void
 	cmds_split = ft_calloc(sizeof(char **), size_of_array(line_cmds) + 1, minishell->garbage);
 	// if (cmds_split == NULL)
 		// free_parse(cmds_split, line_cmds, 0, size_of_array(line_cmds));
-	//FAIRE LE PARSING DES REDIRECTIONS ICI
-	//line_cmds = redirections(line_cmds, minishell);
-	print_command(line_cmds);
 	replace_env(line_cmds, minishell);
 	while (line_cmds[i])
 	{
@@ -134,5 +102,6 @@ void
 	replace_quotes(cmds_split, minishell);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
+	//PARSING DES REDIRECTIONS
 	print_commands(minishell);
 }
