@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 20:18:38 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 14:45:48 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static int
 		if (new_line[i] == '|')
 		{
 			if (only_space_before_pipe == 1)
-				return (rerror("syntax error: ", "near unexpected token `|'", 1));
+				return (rerror("syntax error: ", "near unexpected token `|'"\
+				, 1));
 			else
 				only_space_before_pipe = 1;
 		}
@@ -105,11 +106,11 @@ char *
 	char	*memo;
 
 	i = 0;
-	while(new_line[i])
+	while (new_line[i])
 	{
 		if (new_line[i] == '\'' || new_line[i] == '"')
 			i += return_value_after_quote(new_line, i);
-		else if ((new_line[i] == '>' || new_line[i] == '<') 
+		else if ((new_line[i] == '>' || new_line[i] == '<')
 			&& new_line[i + 1] && new_line[i + 1] == '$')
 		{
 			i += 1;
@@ -146,7 +147,8 @@ static int
 	{
 		if (new_line[i] == '\'' || new_line[i] == '"')
 			i += return_value_after_quote(new_line, i);
-		else if ((new_line[i] == '>' || new_line[i] == '<') && new_line[i + 1] && new_line[i + 1] == ' ')
+		else if ((new_line[i] == '>' || new_line[i] == '<') \
+		&& new_line[i + 1] && new_line[i + 1] == ' ')
 		{
 			i++;
 			while (new_line[i] && new_line[i] == ' ')
@@ -154,7 +156,37 @@ static int
 			if (new_line[i] && new_line[i] == '|')
 				return (rerror("syntax error: ", "near unexpected token `|'", 1));
 			if (!new_line[i])
-				break;
+				break ;
+		}
+		else
+			i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int
+	check_chevrons_between(char *new_line)
+{
+	int	i;
+
+	i = 0;
+	while (new_line[i])
+	{
+		if (new_line[i] == '\'' || new_line[i] == '"')
+			i += return_value_after_quote(new_line, i);
+		else if ((new_line[i] == '>' || new_line[i] == '<') && \
+		new_line[i + 1] && new_line[i + 1] == ' ')
+		{
+			i++;
+			while (new_line[i] && new_line[i] == ' ')
+				i++;
+			if (new_line[i] == '<')
+				return (rerror("syntax error: ", "near unexpected token `<'", 1));
+			else if (new_line[i] == '>')
+				return (rerror("syntax error: ", "near unexpected token `>'", 1));
+			else if (!new_line[i])
+				break ;
+			i++;
 		}
 		else
 			i++;
@@ -173,7 +205,8 @@ static int
 		if (new_line[i] == ' ')
 			i--;
 		else if (new_line[i] == '<' || new_line[i] == '>')
-			return (rerror("syntax error: ", "near unexpected token `newline'", 1));
+			return (rerror("syntax error: ", "near unexpected token `newline'", \
+			1));
 		else
 			break ;
 	}
@@ -202,6 +235,7 @@ static int
 		return (rerror("syntax error: ", "near unexpected token `>'", 1));
 	return (EXIT_SUCCESS);
 }
+
 static int
 	check_chevrons_invalid_number(char *new_line)
 {
@@ -227,6 +261,8 @@ static int
 static int
 	check_chevrons(char *new_line)
 {
+	if (check_chevrons_between(new_line) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (check_chevrons_invalid_end(new_line) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_chevrons_invalid(new_line) == EXIT_FAILURE)

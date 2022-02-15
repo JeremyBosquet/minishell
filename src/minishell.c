@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 13:55:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 14:52:15 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int
 		if (new_line == NULL)
 			break ;
 		add_history(new_line);
-		parse_new_line(&minishell, new_line);
+		if (new_line[0] != '\0')
+			parse_new_line(&minishell, new_line);
 		if (minishell.number_of_commands == 1 \
 		AND is_special_builtins(minishell.commands[0].command[0]) == true)
 			execute_special_builtins(&minishell);
