@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 14:45:48 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:49:46 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,12 @@ static int
 			i++;
 			while (new_line[i] && new_line[i] == ' ')
 				i++;
-			if (new_line[i] == '<')
+			if (!new_line[i])
+				break ;
+			else if (new_line[i] == '<')
 				return (rerror("syntax error: ", "near unexpected token `<'", 1));
 			else if (new_line[i] == '>')
 				return (rerror("syntax error: ", "near unexpected token `>'", 1));
-			else if (!new_line[i])
-				break ;
-			i++;
 		}
 		else
 			i++;

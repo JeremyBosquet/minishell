@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 14:51:58 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:47:44 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void
 	replace_quotes(cmds_split, minishell);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
-	//PARSING DES REDIRECTIONS
+	redirections(minishell);
 	print_commands(minishell);
 }

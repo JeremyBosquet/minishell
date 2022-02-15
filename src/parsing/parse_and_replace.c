@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 14:21:09 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:32:09 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,20 @@ static char
 {
 	int		i;
 	char	*new_line;
+	bool	in_doubles;
 
 	i = -1;
 	new_line = NULL;
+	in_doubles = false;
 	while (string[++i])
 	{
-		while (string[i] == '$')
+		if (string[i] == '"')
+			in_doubles = !in_doubles;
+		while (string[i] == '$' || (string[i] == '\'' && in_doubles == false))
 		{
-			if (string[i] && string[i] == '$')
+			if (string[i] == '\'')
+				i += return_value_after_quote(string, i);
+			else if (string[i] && string[i] == '$')
 				string = parse_when_dollar(string, &i, minishell);
 			if (i >= ft_strlen(string))
 				break ;

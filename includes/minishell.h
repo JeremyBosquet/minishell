@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 15:27:18 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/15 18:03:24 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ typedef struct s_minishell	t_minishell;
 
 struct s_command {
 	char	**command;
-	int		filedescriptor_in;
-	int		filedescriptor_out;
-	int		type_of_infile;
-	int		type_of_outfile;
-	bool	do_run;
+	int		fd_in;
+	int		fd_out;
+	char	*file_out;
+	char	*file_in;
+	int		type_infile;
+	int		type_outfile;
+	bool	do_open_in;
+	bool	do_open_out;
 	int		pipes[2];
 };
 
@@ -136,6 +139,12 @@ replace_env(char **tabs, t_minishell *minishell);
 
 void
 replace_quotes(char ***tabs, t_minishell *minishell);
+
+//	~	structures/redirections.c -------------
+
+void
+redirections(t_minishell *minishell);
+
 //	~	structures/clean.c -------------
 
 bool
