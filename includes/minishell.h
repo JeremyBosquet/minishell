@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 13:54:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 15:27:18 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct	s_minishell {
 	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
+	char		*current_pwd;
 	int			number_of_commands;
 	int			exit_code;
 };

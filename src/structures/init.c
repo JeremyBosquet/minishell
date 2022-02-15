@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 17:42:27 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 15:27:47 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ bool
 	minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, "OLDPWD", minishell->garbage);
 	set_shlvl(minishell);
+	minishell->current_pwd = getcwd(NULL, 0);
+	if (minishell->current_pwd == NULL)
+		return (false);
 	g_exit_code = 0;
 	minishell->is_running = true;
 	return (true);

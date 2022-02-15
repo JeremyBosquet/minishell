@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 16:37:22 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 15:44:55 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool
 		return (false);
 	tmp = getcwd(NULL, 0);
 	if (tmp == NULL)
-		return (false);
+		tmp = ft_strdup(minishell->current_pwd, minishell->garbage);
 	oldpwd = ft_strfjoin(oldpwd, tmp, 3, minishell->garbage);
 	if (oldpwd == NULL)
 		return (false);
@@ -66,9 +66,13 @@ int
 	if (chdir(minishell->commands[i].command[1]) != 0)
 		error_message(errno, minishell->commands[i].command[1]);
 	path = ft_strdup("PWD=", minishell->garbage);
-	tmp = getcwd(NULL, 0);
-	if (path == NULL OR tmp == NULL)
+	if (path == NULL)
 		return (0);
+	tmp = getcwd(NULL, 0);
+	if (tmp == NULL)
+		tmp = ft_strdup(minishell->current_pwd, minishell->garbage);
+	else
+		minishell->current_pwd = ft_strdup(tmp, minishell->garbage);
 	path = ft_strfjoin(path, tmp, 3, minishell->garbage);
 	if (path == NULL)
 		return (0);
