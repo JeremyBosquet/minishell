@@ -38,11 +38,11 @@ void
 	if (ft_strcmp(minishell->commands[0].command[0], "exit") == 0)
 		builtin_exit(minishell, 0);
 	else if (ft_strcmp(minishell->commands[0].command[0], "unset") == 0)
-		minishell->exit_code = builtin_unset(minishell, 0);
+		g_exit_code = builtin_unset(minishell, 0);
 	else if (ft_strcmp(minishell->commands[0].command[0], "export") == 0)
-		minishell->exit_code = builtin_export(minishell, 0);
+		g_exit_code = builtin_export(minishell, 0);
 	else if (ft_strcmp(minishell->commands[0].command[0], "cd") == 0)
-		minishell->exit_code = builtin_cd(minishell, 0);
+		g_exit_code = builtin_cd(minishell, 0);
 }
 
 void

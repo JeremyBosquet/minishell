@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:30:39 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/11 16:10:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:53:13 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void
 			minishell->commands[i].command[1], "invalid option", 1);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
+	{
 		return ;
+	}
 	printf("%s\n", pwd);
 	free(pwd);
-	minishell->exit_code = 0;
+	g_exit_code = 0;
 }

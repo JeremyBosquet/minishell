@@ -43,12 +43,12 @@ void
 			printf("exit\ncouscous: too many arguments\n");
 			return ;
 		}
-		minishell->exit_code = ft_atoi(minishell->commands[i].command[1]) % 256;
-		if (minishell->exit_code < 0)
-			minishell->exit_code += 256;
+		g_exit_code = ft_atoi(minishell->commands[i].command[1]) % 256;
+		if (g_exit_code < 0)
+			g_exit_code += 256;
 	}
 	else
-		minishell->exit_code = 0;
+		g_exit_code = 0;
 	printf("exit\n");
-	exit(minishell->exit_code);
+	exit(g_exit_code);
 }

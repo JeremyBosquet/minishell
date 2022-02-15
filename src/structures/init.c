@@ -50,7 +50,7 @@ bool
 	minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, "OLDPWD", minishell->garbage);
 	set_shlvl(minishell);
-	minishell->exit_code = 0;
+	g_exit_code = 0;
 	minishell->is_running = true;
 	return (true);
 }

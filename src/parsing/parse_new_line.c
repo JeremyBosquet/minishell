@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 20:21:06 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 14:19:32 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void
 	new_line = check_new_line(new_line, minishell->garbage);
 	if (new_line == NULL)
 	{
-		minishell->exit_code = 258;
+		g_exit_code = 258;
 		return ;
 	}
 	line_cmds = ft_split_with_quotes(new_line, '|', minishell->garbage);

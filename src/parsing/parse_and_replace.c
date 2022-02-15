@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 14:21:09 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char
 			if (*i < ft_strlen(string))
 				memo = ft_substr(string, *i, ft_strlen(string) - *i, minishell->garbage);
 			string[tmp - 1] = EOS;
-			string = ft_strfjoin(string, ft_itoa(minishell->exit_code), 3, minishell->garbage);
+			string = ft_strfjoin(string, ft_itoa(g_exit_code), 3, minishell->garbage);
 			*i = ft_strlen(string);
 			if (memo)
 				string = ft_strfjoin(string, memo, 2, minishell->garbage);

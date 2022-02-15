@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:47:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/14 14:15:53 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:55:40 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,26 @@ void
 	handle_signals(int signo)
 {
 	(void) signo;
-	printf("\n");
 	rl_replace_line("", 0);
+	fputchar(STDERR, '\n');
 	rl_on_new_line();
 	rl_redisplay();
+	g_exit_code = 1;
+}
+
+void
+	signal_child(int signo)
+{
+	if (signo == SIGINT)
+	{
+		fputchar(STDERR, '\n');
+		g_exit_code = 130;
+	}
+	else if (signo == SIGQUIT)
+	{
+		fputstring(STDERR, "Quit: 3\n");
+		g_exit_code = 131;
+	}
 }
 
 void
@@ -28,8 +44,5 @@ void
 	if (signal(SIGINT, handle_signals) == SIG_ERR \
 	OR signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		error("bad signals", 1);
+	g_exit_code = 1;
 }
-
-//signal(SIGKILL, SIG_IGN); ignorer dans le parent
-//signal(SIGKILL, NULL); remettre a l'etat de base dans l'enfant
-//signal(SIGKILL, sighandler);

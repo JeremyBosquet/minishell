@@ -28,6 +28,9 @@ execute(t_minishell *minishell);
 void
 handle_signals(int signo);
 
+void
+signal_child(int signo);
+
 int
 builtin_cd(t_minishell *minishell, int i);
 

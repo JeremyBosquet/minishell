@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 11:41:01 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:55:56 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ int
 	}
 	clean_minishell(&minishell);
 	printf("\033[1A\033[14Cexit\n");
-	return (minishell.exit_code);
+	return (g_exit_code);
 }

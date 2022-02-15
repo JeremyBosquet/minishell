@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 11:12:18 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 13:59:15 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void
 
 	j = 0;
 	signal(SIGINT, NULL);
+	signal(SIGQUIT, NULL);
 	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
 	while (minishell->commands[i].command[j])
@@ -96,13 +97,17 @@ static void
 void
 	execute(t_minishell *minishell)
 {
-	int	i;
+	int		i;
+	int		status;
+	bool	are_signal;
 
 	minishell->pids = malloc(minishell->number_of_commands * sizeof(pid_t));
 	if (minishell->pids == NULL)
 		return ;
+	are_signal = false;
 	i = 0;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (i < minishell->number_of_commands)
 	{
 		if (pipe(minishell->commands[i].pipes) == -1)
@@ -117,8 +122,17 @@ void
 	closefd(minishell, i + 1);
 	i = 0;
 	while (i < minishell->number_of_commands)
-		waitpid(minishell->pids[i++], &minishell->exit_code, WUNTRACED);
+	{
+		waitpid(minishell->pids[i++], &status, WUNTRACED);
+		if (WIFEXITED(status))
+			g_exit_code = WEXITSTATUS(status);
+		if (WIFSIGNALED(status) && are_signal == false)
+		{
+			signal_child(WTERMSIG(status));
+			are_signal = true;
+		}
+	}
 	signal(SIGINT, handle_signals);
-	minishell->exit_code /= 256;
+	signal(SIGQUIT, SIG_IGN);
 	free(minishell->pids);
 }
