@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:25:06 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 19:37:22 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:12:37 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ char
 char
 	**redir_simple_out(t_minishell *minishell, int i, int *j)
 {
-	int size;
-
-	size = size_of_array(minishell->commands[i].command);
 	minishell->commands[i].type_outfile = TRUNC;
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
@@ -58,21 +55,19 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
-	// *j -= 1;
 	return (minishell->commands[i].command);
 }
 
 char
 	**redir_append_out(t_minishell *minishell, int i, int *j)
 {
-	int size;
-
-	size = size_of_array(minishell->commands[i].command);
 	minishell->commands[i].type_outfile = APPEND;
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
@@ -85,14 +80,13 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
-	// *j -= 1;
-	printf("|%s|",minishell->commands[i].file_out );
-	sdebug(minishell->commands[i].file_out);
 	return (minishell->commands[i].command);
 }
 
@@ -100,9 +94,6 @@ char
 char
 	**redir_simple_in(t_minishell *minishell, int i, int *j)
 {
-	int size;
-
-	size = size_of_array(minishell->commands[i].command);
 	minishell->commands[i].type_infile = SIMPLE;
 	if (minishell->commands[i].do_open_in)
 	{
@@ -114,21 +105,19 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j,\
+	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_in > 2)
 		close(minishell->commands[i].fd_in);
-	// *j -= 1;
 	return (minishell->commands[i].command);
 }
 
 char
 	**redir_heredoc(t_minishell *minishell, int i, int *j)
 {
-	int size;
-
-	size = size_of_array(minishell->commands[i].command);
 	minishell->commands[i].type_infile = SIMPLE;
 	if (minishell->commands[i].do_open_in)
 	{
@@ -140,12 +129,11 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j, size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j, size, minishell->garbage);
+	minishell->commands[i].command, *j, size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_in > 2)
 		close(minishell->commands[i].fd_in);
-	// *j -= 1;
 	return (minishell->commands[i].command);
 }
 
