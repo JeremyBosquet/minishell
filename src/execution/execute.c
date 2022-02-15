@@ -6,45 +6,45 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 09:30:05 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:12:18 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 
-static void
-	duplicate_redirection(t_minishell *minishell, int i, int type)
-{
-	if (type == 0)
-	{
-		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
-			error("dup fail", 1);
-		close(minishell->commands[i].filedescriptor_in);
-	}
-	else if (type == 1)
-	{
-		if (dup2(minishell->commands[i].filedescriptor_out, \
-		STDOUT_FILENO) == -1)
-			error("dup fail", 1);
-		close(minishell->commands[i].filedescriptor_out);
-	}
-}
+//static void
+//	duplicate_redirection(t_minishell *minishell, int i, int type)
+//{
+//	if (type == 0)
+//	{
+//		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
+//			error("dup fail", 1);
+//		close(minishell->commands[i].filedescriptor_in);
+//	}
+//	else if (type == 1)
+//	{
+//		if (dup2(minishell->commands[i].filedescriptor_out, \
+//		STDOUT_FILENO) == -1)
+//			error("dup fail", 1);
+//		close(minishell->commands[i].filedescriptor_out);
+//	}
+//}
 
 static void
 	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
-	if (minishell->commands[i].filedescriptor_in != 0)
-		duplicate_redirection(minishell, i, 0);
-	else if (i != 0)
+//	if (minishell->commands[i].filedescriptor_in != 0)
+//		duplicate_redirection(minishell, i, 0);
+	if (i != 0)
 	{
 		close(minishell->commands[i - 1].pipes[1]);
 		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
 			error("dup fail", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
-	if (minishell->commands[i].filedescriptor_out != 1)
-		duplicate_redirection(minishell, i, 1);
-	else if (i != minishell->number_of_commands - 1)
+//	if (minishell->commands[i].filedescriptor_out != 1)
+//		duplicate_redirection(minishell, i, 1);
+	if (i != minishell->number_of_commands - 1)
 	{
 		close(minishell->commands[i].pipes[0]);
 		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
@@ -114,7 +114,7 @@ void
 			child(minishell, i);
 		i += 1;
 	}
-	closefd(minishell, i);
+	closefd(minishell, i + 1);
 	i = 0;
 	while (i < minishell->number_of_commands)
 		waitpid(minishell->pids[i++], &minishell->exit_code, WUNTRACED);
