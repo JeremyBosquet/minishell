@@ -31,7 +31,7 @@
 
 //	~~	Globals ----------------------------------------------------------------
 
-int	g_exit_code;
+int							g_exit_code;
 
 //	~~	Enums ------------------------------------------------------------------
 
@@ -49,7 +49,8 @@ typedef struct s_minishell	t_minishell;
 
 //	~~	Structures -------------------------------------------------------------
 
-struct s_command {
+struct s_command
+{
 	char	**command;
 	int		fd_in;
 	int		fd_out;

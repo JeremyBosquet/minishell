@@ -64,7 +64,7 @@ int
 	if (set_oldpwd(minishell) == false)
 		return (0);
 	if (chdir(minishell->commands[i].command[1]) != 0)
-		return (error_message(minishell->commands[i].command[1]))
+		return (error_message(minishell->commands[i].command[1]));
 	path = ft_strdup("PWD=", minishell->garbage);
 	if (path == NULL)
 		return (0);
