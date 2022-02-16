@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:24:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 17:27:22 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 static int
 	check_first_char(char **command)

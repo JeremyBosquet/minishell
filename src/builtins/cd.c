@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 18:10:19 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:29 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 static bool
 	check_option(char **command)

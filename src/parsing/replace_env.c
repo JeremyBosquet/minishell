@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 19:46:18 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 22:32:10 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//Probleme si $'test' et "$'test'" pas le même resultat
 
 static int
 	env_allow(char c)

@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:30:39 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 18:10:37 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 void
 	builtin_pwd(t_minishell *minishell, int i)

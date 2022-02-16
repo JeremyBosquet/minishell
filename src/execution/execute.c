@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 17:30:21 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 static void
 	duplicate_redirection(t_minishell *minishell, int i, int type, int type2)

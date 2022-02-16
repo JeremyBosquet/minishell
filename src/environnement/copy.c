@@ -6,15 +6,12 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:56:38 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:18:52 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:30:21 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
- * Surement remplacer le strcpy par strdup pour free l'ancien environnement.
- */
 char
 	**copy_environnement(char **environnement, int option, t_list *garbage)
 {

@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:50:17 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 17:31:06 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 static void
 	check_directory(t_minishell *minishell, int i)

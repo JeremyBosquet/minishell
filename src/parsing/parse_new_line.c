@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_new_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 17:43:06 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 22:31:55 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "minishell2.h"
 
 static int	size_of_3array(char ***str)
 {
@@ -69,14 +68,38 @@ static void
 	free(cmds);
 }
 
-void
-	parse_new_line(t_minishell *minishell, char *new_line)
+static char
+	***parse_new_line2(t_minishell *minishell, char **line_cmds)
 {
 	int		i;
-	char	**line_cmds;
 	char	***cmds_split;
 
 	i = 0;
+	cmds_split = ft_calloc(sizeof(char **), size_of_array(line_cmds) + 1, \
+	minishell->garbage);
+	if (cmds_split == NULL)
+		return (NULL);
+	while (line_cmds[i])
+	{
+		cmds_split[i] = ft_split_with_quotes(line_cmds[i], ' ', \
+		minishell->garbage);
+		if (cmds_split[i] == NULL)
+			return (NULL);
+		free(line_cmds[i]);
+		i += 1;
+	}
+	free(line_cmds);
+	return (cmds_split);
+}
+
+void
+	parse_new_line(t_minishell *minishell, char *new_line)
+{
+	char	**line_cmds;
+	char	***cmds_split;
+	int		j;
+
+	j = 0;
 	new_line = check_new_line(new_line, minishell->garbage);
 	if (new_line == NULL)
 	{
@@ -86,21 +109,14 @@ void
 	line_cmds = ft_split_with_quotes(new_line, '|', minishell->garbage);
 	if (!line_cmds)
 		return ;
-	cmds_split = ft_calloc(sizeof(char **), size_of_array(line_cmds) + 1, minishell->garbage);
-	// if (cmds_split == NULL)
-		// free_parse(cmds_split, line_cmds, 0, size_of_array(line_cmds));
 	replace_env(line_cmds, minishell);
-	while (line_cmds[i])
+	cmds_split = parse_new_line2(minishell, line_cmds);
+	if (cmds_split == NULL)
 	{
-		cmds_split[i] = ft_split_with_quotes(line_cmds[i], ' ', minishell->garbage);
-		// if (cmds_split[i] == NULL)
-			// free_parse(cmds_split, line_cmds, size_of_array(cmds_split[i]), i);
-		free(line_cmds[i]);
-		i++;
+		free_array((void **) line_cmds, size_of_array(line_cmds));
+		return ;
 	}
-	free(line_cmds);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
-	redirections(minishell);
-	print_commands(minishell);
+	redirections(minishell, j);
 }

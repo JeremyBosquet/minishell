@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 18:18:27 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:21:50 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,19 @@ static int
 	length = 0;
 	while (string[length] != '\0')
 	{
-		if (string[length] != charset)
-		{
-			if (string[length] == '\'' || string[length] == '"')
-				length += return_value_after_quote(string, length);
-			else if ((string[length] == '>' || string[length] == '<') \
-			&& charset != '|' && length > 0)
-				break ;
-			else if (string[length] == '>' && charset != '|')
-			{
-				if (string[length + 1] == '>')
-					length += 2;
-				else
-					if (string[length + 1] != '<')
-						length += 1;
-				break ;
-			}
-			else if (string[length] == '<' && charset != '|')
-			{
-				if (string[length + 1] == '<')
-					length += 2;
-				else
-				{
-					if (string[length + 1] != '>')
-						length += 1;
-					else if (string[length + 1] == '>')
-						length += 1;
-				}
-				break ;
-			}
-			else
-				length += 1;
-		}
-		else
+		if (string[length] == charset)
 			break ;
+		if (string[length] == '\'' || string[length] == '"')
+			length += return_value_after_quote(string, length);
+		else if ((string[length] == '>' || string[length] == '<') \
+		&& charset != '|' && length > 0)
+			break ;
+		else if (string[length] == '>' && charset != '|')
+			return (wlength3(string, &length));
+		else if (string[length] == '<' && charset != '|')
+			return (wlength2(string, &length));
+		else
+			length += 1;
 	}
 	return (length);
 }

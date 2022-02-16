@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 19:46:42 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 22:29:13 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <sys/ioctl.h>
+# include <errno.h>
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
@@ -33,7 +34,7 @@
 
 int							g_exit_code;
 
-// ~~
+//	~~	Defines ----------------------------------------------------------------
 
 # define S_ERROR "syntax error: "
 
@@ -81,32 +82,20 @@ struct	s_minishell {
 
 //	~~	Prototypes -------------------------------------------------------------
 
-//	~	environnement/add.c ------------
-
 char
 **add_to_environnement(char **environnement, char *new, t_list *garbage);
-
-//	~	environnement/clean.c ----------
 
 void
 clean_environnement(char **environnement, int size);
 
-//	~	environnement/copy.c -----------
-
 char
 **copy_environnement(char **environnement, int option, t_list *garbage);
-
-//	~	environnement/delete.c ---------
 
 char
 **delete_line_in_environnement(char **environnement, char *name, t_list *g);
 
-//	~	environnement/find.c -----------
-
 int
 find_line_of_name(char **environnement, char *name, t_list *garbage);
-
-//	~	environnement/get.c ------------
 
 char
 *get_name_of_line(char *line, t_list *garbage);
@@ -117,28 +106,18 @@ char
 char
 *get_env_value(char *name, t_minishell *minishell);
 
-//	~	environnement/replace.c --------
-
 char
 **replace_line_in_environnement(char **environnement, int line, char *value,
 	t_list *garbage);
 
-//	~	parsing/arguments.c ------------
-
 void
 check_number_of_argument(int number_of_arguments);
-
-//	~	parsing/parse_new_line.c -------
 
 void
 parse_new_line(t_minishell *minishell, char *new_line);
 
-//	~	parsing/parse_new_line.c -------
-
 char
 *check_new_line(char *new_line, t_list *garbage);
-
-//	~	parsing/parse_and_replace_in_quotes.c
 
 void
 replace_env(char **tabs, t_minishell *minishell);
@@ -146,22 +125,14 @@ replace_env(char **tabs, t_minishell *minishell);
 void
 replace_quotes(char ***tabs, t_minishell *minishell);
 
-//	~	structures/redirections.c -------------
-
 void
-redirections(t_minishell *minishell);
-
-//	~	structures/clean.c -------------
+redirections(t_minishell *minishell, int j);
 
 bool
 clean_minishell(t_minishell *minishell);
 
-//	~	structures/init.c --------------
-
 bool
 init_minishell(t_minishell *minishell, char	**envp);
-
-//	~	signals.c ----------------------
 
 void
 my_signal(void);
@@ -186,6 +157,79 @@ check_quotes(char *new_line);
 
 char
 *parse_when_dollar(char *string, int *i, t_minishell *minishell);
+
+void
+init_fd_command(t_minishell *minishell, int i);
+
+char
+**redir_hered(t_minishell *minishell, int i, int *j);
+
+char
+**remove_line_2array(char **tabs, int line, int size, t_list *g);
+
+char
+**clean_redirection(t_minishell *minishell, int i, int *j);
+
+void
+signal_heredoc(int signo);
+
+char
+**add_oldpwd(char **environnement, t_list *garbage);
+
+void
+child_loop(t_minishell *minishell, int i, int j);
+
+void
+wait_exec(t_minishell *minishell);
+
+bool
+is_builtins(char *command);
+
+char
+**ft_dup_2array(char **src, t_list *garbage, int opt);
+
+void
+execute(t_minishell *minishell);
+
+void
+handle_signals(int signo);
+
+void
+signal_child(int signo);
+
+int
+builtin_cd(t_minishell *minishell, int i);
+
+void
+builtin_echo(t_minishell *minishell, int i);
+
+void
+builtin_exit(t_minishell *minishell, int i);
+
+void
+builtin_pwd(t_minishell *minishell, int i);
+
+void
+builtin_env(t_minishell *minishell, int i);
+
+int
+builtin_unset(t_minishell *minishell, int i);
+
+int
+builtin_export(t_minishell *minishell, int i);
+
+bool
+is_special_builtins(char *command);
+
+void
+execute_special_builtins(t_minishell *minishell);
+
+void
+execute_builtins(t_minishell *minishell, char *command, int i);
+
+char
+*check_path(char *command, char **environnement, t_list *garbage);
+
 // A SUPPRIMER A LA FIN
 
 void	print_commands(t_minishell *minishell);

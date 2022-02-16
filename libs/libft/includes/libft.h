@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 18:15:56 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:21:33 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -495,5 +495,11 @@ ft_isspace(char c);
 
 char
 *ft_itoa(int n);
+
+int
+wlength2(const char *string, int *length);
+
+int
+wlength3(const char *string, int *length);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 16:47:26 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 static void
 	display_env(t_minishell *minishell, char **array)

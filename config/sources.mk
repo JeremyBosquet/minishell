@@ -12,6 +12,18 @@ override	LIBS		:=		\
 ##	~~	Sources ----------------------------------------------------------------
 
 override	SOURCES	:=						\
+	builtins/cd.c							\
+	builtins/echo.c							\
+	builtins/env.c							\
+	builtins/exit.c							\
+	builtins/export.c						\
+	builtins/export_utils.c					\
+	builtins/pwd.c							\
+	builtins/unset.c						\
+	execution/builtins.c					\
+	execution/execute.c						\
+	execution/execute_utils.c				\
+	execution/path.c						\
 	environnement/add.c						\
 	environnement/clean.c					\
 	environnement/copy.c					\
@@ -30,6 +42,8 @@ override	SOURCES	:=						\
 	parsing/parse_new_line.c				\
 	parsing/print.c							\
 	parsing/redirections.c					\
+	parsing/redirections2.c					\
+	parsing/utils.c							\
 	structures/clean.c						\
 	structures/init.c						\
 	minishell.c								\

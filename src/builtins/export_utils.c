@@ -6,11 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:47:08 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 16:47:37 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell2.h"
+#include "minishell.h"
 
 char
 	**add_oldpwd(char **environnement, t_list *garbage)

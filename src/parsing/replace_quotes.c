@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:39:21 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 19:43:37 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 21:19:04 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static char
 {
 	string[*i] = '\0';
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
-	printf("\n%c\n", string[*i]);
 	while (string[*i] != '"')
 		*i += 1;
 	if (string[*i] == '"')

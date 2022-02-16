@@ -6,12 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 18:26:12 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 22:32:33 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "minishell2.h"
 
 static void
 	cleanup(t_minishell *minishell)
