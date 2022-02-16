@@ -103,5 +103,5 @@ void
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
 	redirections(minishell);
-	print_commands(minishell);
+	// print_commands(minishell);
 }

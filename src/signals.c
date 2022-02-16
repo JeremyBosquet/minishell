@@ -39,6 +39,15 @@ void
 }
 
 void
+	signal_heredoc(int signo)
+{
+	(void) signo;
+	fputchar(STDERR, '\n');
+	g_exit_code = 1;
+	exit(g_exit_code);
+}
+
+void
 	my_signal(void)
 {
 	if (signal(SIGINT, handle_signals) == SIG_ERR \

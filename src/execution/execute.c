@@ -12,39 +12,55 @@
 
 #include "minishell2.h"
 
-//static void
-//	duplicate_redirection(t_minishell *minishell, int i, int type)
-//{
-//	if (type == 0)
-//	{
-//		if (dup2(minishell->commands[i].filedescriptor_in, STDIN_FILENO) == -1)
-//			error("dup fail", 1);
-//		close(minishell->commands[i].filedescriptor_in);
-//	}
-//	else if (type == 1)
-//	{
-//		if (dup2(minishell->commands[i].filedescriptor_out, \
-//		STDOUT_FILENO) == -1)
-//			error("dup fail", 1);
-//		close(minishell->commands[i].filedescriptor_out);
-//	}
-//}
+static void
+	duplicate_redirection(t_minishell *minishell, int i, int type, int type2)
+{
+	if (type == 0)
+	{
+		minishell->commands[i].fd_in = open(\
+		minishell->commands[i].file_in, O_RDONLY);
+		if (minishell->commands[i].fd_in == -1)
+			return ;
+		if (dup2(minishell->commands[i].fd_in, STDIN_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].fd_in);
+	}
+	else if (type == 1)
+	{
+		sdebug(minishell->commands[i].file_out);
+		if (type2 == TRUNC)
+			minishell->commands[i].fd_out = open(\
+			minishell->commands[i].file_out, O_WRONLY, O_TRUNC);
+		else if (type2 == APPEND)
+			minishell->commands[i].fd_out = open(\
+			minishell->commands[i].file_out, O_WRONLY, O_APPEND);
+		if (minishell->commands[i].fd_out == -1)
+			return ;
+		if (dup2(minishell->commands[i].fd_out, \
+		STDOUT_FILENO) == -1)
+			error("dup fail", 1);
+		close(minishell->commands[i].fd_out);
+	}
+}
 
 static void
 	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
-//	if (minishell->commands[i].filedescriptor_in != 0)
-//		duplicate_redirection(minishell, i, 0);
-	if (i != 0)
+	sdebug(minishell->commands[i].file_out);
+	if (minishell->commands[i].file_in != NULL)
+		duplicate_redirection(minishell, i, 0, \
+		minishell->commands[i].type_infile);
+	else if (i != 0)
 	{
 		close(minishell->commands[i - 1].pipes[1]);
 		if (dup2(minishell->commands[i - 1].pipes[0], STDIN_FILENO) == -1)
 			error("dup fail", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
-//	if (minishell->commands[i].filedescriptor_out != 1)
-//		duplicate_redirection(minishell, i, 1);
-	if (i != minishell->number_of_commands - 1)
+	if (minishell->commands[i].file_out != NULL)
+		duplicate_redirection(minishell, i, 1, \
+		minishell->commands[i].type_outfile);
+	else if (i != minishell->number_of_commands - 1)
 	{
 		close(minishell->commands[i].pipes[0]);
 		if (dup2(minishell->commands[i].pipes[1], STDOUT_FILENO) == -1)
@@ -77,6 +93,8 @@ static void
 	signal(SIGQUIT, NULL);
 	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
+	if (minishell->commands[i].do_run == false)
+		j += 1;
 	if (minishell->commands[i].command[0] == NULL)
 	{
 		j += 1;

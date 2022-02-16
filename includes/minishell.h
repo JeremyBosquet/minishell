@@ -59,6 +59,7 @@ struct s_command {
 	int		type_outfile;
 	bool	do_open_in;
 	bool	do_open_out;
+	bool	do_run;
 	int		pipes[2];
 };
 

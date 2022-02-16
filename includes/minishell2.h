@@ -16,6 +16,9 @@
 # include "minishell.h"
 # include <errno.h>
 
+void
+signal_heredoc(int signo);
+
 bool
 is_builtins(char *command);
 

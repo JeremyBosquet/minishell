@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "minishell2.h"
 
 
 //CRASH QUAND AUCUNE COMMANDE
@@ -89,7 +90,6 @@ char
 	return (minishell->commands[i].command);
 }
 
-
 char
 	**redir_simple_in(t_minishell *minishell, int i, int *j)
 {
@@ -119,30 +119,50 @@ char
 {
 	char	*final;
 	char	*new_line;
+	int		status;
+	pid_t	child_heredoc;
 
 	final = NULL;
 	new_line = NULL;
 	minishell->commands[i].type_outfile = HEREDOC;
 	if (minishell->commands[i].do_open_out)
 	{
-		while (ft_strcmp(new_line, minishell->commands[i].command[*j + 1]) != 0)
+		signal(SIGINT, SIG_IGN);
+		child_heredoc = fork();
+		if (child_heredoc < 0)
+			error("fork fail", 1);
+		else if (child_heredoc == 0)
 		{
-			new_line = readline("> ");
-			if (!new_line)
-				break ;
-			if (ft_strcmp(new_line, minishell->commands[i].command[*j + 1]) == 0)
+			signal(SIGINT, signal_heredoc);
+			while (ft_strcmp(new_line, minishell->commands[i].command[*j + 1]) != 0)
 			{
-				if (*new_line)
-					free(new_line);
-				break ;
-			}
-			new_line = ft_strfjoin(new_line, "\n", 1, minishell->garbage);
-			if (!final)
-				final = ft_strdup("", minishell->garbage);
-			if (ft_strlen(new_line) + ft_strlen(final) >= 65535)
-				break ;
-			final = ft_strfjoin(final, new_line, 3, minishell->garbage);
+				new_line = readline("> ");
+				if (!new_line)
+				{
+					printf("\033[1A\033[2C");
+					break ;
+				}
+				if (ft_strcmp(new_line, minishell->commands[i].command[*j + 1]) == 0)
+				{
+					if (*new_line)
+						free(new_line);
+					break ;
+				}
+				new_line = ft_strfjoin(new_line, "\n", 1, minishell->garbage);
+				if (!final)
+					final = ft_strdup("", minishell->garbage);
+				if (ft_strlen(new_line) + ft_strlen(final) >= 65535)
+					break ;
+				final = ft_strfjoin(final, new_line, 3, minishell->garbage);
+			}	
+			exit(0);
 		}
+		waitpid(child_heredoc, &status, WUNTRACED);
+		if (WIFEXITED(status))
+			g_exit_code = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+			minishell->commands[i].do_run = false;
+		signal(SIGINT, handle_signals);
 		new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
 		new_line = ft_strfjoin(new_line, ft_itoa(i), 3, minishell->garbage);
 		minishell->commands[i].fd_out = open(new_line, O_RDWR | O_TRUNC | O_CREAT, 0644);
@@ -171,6 +191,8 @@ void
 		minishell->commands[i].fd_out = STDOUT;
 		minishell->commands[i].do_open_in = true;
 		minishell->commands[i].do_open_out = true;
+		minishell->commands[i].file_in = NULL;
+		minishell->commands[i].file_out = NULL;
 		while (minishell->commands[i].command[j])
 		{
 			if (ft_strcmp( minishell->commands[i].command[j], ">") == 0)
