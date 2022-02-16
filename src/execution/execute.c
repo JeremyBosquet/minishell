@@ -77,6 +77,14 @@ static void
 	signal(SIGQUIT, NULL);
 	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
+	if (minishell->commands[i].command[0] == NULL)
+	{
+		j += 1;
+		execve(minishell->commands[i].command[0], \
+		minishell->commands[i].command, minishell->environnement);
+		error_exe(minishell->commands[i].command[0], NULL, \
+		"command not found", 127);
+	}
 	while (minishell->commands[i].command[j])
 	{
 		if (is_builtins(minishell->commands[i].command[j]) == true)
