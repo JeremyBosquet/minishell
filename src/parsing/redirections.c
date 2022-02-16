@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:25:06 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 23:17:13 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:19:10 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ char
 			new_line = ft_strfjoin(new_line, "\n", 1, minishell->garbage);
 			if (!final)
 				final = ft_strdup("", minishell->garbage);
-			//calculer la taille de new_line + final et voir si elle est superieur a 65000...
+			if (ft_strlen(new_line) + ft_strlen(final) >= 65535)
+				break ;
 			final = ft_strfjoin(final, new_line, 3, minishell->garbage);
 		}
 		new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
@@ -153,8 +154,6 @@ char
 	minishell->commands[i].command, *j, size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
 	minishell->commands[i].command, *j, size_of_array(minishell->commands[i].command), minishell->garbage);
-	// if (minishell->commands[i].fd_out > 2)
-	// 	close(minishell->commands[i].fd_out);
 	return (minishell->commands[i].command);
 }
 
@@ -164,8 +163,8 @@ void
 	int i;
 	int j;
 
-	i = 0;
-	while (i < minishell->number_of_commands)
+	i = -1;
+	while (++i < minishell->number_of_commands)
 	{
 		j = 0;
 		minishell->commands[i].fd_in = STDIN;
@@ -184,7 +183,6 @@ void
 			    minishell->commands[i].command = redir_heredoc(minishell, i, &j);
 			else
 				j++;
-		}    
-		i++;
+		}
 	}
 }
