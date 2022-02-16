@@ -27,13 +27,12 @@ static void
 	}
 	else if (type == 1)
 	{
-		sdebug(minishell->commands[i].file_out);
 		if (type2 == TRUNC)
 			minishell->commands[i].fd_out = open(\
-			minishell->commands[i].file_out, O_WRONLY, O_TRUNC);
+			minishell->commands[i].file_out, O_WRONLY | O_TRUNC);
 		else if (type2 == APPEND)
 			minishell->commands[i].fd_out = open(\
-			minishell->commands[i].file_out, O_WRONLY, O_APPEND);
+			minishell->commands[i].file_out, O_WRONLY | O_APPEND);
 		if (minishell->commands[i].fd_out == -1)
 			return ;
 		if (dup2(minishell->commands[i].fd_out, \
@@ -46,7 +45,6 @@ static void
 static void
 	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
-	sdebug(minishell->commands[i].file_out);
 	if (minishell->commands[i].file_in != NULL)
 		duplicate_redirection(minishell, i, 0, \
 		minishell->commands[i].type_infile);

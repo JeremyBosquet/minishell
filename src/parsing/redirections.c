@@ -193,6 +193,7 @@ void
 		minishell->commands[i].do_open_out = true;
 		minishell->commands[i].file_in = NULL;
 		minishell->commands[i].file_out = NULL;
+		minishell->commands[i].do_run = true;
 		while (minishell->commands[i].command[j])
 		{
 			if (ft_strcmp( minishell->commands[i].command[j], ">") == 0)
