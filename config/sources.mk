@@ -21,8 +21,13 @@ override	SOURCES	:=						\
 	environnement/replace.c					\
 	parsing/arguments.c						\
 	parsing/check.c							\
+	parsing/check_pipe.c					\
+	parsing/check_quotes.c					\
+	parsing/check_chevrons.c				\
+	parsing/replace_env.c					\
+	parsing/replace_env2.c					\
+	parsing/replace_quotes.c				\
 	parsing/parse_new_line.c				\
-	parsing/parse_and_replace.c				\
 	parsing/print.c							\
 	parsing/redirections.c					\
 	structures/clean.c						\

@@ -6,15 +6,12 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:25:06 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 17:44:08 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:00:55 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "minishell2.h"
-
-//CRASH QUAND AUCUNE COMMANDE
-//CRASH QUAND LA COMMANDE EST APRES
 
 char
 	**remove_line_2array(char **tabs, int line, int size, t_list *g)
@@ -56,10 +53,10 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
@@ -83,10 +80,10 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
@@ -109,10 +106,10 @@ char
 		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	minishell->commands[i].command = remove_line_2array(\
-	minishell->commands[i].command, *j,\
+	minishell->commands[i].command, *j, \
 	size_of_array(minishell->commands[i].command), minishell->garbage);
 	if (minishell->commands[i].fd_in > 2)
 		close(minishell->commands[i].fd_in);
@@ -158,8 +155,6 @@ char
 				new_line = ft_strfjoin(new_line, "\n", 1, minishell->garbage);
 				if (!final)
 					final = ft_strdup("", minishell->garbage);
-				if (ft_strlen(new_line) + ft_strlen(final) >= 65535)
-					break ;
 				final = ft_strfjoin(final, new_line, 3, minishell->garbage);
 			}
 			new_line = ft_strdup(".couscous_cmd_", minishell->garbage);

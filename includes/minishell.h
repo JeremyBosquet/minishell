@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 17:36:56 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:46:42 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 //	~~	Globals ----------------------------------------------------------------
 
 int							g_exit_code;
+
+// ~~
+
+# define S_ERROR "syntax error: "
 
 //	~~	Enums ------------------------------------------------------------------
 
@@ -165,6 +169,23 @@ my_signal(void);
 char
 *replace_values_quotes(char *string, t_minishell *minishell);
 
+int
+check_pipe(char *new_line);
+
+int
+check_chevrons_between(char *new_line);
+
+int
+check_chevrons_invalid(char *new_line);
+
+int
+check_chevrons_invalid_number(char *new_line);
+
+int
+check_quotes(char *new_line);
+
+char
+*parse_when_dollar(char *string, int *i, t_minishell *minishell);
 // A SUPPRIMER A LA FIN
 
 void	print_commands(t_minishell *minishell);
