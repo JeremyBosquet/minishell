@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 16:57:02 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 18:26:12 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void
 		if (access(minishell->commands[i].file_in, F_OK) == 0 && \
 		unlink(minishell->commands[i].file_in) != 0)
 			perror("unlink error");
+		if (minishell->commands[i].file_in)
+			free(minishell->commands[i].file_in);
+		if (minishell->commands[i].file_out)
+			free(minishell->commands[i].file_out);
 		free_array((void **) minishell->commands[i].command, \
 		size_of_array(minishell->commands[i].command));
 		i++;
