@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   char.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 13:22:43 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/05 13:32:55 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:03:09 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool
 bool
 	ft_isdigit(int character)
 {
-	if (character >= '0' AND character <= '9')
+	if ((character >= '0' AND character <= '9') || character == ' ')
 		return (true);
 	return (false);
 }

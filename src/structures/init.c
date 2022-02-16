@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 15:27:47 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 16:53:04 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static int
 	if (number > 999)
 	{
 		printf("couscous: ");
-		printf("warning: shell level (%d) too high, resetting to 1\n", number + 1);
+		printf("warning: shell level (%d) too high, resetting to 1\n", \
+		number + 1);
 		number = 0;
 	}
+	free(line);
 	return (number);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 12:23:01 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:29:20 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 
 void
 signal_heredoc(int signo);
+
+char
+**add_oldpwd(char **environnement, t_list *garbage);
+
+void
+child_loop(t_minishell *minishell, int i, int j);
+
+void
+wait_exec(t_minishell *minishell);
 
 bool
 is_builtins(char *command);

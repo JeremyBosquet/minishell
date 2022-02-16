@@ -57,12 +57,11 @@ int
 	char	*path;
 	char	*tmp;
 
-	if (size_of_array(minishell->commands[i].command) < 2)
+	if (size_of_array(minishell->commands[i].command) < 2 \
+	OR set_oldpwd(minishell) == false)
 		return (0);
 	if (check_option(minishell->commands[i].command) == true)
 		return (1);
-	if (set_oldpwd(minishell) == false)
-		return (0);
 	if (chdir(minishell->commands[i].command[1]) != 0)
 		return (error_message(minishell->commands[i].command[1]));
 	path = ft_strdup("PWD=", minishell->garbage);

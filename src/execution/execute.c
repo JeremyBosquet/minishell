@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 13:59:15 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:30:21 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void
 	child(t_minishell *minishell, int i)
 {
 	int	j;
-	int	fd;
 
 	j = 0;
 	signal(SIGINT, NULL);
@@ -104,34 +103,7 @@ static void
 	}
 	while (minishell->commands[i].command[j])
 	{
-		if (is_builtins(minishell->commands[i].command[j]) == true)
-			execute_builtins(minishell, \
-			minishell->commands[i].command[j], i);
-		else
-		{
-			fd = open(minishell->commands[i].command[0], O_DIRECTORY);
-			if (fd > 0)
-			{
-				close(fd);
-				error_exe(minishell->commands[i].command[0], NULL, \
-				"is a directory", 126);
-			}
-			fd = open(check_path(minishell->commands[i].command[0], \
-			minishell->environnement, minishell->garbage), O_RDONLY);
-			if (fd < 0)
-			{
-				close(fd);
-				error_exe(minishell->commands[i].command[0], NULL, \
-				"command not found", 127);
-			}
-			if (access(check_path(minishell->commands[i].command[0], \
-			minishell->environnement, minishell->garbage), X_OK) != 0)
-				error_exe(minishell->commands[i].command[0], NULL, \
-				"permission1 denied", 126);
-			execve(check_path(minishell->commands[i].command[0], \
-			minishell->environnement, minishell->garbage), \
-			minishell->commands[i].command, minishell->environnement);
-		}
+		child_loop(minishell, i, j);
 		j += 1;
 	}
 }
@@ -140,13 +112,10 @@ void
 	execute(t_minishell *minishell)
 {
 	int		i;
-	int		status;
-	bool	are_signal;
 
 	minishell->pids = malloc(minishell->number_of_commands * sizeof(pid_t));
 	if (minishell->pids == NULL)
 		return ;
-	are_signal = false;
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -162,18 +131,7 @@ void
 		i += 1;
 	}
 	closefd(minishell, i + 1);
-	i = 0;
-	while (i < minishell->number_of_commands)
-	{
-		waitpid(minishell->pids[i++], &status, WUNTRACED);
-		if (WIFEXITED(status))
-			g_exit_code = WEXITSTATUS(status);
-		if (WIFSIGNALED(status) && are_signal == false)
-		{
-			signal_child(WTERMSIG(status));
-			are_signal = true;
-		}
-	}
+	wait_exec(minishell);
 	signal(SIGINT, handle_signals);
 	signal(SIGQUIT, SIG_IGN);
 	free(minishell->pids);

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:40:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/13 11:39:08 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:12:00 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static void
 	check_numeric_argument(char **command)
 {
-	int	i;
+	int		i;
+	bool	num;
 
 	i = 1;
+	num = false;
 	while (command[1][i] != EOS)
 	{
 		if (ft_isdigit(command[1][i]) == false)
@@ -26,6 +28,15 @@ static void
 			error_exe(command[0], command[1], "numeric argument required", 255);
 		}
 		i += 1;
+	}
+	i = 0;
+	while (command[1][++i] != EOS AND num == false)
+		if (command[1][i] >= '0' AND command[1][i] <= '9')
+			num = true;
+	if (num != true)
+	{
+		printf("exit\n");
+		error_exe(command[0], command[1], "numeric argument required", 255);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 20:00:48 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 15:35:08 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 16:52:27 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ bool
 	size_of_array(minishell->environnement));
 	list_clear(&minishell->garbage, free);
 	rl_clear_history();
+	free(minishell->current_pwd);
 	return (true);
 }
