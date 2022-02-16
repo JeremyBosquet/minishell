@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_with_quotes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:54:31 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 18:18:27 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,47 @@ static char	*ft_word_dup(const char *str, int start, int finish, t_list *g)
 static int
 	wlength(const char *string, char charset)
 {
-	int	words_length;
+	int	length;
 
-	words_length = 0;
-	while (string[words_length] != '\0')
+	length = 0;
+	while (string[length] != '\0')
 	{
-		if (string[words_length] != charset)
+		if (string[length] != charset)
 		{
-			if (string[words_length] == '\'' || string[words_length] == '"')
-				words_length += return_value_after_quote(string, words_length);
-			else if ((string[words_length] == '>' || string[words_length] == '<') && charset != '|' && words_length > 0)
+			if (string[length] == '\'' || string[length] == '"')
+				length += return_value_after_quote(string, length);
+			else if ((string[length] == '>' || string[length] == '<') \
+			&& charset != '|' && length > 0)
 				break ;
-			else if (string[words_length] == '>' && charset != '|')
+			else if (string[length] == '>' && charset != '|')
 			{
-				if (string[words_length + 1] == '>')
-					words_length += 2;
+				if (string[length + 1] == '>')
+					length += 2;
 				else
-					if (string[words_length + 1] != '<')
-						words_length += 1;
+					if (string[length + 1] != '<')
+						length += 1;
 				break ;
 			}
-			else if (string[words_length] == '<' && charset != '|')
+			else if (string[length] == '<' && charset != '|')
 			{
-				if (string[words_length + 1] == '<')
-					words_length += 2;
+				if (string[length + 1] == '<')
+					length += 2;
 				else
-					if (string[words_length + 1] != '>')
-						words_length += 1;
-					else if (string[words_length + 1] == '>')
-						words_length += 1;
+				{
+					if (string[length + 1] != '>')
+						length += 1;
+					else if (string[length + 1] == '>')
+						length += 1;
+				}
 				break ;
 			}
 			else
-				words_length += 1;
+				length += 1;
 		}
 		else
 			break ;
 	}
-	return (words_length);
+	return (length);
 }
 
 static unsigned int
