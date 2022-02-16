@@ -124,8 +124,8 @@ char
 
 	final = NULL;
 	new_line = NULL;
-	minishell->commands[i].type_outfile = HEREDOC;
-	if (minishell->commands[i].do_open_out)
+	minishell->commands[i].type_infile = HEREDOC;
+	if (minishell->commands[i].do_open_in)
 	{
 		signal(SIGINT, SIG_IGN);
 		child_heredoc = fork();
@@ -154,7 +154,12 @@ char
 				if (ft_strlen(new_line) + ft_strlen(final) >= 65535)
 					break ;
 				final = ft_strfjoin(final, new_line, 3, minishell->garbage);
-			}	
+			}
+			new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
+			new_line = ft_strfjoin(new_line, ft_itoa(i), 3, minishell->garbage);
+			minishell->commands[i].fd_in = open(new_line, O_RDWR | O_TRUNC | O_CREAT, 0644);
+			write(minishell->commands[i].fd_in, final, ft_strlen(final));
+			close(minishell->commands[i].fd_in);
 			exit(0);
 		}
 		waitpid(child_heredoc, &status, WUNTRACED);
@@ -164,11 +169,7 @@ char
 			minishell->commands[i].do_run = false;
 		signal(SIGINT, handle_signals);
 		new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
-		new_line = ft_strfjoin(new_line, ft_itoa(i), 3, minishell->garbage);
-		minishell->commands[i].fd_out = open(new_line, O_RDWR | O_TRUNC | O_CREAT, 0644);
-		write(minishell->commands[i].fd_out, final, ft_strlen(final));
-		close(minishell->commands[i].fd_out);
-		minishell->commands[i].file_out = ft_strdup(new_line, minishell->garbage);
+		minishell->commands[i].file_in = ft_strfjoin(new_line, ft_itoa(i), 3, minishell->garbage);
 	}
 	minishell->commands[i].command = remove_line_2array(\
 	minishell->commands[i].command, *j, size_of_array(minishell->commands[i].command), minishell->garbage);

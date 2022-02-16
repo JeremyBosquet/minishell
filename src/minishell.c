@@ -21,6 +21,8 @@ static void
 	i = 0;
 	while (i < minishell->number_of_commands)
 	{
+		if (access(minishell->commands[i].file_in, F_OK) == 0 && unlink(minishell->commands[i].file_in) != 0)
+			perror("unlink error");
 		free_array((void **) minishell->commands[i].command, \
 		size_of_array(minishell->commands[i].command));
 		i++;
