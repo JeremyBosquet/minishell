@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:26:40 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len, t_list *g)
 	newstr = (char *)ft_calloc(sizeof(char), (len + 1), g);
 	if (!newstr)
 		return (0);
-	if (start < (unsigned char)ft_strlen((char *)s))
+	if (start < (unsigned int)ft_strlen((char *)s))
 	{
 		while (i < (start + len) && s[i])
 		{

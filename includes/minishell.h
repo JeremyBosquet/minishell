@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/15 18:03:24 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:36:56 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ init_minishell(t_minishell *minishell, char	**envp);
 
 void
 my_signal(void);
+
+char
+*replace_values_quotes(char *string, t_minishell *minishell);
 
 // A SUPPRIMER A LA FIN
 

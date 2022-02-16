@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 18:32:09 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:50:43 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,9 @@ static char
 {
 	string[*i] = '\0';
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
+	printf("\n%c\n", string[*i]);
 	while (string[*i] != '"')
-	{
 		*i += 1;
-	}
 	if (string[*i] == '"')
 	{
 		string[*i] = EOS;
@@ -151,16 +150,6 @@ static char
 	return (string);
 }
 
-char
-	*ft_parse_and_replace(char *line, t_minishell *minishell)
-{
-	char	*new_line;
-
-	new_line = NULL;
-	line = replace_values(line, minishell);
-	return (line);
-}
-
 void
 	replace_env(char **tabs, t_minishell *minishell)
 {
@@ -169,16 +158,12 @@ void
 	i = 0;
 	while (tabs[i])
 	{
-		tabs[i] = ft_parse_and_replace(tabs[i], minishell);
+		tabs[i] = replace_values(tabs[i], minishell);
 		i++;
 	}
 }
 
-//
-//QUOTES
-//
-
-static char
+char
 	*replace_values_quotes(char *string, t_minishell *minishell)
 {
 	int		i;
@@ -201,33 +186,4 @@ static char
 			break ;
 	}
 	return (string);
-}
-
-char
-	*ft_parse_and_replace_quotes(char *line, t_minishell *minishell)
-{
-	char	*new_line;
-
-	new_line = NULL;
-	line = replace_values_quotes(line, minishell);
-	return (line);
-}
-
-void
-	replace_quotes(char ***tabs, t_minishell *minishell)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (tabs[i])
-	{
-		j = 0;
-		while (tabs[i][j])
-		{
-			tabs[i][j] = ft_parse_and_replace_quotes(tabs[i][j], minishell);
-			j++;
-		}
-		i++;
-	}
 }

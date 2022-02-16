@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 22:09:26 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:43:06 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ void
 		i++;
 	}
 	free(line_cmds);
-	replace_quotes(cmds_split, minishell);
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(new_line);
 	redirections(minishell);
-	// print_commands(minishell);
+	print_commands(minishell);
 }

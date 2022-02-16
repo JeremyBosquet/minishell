@@ -6,13 +6,12 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:25:06 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 10:19:10 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:44:08 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "minishell2.h"
-
 
 //CRASH QUAND AUCUNE COMMANDE
 //CRASH QUAND LA COMMANDE EST APRES
@@ -44,6 +43,8 @@ char
 	**redir_simple_out(t_minishell *minishell, int i, int *j)
 {
 	minishell->commands[i].type_outfile = TRUNC;
+	minishell->commands[i].command[*j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_out = \
@@ -69,6 +70,8 @@ char
 	**redir_append_out(t_minishell *minishell, int i, int *j)
 {
 	minishell->commands[i].type_outfile = APPEND;
+	minishell->commands[i].command[*j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_out = \
@@ -94,6 +97,8 @@ char
 	**redir_simple_in(t_minishell *minishell, int i, int *j)
 {
 	minishell->commands[i].type_infile = SIMPLE;
+	minishell->commands[i].command[*j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
 	if (minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_in = \
@@ -125,6 +130,8 @@ char
 	final = NULL;
 	new_line = NULL;
 	minishell->commands[i].type_infile = HEREDOC;
+	minishell->commands[i].command[*j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
 	if (minishell->commands[i].do_open_in)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -181,8 +188,8 @@ char
 void
 	redirections(t_minishell *minishell)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < minishell->number_of_commands)
@@ -197,16 +204,21 @@ void
 		minishell->commands[i].do_run = true;
 		while (minishell->commands[i].command[j])
 		{
-			if (ft_strcmp( minishell->commands[i].command[j], ">") == 0)
+			if (ft_strcmp(minishell->commands[i].command[j], ">") == 0)
 				minishell->commands[i].command = redir_simple_out(minishell, i, &j);
 			else if (ft_strcmp(minishell->commands[i].command[j], ">>") == 0)
-			    minishell->commands[i].command = redir_append_out(minishell, i, &j);
+				minishell->commands[i].command = redir_append_out(minishell, i, &j);
 			else if (ft_strcmp(minishell->commands[i].command[j], "<") == 0)
-			    minishell->commands[i].command = redir_simple_in(minishell, i, &j);
+				minishell->commands[i].command = redir_simple_in(minishell, i, &j);
 			else if (ft_strcmp(minishell->commands[i].command[j], "<<") == 0)
-			    minishell->commands[i].command = redir_heredoc(minishell, i, &j);
+				minishell->commands[i].command = redir_heredoc(minishell, i, &j);
 			else
+			{
+				minishell->commands[i].command[j] = \
+				replace_values_quotes(minishell->commands[i].command[j], \
+				minishell);
 				j++;
+			}
 		}
 	}
 }

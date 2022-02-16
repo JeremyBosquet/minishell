@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:58:24 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/15 19:49:46 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:56:39 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ static int
 	{
 		if (new_line[i] != '|' AND new_line[i] != ' ')
 			only_space_before_pipe = -1;
-		if (new_line[i] == '|')
+		if (new_line[i] == '\'' || new_line[i] == '"')
+			i += return_value_after_quote(new_line, i) - 1;
+		else if (new_line[i] == '|')
 		{
 			if (only_space_before_pipe == 1)
 				return (rerror("syntax error: ", "near unexpected token `|'"\
@@ -280,9 +282,9 @@ char *
 		return (NULL);
 	if (ft_strlen(new_line) == 0)
 		return (NULL);
-	if (check_pipe(new_line) == EXIT_FAILURE)
-		return (NULL);
 	if (check_quotes(new_line) == EXIT_FAILURE)
+		return (NULL);
+	if (check_pipe(new_line) == EXIT_FAILURE)
 		return (NULL);
 	if (check_space(new_line) == EXIT_FAILURE)
 		return (NULL);
