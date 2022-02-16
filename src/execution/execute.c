@@ -85,6 +85,7 @@ static void
 	child(t_minishell *minishell, int i)
 {
 	int	j;
+	int	fd;
 
 	j = 0;
 	signal(SIGINT, NULL);
@@ -108,11 +109,28 @@ static void
 			minishell->commands[i].command[j], i);
 		else
 		{
+			fd = open(minishell->commands[i].command[0], O_DIRECTORY);
+			if (fd > 0)
+			{
+				close(fd);
+				error_exe(minishell->commands[i].command[0], NULL, \
+				"is a directory", 126);
+			}
+			fd = open(check_path(minishell->commands[i].command[0], \
+			minishell->environnement, minishell->garbage), O_RDONLY);
+			if (fd < 0)
+			{
+				close(fd);
+				error_exe(minishell->commands[i].command[0], NULL, \
+				"command not found", 127);
+			}
+			if (access(check_path(minishell->commands[i].command[0], \
+			minishell->environnement, minishell->garbage), X_OK) != 0)
+				error_exe(minishell->commands[i].command[0], NULL, \
+				"permission1 denied", 126);
 			execve(check_path(minishell->commands[i].command[0], \
 			minishell->environnement, minishell->garbage), \
 			minishell->commands[i].command, minishell->environnement);
-			error_exe(minishell->commands[i].command[0], NULL, \
-			"command not found", 127);
 		}
 		j += 1;
 	}

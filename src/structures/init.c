@@ -12,6 +12,25 @@
 
 #include "minishell.h"
 
+static int
+	get_number(t_minishell *minishell)
+{
+	int		number;
+	char	*line;
+
+	line = get_env_value("SHLVL", minishell);
+	if (line == NULL)
+		return (-1);
+	number = ft_atoi(line);
+	if (number > 999)
+	{
+		printf("couscous: ");
+		printf("warning: shell level (%d) too high, resetting to 1\n", number + 1);
+		number = 0;
+	}
+	return (number);
+}
+
 static void
 	set_shlvl(t_minishell *minishell)
 {
@@ -19,18 +38,16 @@ static void
 	char	*line;
 	char	*number;
 
-	line = get_env_value("SHLVL", minishell);
-	if (line == NULL)
-		return ;
-	n = ft_atoi(line);
-	free(line);
-	number = ft_itoa(n + 1);
-	if (number == NULL)
-		return ;
-	line = ft_strdup("SHLVL=", minishell->garbage);
-	if (line == NULL)
-		return ;
-	line = ft_strfjoin(line, number, 3, minishell->garbage);
+	n = get_number(minishell);
+	if (n == 999)
+		line = ft_strfjoin("SHLVL=", "", 0, minishell->garbage);
+	else
+	{
+		number = ft_itoa(n + 1);
+		if (number == NULL)
+			return ;
+		line = ft_strfjoin("SHLVL=", number, 2, minishell->garbage);
+	}
 	if (line == NULL)
 		return ;
 	minishell->environnement = add_to_environnement(minishell->environnement, \

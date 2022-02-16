@@ -45,10 +45,10 @@ static bool
 }
 
 static int
-	error_message(int errnumber, char *command)
+	error_message(char *command)
 {
 	printf("couscous: %s: No such file or directory\n", command);
-	return (errnumber);
+	return (1);
 }
 
 int
@@ -64,7 +64,7 @@ int
 	if (set_oldpwd(minishell) == false)
 		return (0);
 	if (chdir(minishell->commands[i].command[1]) != 0)
-		error_message(errno, minishell->commands[i].command[1]);
+		return (error_message(minishell->commands[i].command[1]))
 	path = ft_strdup("PWD=", minishell->garbage);
 	if (path == NULL)
 		return (0);
