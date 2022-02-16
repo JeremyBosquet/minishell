@@ -21,7 +21,8 @@ static void
 	i = 0;
 	while (i < minishell->number_of_commands)
 	{
-		if (access(minishell->commands[i].file_in, F_OK) == 0 && unlink(minishell->commands[i].file_in) != 0)
+		if (access(minishell->commands[i].file_in, F_OK) == 0 && \
+		unlink(minishell->commands[i].file_in) != 0)
 			perror("unlink error");
 		free_array((void **) minishell->commands[i].command, \
 		size_of_array(minishell->commands[i].command));
@@ -32,32 +33,39 @@ static void
 	minishell->number_of_commands = 0;
 }
 
-int
-	main(int argc, char **argv, char **envp)
+static void
+	main_loop(t_minishell *minishell)
 {
-	t_minishell	minishell;
-	char		*new_line;
+	char	*new_line;
 
-	(void) argv;
-	check_number_of_argument(argc);
-	if (init_minishell(&minishell, envp) == false)
-		error("initialization error", 1);
-	my_signal();
-	while (minishell.is_running == true)
+	while (minishell->is_running == true)
 	{
 		new_line = readline(ORANGE"couscous-0.1$ "END);
 		if (new_line == NULL)
 			break ;
 		add_history(new_line);
 		if (new_line[0] != '\0')
-			parse_new_line(&minishell, new_line);
-		if (minishell.number_of_commands == 1 \
-		AND is_special_builtins(minishell.commands[0].command[0]) == true)
-			execute_special_builtins(&minishell);
+			parse_new_line(minishell, new_line);
+		if (minishell->number_of_commands == 1 \
+		AND is_special_builtins(minishell->commands[0].command[0]) == true)
+			execute_special_builtins(minishell);
 		else
-			execute(&minishell);
-		cleanup(&minishell);
+			execute(minishell);
+		cleanup(minishell);
 	}
+}
+
+int
+	main(int argc, char **argv, char **envp)
+{
+	t_minishell	minishell;
+
+	(void) argv;
+	check_number_of_argument(argc);
+	if (init_minishell(&minishell, envp) == false)
+		error("initialization error", 1);
+	my_signal();
+	main_loop(&minishell);
 	clean_minishell(&minishell);
 	printf("\033[1A\033[14Cexit\n");
 	return (g_exit_code);
