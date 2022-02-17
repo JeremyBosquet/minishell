@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 11:34:47 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/17 16:03:33 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,12 @@ static int
 	i = 1;
 	j = 1;
 	nb_option = 0;
-	while (command[j] != NULL)
+	if (command[j][0] == '-')
 	{
-		if (command[j][0] == '-')
-		{
-			while (command[j][i] != EOS AND command[j][i] == 'n')
-				i += 1;
-			if (ft_strlen(command[j]) == i)
-				nb_option += 1;
-		}
-		j += 1;
+		while (command[j][i] != EOS AND command[j][i] == 'n')
+			i += 1;
+		if (ft_strlen(command[j]) == i)
+			nb_option += 1;
 	}
 	return (nb_option);
 }

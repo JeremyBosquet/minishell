@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 15:41:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/17 17:51:55 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ static char
 }
 
 static void
-	wait_here_doc(t_minishell *minishell, pid_t child, int i)
+	wait_here_doc(pid_t child)
 {
 	int	status;
 
 	waitpid(child, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_exit_code = WEXITSTATUS(status);
-	if (WIFSIGNALED(status))
-		minishell->commands[i].do_run = false;
 	signal(SIGINT, handle_signals);
 }
 
@@ -72,7 +70,7 @@ static void
 {
 	char	*final;
 
-	signal(SIGINT, signal_child);
+	signal(SIGINT, &signal_heredoc);
 	final = child_here_doc(minishell, i, j, new_line);
 	new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
 	new_line = ft_strfjoin(new_line, ft_itoa(i), 3, minishell->garbage);
@@ -82,7 +80,7 @@ static void
 	close(minishell->commands[i].fd_in);
 	free(new_line);
 	free(final);
-	exit(0);
+	exit(g_exit_code);
 }
 
 char
@@ -103,7 +101,7 @@ char
 			error("fork fail", 1);
 		else if (child_heredoc == 0)
 			child1(minishell, i, j, new_line);
-		wait_here_doc(minishell, child_heredoc, i);
+		wait_here_doc(child_heredoc);
 		new_line = ft_strdup(".couscous_cmd_", minishell->garbage);
 		minishell->commands[i].file_in = ft_strfjoin(new_line, ft_itoa(i), 3, \
 		minishell->garbage);

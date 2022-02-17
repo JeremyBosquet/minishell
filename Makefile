@@ -6,7 +6,7 @@
 #    By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/05 17:07:00 by mmosca            #+#    #+#              #
-#    Updated: 2022/02/17 09:17:32 by mmosca           ###   ########lyon.fr    #
+#    Updated: 2022/02/17 17:25:23 by mmosca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ include		config/sources.mk
 override	CFLAGS			+=	$(sort $(addprefix -I./, $(dir ${HEADERS})))
 override	CFLAGS			+=	${RL_INC}
 override	OBJS			:=	$(addprefix ${BINARIES_DIRECTORY}/, ${SOURCES:.c=.o})
-override	OBJS_DIRECTORY	:=	$(sort $(dir ${OBJS}))
 
 override	EXTENSIONS		:=	\
 	config/compilations.mk		\
@@ -39,14 +38,10 @@ override	EXTENSIONS		:=	\
 all:	header libft ${BUILD_DIRECTORY}/${NAME}
 
 
-${BINARIES_DIRECTORY}/%.o:	${SOURCES_DIRECTORY}/%.c ${HEADERS} Makefile ${LIBS} ${EXTENSIONS}
+${BINARIES_DIRECTORY}/%.o:	%.c ${HEADERS} Makefile ${LIBS} ${EXTENSIONS}
+	${MKDIR} $(dir $@)
 	${CC} ${CFLAGS} -c $< -o $@
 	${PRINT_COMPILING}
-
-${OBJS}:	| ${OBJS_DIRECTORY}
-
-${OBJS_DIRECTORY}:
-	${MKDIR} $@
 
 ${BUILD_DIRECTORY}/${NAME}:	${OBJS}
 	${MKDIR} $(dir $@)
