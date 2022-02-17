@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 15:08:18 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/17 15:16:54 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ static bool
 }
 
 static int
-	error_message(char *command)
-{
-	printf("couscous: %s: No such file or directory\n", command);
-	return (1);
-}
-
-static int
 	check_bi_cd(t_minishell *minishell, int i)
 {
 	if (size_of_array(minishell->commands[i].command) < 2 \
@@ -62,8 +55,21 @@ static int
 	if (check_option(minishell->commands[i].command) == true)
 		return (1);
 	if (chdir(minishell->commands[i].command[1]) != 0)
-		return (error_message(minishell->commands[i].command[1]));
+	{
+		printf("couscous: %s: No such file or directory\n", \
+		minishell->commands[i].command[1]);
+		return (1);
+	}
 	return (-1);
+}
+
+static void
+	add_env_export(t_minishell *minishell, char *path)
+{
+	minishell->environnement = add_to_environnement(\
+	minishell->environnement, path, minishell->garbage);
+	minishell->env_export = add_to_export(\
+	minishell->env_export, path, minishell->garbage);
 }
 
 int
@@ -90,10 +96,7 @@ int
 	path = ft_strfjoin(path, tmp, 3, minishell->garbage);
 	if (path == NULL)
 		return (0);
-	minishell->environnement = add_to_environnement(\
-	minishell->environnement, path, minishell->garbage);
-	minishell->env_export = add_to_export(\
-	minishell->env_export, path, minishell->garbage);
+	add_env_export(minishell, path);
 	free(path);
 	return (0);
 }
