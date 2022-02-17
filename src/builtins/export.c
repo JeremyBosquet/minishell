@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 10:07:01 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 14:50:02 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static void
 	i = 0;
 	while (array[i] != NULL)
 	{
-		if (ft_strcmp(array[i], "OLDPWD") == 0)
+		if (ft_strchr(array[i], '=') == NULL)
+			printf("declare -x %s\n", array[i++]);
+		else
 		{
-			printf("declare -x OLDPWD\n");
+			name = get_name_of_line(array[i], \
+			minishell->garbage);
+			value = get_value_of_line(array[i], \
+		minishell->garbage);
+			printf("declare -x %s=\"%s\"\n", name, value);
 			i += 1;
+			free(name);
+			free(value);
 		}
-		if (!array[i])
+		if (array[i] == NULL)
 			break ;
-		name = get_name_of_line(array[i], \
-		minishell->garbage);
-		value = get_value_of_line(array[i], \
-		minishell->garbage);
-		printf("declare -x %s=\"%s\"\n", name, value);
-		i += 1;
-		free(name);
-		free(value);
 	}
 }
 
@@ -58,23 +58,27 @@ static int
 static int
 	check_arguments_or_options(t_minishell *minishell, char **command)
 {
-	char	*pos;
-	int		i;
+	int	i;
 
-	i = 1;
-	while (command[i] != NULL)
+	i = 0;
+	while (command[++i] != NULL)
 	{
 		if (command[i][0] == '_' OR ft_isalpha(command[i][0]) == true)
 		{
-			pos = ft_strchr(command[i], '=');
-			if (pos == NULL)
-				return (0);
-			minishell->environnement = add_to_environnement(\
-			minishell->environnement, command[i], minishell->garbage);
+			if (ft_strchr(command[i], '=') == NULL)
+				minishell->env_export = add_to_export(minishell->env_export, \
+				command[i], minishell->garbage);
+			else
+			{
+				minishell->environnement = add_to_environnement(\
+				minishell->environnement, command[i], minishell->garbage);
+				if (find_line_of_name2(minishell->env_export, command[i]) == -1)
+					minishell->env_export = add_to_export(\
+					minishell->env_export, command[i], minishell->garbage);
+			}
 		}
 		else
 			return (error_arg(command, i));
-		i += 1;
 	}
 	return (0);
 }
@@ -110,27 +114,25 @@ static void
 int
 	builtin_export(t_minishell *minishell, int i)
 {
-	int		size_of_arg;
-	int		check_arg;
-	char	**tmp;
+	int		size;
+	int		check;
 
-	size_of_arg = size_of_array(minishell->commands[i].command);
-	if (size_of_arg < 2)
+	size = size_of_array(minishell->commands[i].command);
+	if (size == 1)
 	{
-		tmp = ft_dup_2array(minishell->environnement, minishell->garbage, 0);
-		if (find_line_of_name(tmp, "OLDPWD", minishell->garbage) == -1)
-			tmp = add_oldpwd(tmp, minishell->garbage);
-		sort_ascii(tmp);
-		display_env(minishell, tmp);
-		free_array((void **) tmp, size_of_array(tmp));
+		if (find_line_of_name2(minishell->env_export, "OLDPWD") == -1)
+			minishell->env_export = add_to_export(minishell->env_export, \
+			"OLDPWD", minishell->garbage);
+		sort_ascii(minishell->env_export);
+		display_env(minishell, minishell->env_export);
 		return (0);
 	}
 	else
 	{
-		check_arg = check_arguments_or_options(minishell, \
+		check = check_arguments_or_options(minishell, \
 		minishell->commands[i].command);
-		if (check_arg == 1 || check_arg == 2)
-			return (check_arg);
+		if (check == 1 OR check == 2)
+			return (check);
 		return (0);
 	}
 }

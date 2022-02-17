@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 10:07:10 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 13:38:56 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct	s_minishell {
 	pid_t		*pids;
 	bool		is_running;
 	char		**environnement;
+	char		**env_export;
 	char		*current_pwd;
 	int			number_of_commands;
 	int			exit_code;
@@ -173,9 +174,6 @@ char
 void
 signal_heredoc(int signo);
 
-char
-**add_oldpwd(char **environnement, t_list *garbage);
-
 void
 child_loop(t_minishell *minishell, int i, int j);
 
@@ -229,6 +227,15 @@ execute_builtins(t_minishell *minishell, char *command, int i);
 
 char
 *check_path(char *command, char **environnement, t_list *garbage);
+
+char
+**add_to_export(char **environnement, char *command, t_list *garbage);
+
+int
+find_line_of_name2(char **environnement, char *name);
+
+char
+**delete_line_in_export(char **environnement, char *name, t_list *g);
 
 // A SUPPRIMER A LA FIN
 

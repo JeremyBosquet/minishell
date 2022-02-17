@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:32:30 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ bool
 	minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, "OLDPWD", minishell->garbage);
 	set_shlvl(minishell);
+	minishell->env_export = copy_environnement(minishell->environnement, 0, \
+	minishell->garbage);
 	minishell->current_pwd = getcwd(NULL, 0);
 	if (minishell->current_pwd == NULL)
 		return (false);

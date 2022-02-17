@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:24:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 15:04:49 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int
 	return_value = check_arguments_or_options(minishell->commands[i].command);
 	if (return_value == 1 OR return_value == 2)
 		return (return_value);
-	j = 1;
-	while (j < size_of_arg)
+	j = 0;
+	while (++j < size_of_arg)
 	{
 		if (ft_strcmp(minishell->commands[i].command[j], "PWD") == 0)
 		{
@@ -81,7 +81,8 @@ int
 		minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, minishell->commands[i].command[j], \
 	minishell->garbage);
-		j += 1;
+		minishell->env_export = delete_line_in_export(minishell->env_export, \
+		minishell->commands[i].command[j], minishell->garbage);
 	}
 	return (0);
 }

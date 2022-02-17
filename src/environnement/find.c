@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 14:45:13 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/09 18:20:18 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 14:00:50 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,20 @@ int
 		i += 1;
 	}
 	free(name);
+	return (-1);
+}
+
+int
+	find_line_of_name2(char **environnement, char *name)
+{
+	int	i;
+
+	i = 0;
+	while (environnement[i] != NULL)
+	{
+		if (ft_strncmp(environnement[i], name, ft_strlen(name)) == 0)
+			return (i);
+		i += 1;
+	}
 	return (-1);
 }

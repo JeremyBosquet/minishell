@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 10:57:31 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 15:08:18 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static bool
 		return (false);
 	minishell->environnement = add_to_environnement(minishell->environnement, \
 	oldpwd, minishell->garbage);
+	minishell->env_export = add_to_export(minishell->env_export, oldpwd, \
+	minishell->garbage);
 	free(oldpwd);
 	return (true);
 }
@@ -51,12 +53,9 @@ static int
 	return (1);
 }
 
-int
-	builtin_cd(t_minishell *minishell, int i)
+static int
+	check_bi_cd(t_minishell *minishell, int i)
 {
-	char	*path;
-	char	*tmp;
-
 	if (size_of_array(minishell->commands[i].command) < 2 \
 	OR set_oldpwd(minishell) == false)
 		return (0);
@@ -64,6 +63,19 @@ int
 		return (1);
 	if (chdir(minishell->commands[i].command[1]) != 0)
 		return (error_message(minishell->commands[i].command[1]));
+	return (-1);
+}
+
+int
+	builtin_cd(t_minishell *minishell, int i)
+{
+	char	*path;
+	char	*tmp;
+	int		ret;
+
+	ret = check_bi_cd(minishell, i);
+	if (ret != -1)
+		return (ret);
 	path = ft_strdup("PWD=", minishell->garbage);
 	if (path == NULL)
 		return (0);
@@ -80,6 +92,8 @@ int
 		return (0);
 	minishell->environnement = add_to_environnement(\
 	minishell->environnement, path, minishell->garbage);
+	minishell->env_export = add_to_export(\
+	minishell->env_export, path, minishell->garbage);
 	free(path);
 	return (0);
 }
