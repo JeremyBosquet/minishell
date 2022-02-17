@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 17:51:55 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/17 19:02:05 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ char
 		minishell->garbage);
 	}
 	minishell->commands[i].command = clean_redirection(minishell, i, &j);
+	if (g_exit_code)
+		minishell->commands[i].do_run = false;
 	return (minishell->commands[i].command);
 }

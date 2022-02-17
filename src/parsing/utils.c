@@ -22,4 +22,6 @@ void
 	minishell->commands[i].file_in = NULL;
 	minishell->commands[i].file_out = NULL;
 	minishell->commands[i].do_run = true;
+	minishell->commands[i].type_infile = -1;
+	minishell->commands[i].type_outfile = -1;
 }
