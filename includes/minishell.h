@@ -163,7 +163,7 @@ void
 init_fd_command(t_minishell *minishell, int i);
 
 char
-**redir_hered(t_minishell *minishell, int i, int *j);
+**redir_hered(t_minishell *minishell, int i, int j);
 
 char
 **remove_line_2array(char **tabs, int line, int size, t_list *g);

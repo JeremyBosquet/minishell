@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 09:26:38 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 15:41:56 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ char
 }
 
 static char
-	*child_here_doc(t_minishell *minishell, int i, int *j, char *new_line)
+	*child_here_doc(t_minishell *minishell, int i, int j, char *new_line)
 {
 	char	*final;
 
 	final = NULL;
-	while (ft_strcmp(new_line, minishell->commands[i].command[*j + 1]) != 0)
+	while (ft_strcmp(new_line, minishell->commands[i].command[j + 1]) != 0)
 	{
 		new_line = readline("> ");
 		if (!new_line)
@@ -38,7 +38,7 @@ static char
 			printf("\033[1A\033[2C");
 			break ;
 		}
-		if (!ft_strcmp(new_line, minishell->commands[i].command[*j + 1]))
+		if (!ft_strcmp(new_line, minishell->commands[i].command[j + 1]))
 		{
 			if (*new_line)
 				free(new_line);
@@ -68,7 +68,7 @@ static void
 }
 
 static void
-	child1(t_minishell *minishell, int i, int *j, char *new_line)
+	child1(t_minishell *minishell, int i, int j, char *new_line)
 {
 	char	*final;
 
@@ -86,15 +86,15 @@ static void
 }
 
 char
-	**redir_hered(t_minishell *minishell, int i, int *j)
+	**redir_hered(t_minishell *minishell, int i, int j)
 {
 	char	*new_line;
 	pid_t	child_heredoc;
 
 	new_line = NULL;
 	minishell->commands[i].type_infile = HEREDOC;
-	minishell->commands[i].command[*j + 1] = \
-	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
+	minishell->commands[i].command[j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[j + 1], minishell);
 	if (minishell->commands[i].do_open_in)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -108,6 +108,6 @@ char
 		minishell->commands[i].file_in = ft_strfjoin(new_line, ft_itoa(i), 3, \
 		minishell->garbage);
 	}
-	minishell->commands[i].command = clean_redirection(minishell, i, j);
+	minishell->commands[i].command = clean_redirection(minishell, i, &j);
 	return (minishell->commands[i].command);
 }

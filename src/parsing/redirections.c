@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:25:06 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/17 15:40:36 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,65 +36,65 @@ char
 }
 
 char
-	**redir_s_out(t_minishell *minishell, int i, int *j)
+	**redir_s_out(t_minishell *minishell, int i, int j)
 {
 	minishell->commands[i].type_outfile = TRUNC;
-	minishell->commands[i].command[*j + 1] = \
-	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
+	minishell->commands[i].command[j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[j + 1], minishell);
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_out = \
-		open(minishell->commands[i].command[*j + 1], \
+		open(minishell->commands[i].command[j + 1], \
 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (minishell->commands[i].fd_out == -1)
 			minishell->commands[i].do_open_out = false;
 		minishell->commands[i].file_out = \
-		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
+		ft_strdup(minishell->commands[i].command[j + 1], minishell->garbage);
 	}
-	minishell->commands[i].command = clean_redirection(minishell, i, j);
+	minishell->commands[i].command = clean_redirection(minishell, i, &j);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
 	return (minishell->commands[i].command);
 }
 
 char
-	**redir_a_out(t_minishell *minishell, int i, int *j)
+	**redir_a_out(t_minishell *minishell, int i, int j)
 {
 	minishell->commands[i].type_outfile = APPEND;
-	minishell->commands[i].command[*j + 1] = \
-	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
+	minishell->commands[i].command[j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[j + 1], minishell);
 	if (minishell->commands[i].do_open_out && minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_out = \
-		open(minishell->commands[i].command[*j + 1], \
+		open(minishell->commands[i].command[j + 1], \
 		O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (minishell->commands[i].fd_out == -1)
 			minishell->commands[i].do_open_out = false;
 		minishell->commands[i].file_out = \
-		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
+		ft_strdup(minishell->commands[i].command[j + 1], minishell->garbage);
 	}
-	minishell->commands[i].command = clean_redirection(minishell, i, j);
+	minishell->commands[i].command = clean_redirection(minishell, i, &j);
 	if (minishell->commands[i].fd_out > 2)
 		close(minishell->commands[i].fd_out);
 	return (minishell->commands[i].command);
 }
 
 char
-	**redir_s_in(t_minishell *minishell, int i, int *j)
+	**redir_s_in(t_minishell *minishell, int i, int j)
 {
 	minishell->commands[i].type_infile = SIMPLE;
-	minishell->commands[i].command[*j + 1] = \
-	replace_values_quotes(minishell->commands[i].command[*j + 1], minishell);
+	minishell->commands[i].command[j + 1] = \
+	replace_values_quotes(minishell->commands[i].command[j + 1], minishell);
 	if (minishell->commands[i].do_open_in)
 	{
 		minishell->commands[i].fd_in = \
-		open(minishell->commands[i].command[*j + 1], O_RDONLY);
+		open(minishell->commands[i].command[j + 1], O_RDONLY);
 		if (minishell->commands[i].fd_in == -1)
 			minishell->commands[i].do_open_in = false;
 		minishell->commands[i].file_in = \
-		ft_strdup(minishell->commands[i].command[*j + 1], minishell->garbage);
+		ft_strdup(minishell->commands[i].command[j + 1], minishell->garbage);
 	}
-	minishell->commands[i].command = clean_redirection(minishell, i, j);
+	minishell->commands[i].command = clean_redirection(minishell, i, &j);
 	if (minishell->commands[i].fd_in > 2)
 		close(minishell->commands[i].fd_in);
 	return (minishell->commands[i].command);
@@ -113,13 +113,13 @@ void
 		while (minishell->commands[i].command[j])
 		{
 			if (ft_strcmp(minishell->commands[i].command[j], ">") == 0)
-				minishell->commands[i].command = redir_s_out(minishell, i, &j);
+				minishell->commands[i].command = redir_s_out(minishell, i, j);
 			else if (ft_strcmp(minishell->commands[i].command[j], ">>") == 0)
-				minishell->commands[i].command = redir_a_out(minishell, i, &j);
+				minishell->commands[i].command = redir_a_out(minishell, i, j);
 			else if (ft_strcmp(minishell->commands[i].command[j], "<") == 0)
-				minishell->commands[i].command = redir_s_in(minishell, i, &j);
+				minishell->commands[i].command = redir_s_in(minishell, i, j);
 			else if (ft_strcmp(minishell->commands[i].command[j], "<<") == 0)
-				minishell->commands[i].command = redir_hered(minishell, i, &j);
+				minishell->commands[i].command = redir_hered(minishell, i, j);
 			else
 			{
 				minishell->commands[i].command[j] = replace_values_quotes(\

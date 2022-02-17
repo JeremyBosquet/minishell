@@ -50,6 +50,7 @@ char
 		name = get_name_of_line(command, garbage);
 		if (find_line_of_name2(environnement, name) != -1)
 			environnement = delete_line_in_export(environnement, name, garbage);
+		free(name);
 	}
 	line = find_line_of_name2(environnement, command);
 	if (line != -1)
@@ -62,7 +63,6 @@ char
 	if (new[i] == NULL)
 		clean_environnement(environnement, size_of_array(environnement));
 	ft_strcpy(new[i], command);
-	new[i + 1] = NULL;
 	free_array((void **) environnement, i);
 	return (new);
 }
