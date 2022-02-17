@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:32:03 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 09:26:38 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char
 			printf("\033[1A\033[2C");
 			break ;
 		}
-		if (!ft_strcmp(new_line, minishell->commands[i].command[*j +1]))
+		if (!ft_strcmp(new_line, minishell->commands[i].command[*j + 1]))
 		{
 			if (*new_line)
 				free(new_line);
@@ -80,6 +80,8 @@ static void
 	| O_CREAT, 0644);
 	write(minishell->commands[i].fd_in, final, ft_strlen(final));
 	close(minishell->commands[i].fd_in);
+	free(new_line);
+	free(final);
 	exit(0);
 }
 

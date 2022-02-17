@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 10:07:01 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int
 			if (pos == NULL)
 				return (0);
 			minishell->environnement = add_to_environnement(\
-		minishell->environnement, command[i], minishell->garbage);
+			minishell->environnement, command[i], minishell->garbage);
 		}
 		else
 			return (error_arg(command, i));
