@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 11:34:47 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 11:02:59 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static bool
 			else
 				return (false);
 		}
+		if (command[j][0] == '>' || command[j][0] == '<')
+			return (true);
 		j += 1;
 	}
 	return (false);

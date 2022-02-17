@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 22:32:10 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 10:59:54 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char
 {
 	char	*subline;
 	char	*memo;
+	char	*tmp2;
 
 	memo = NULL;
 	*i += 1;
@@ -41,12 +42,14 @@ static char
 		minishell->garbage);
 	subline = ft_substr(string, *tmp, *i - *tmp, minishell->garbage);
 	string[*tmp - 1] = EOS;
-	if (get_env_value(subline, minishell))
+	tmp2 = get_env_value(subline, minishell);
+	if (tmp2)
 		string = ft_strfjoin(string, get_env_value(subline, minishell), 3, \
 		minishell->garbage);
 	*i = ft_strlen(string);
 	if (memo)
 		string = ft_strfjoin(string, memo, 3, minishell->garbage);
+	free(tmp2);
 	return (string);
 }
 

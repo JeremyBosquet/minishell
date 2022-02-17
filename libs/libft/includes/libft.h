@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 22:55:27 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:21:33 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 10:13:43 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define OR ||
 # define EOS '\0'
 
-// # define debug print_debug(__LINE__, __FILE__)
-// # define sdebug(x) print_debug_str(x, __LINE__, __FILE__)
-// # define idebug(x) print_debug_int(x, __LINE__, __FILE__)
+# define debug print_debug(__LINE__, __FILE__)
+# define sdebug(x) print_debug_str(x, __LINE__, __FILE__)
+# define idebug(x) print_debug_int(x, __LINE__, __FILE__)
 
 # define RED "\033[0;31m"
 # define ORANGE "\033[0;33m"

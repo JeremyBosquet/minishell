@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:29:29 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/17 10:57:31 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int
 	if (tmp == NULL)
 		tmp = ft_strdup(minishell->current_pwd, minishell->garbage);
 	else
+	{
+		free(minishell->current_pwd);
 		minishell->current_pwd = ft_strdup(tmp, minishell->garbage);
+	}
 	path = ft_strfjoin(path, tmp, 3, minishell->garbage);
 	if (path == NULL)
 		return (0);
