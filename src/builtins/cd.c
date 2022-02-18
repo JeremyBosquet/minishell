@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:21:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 16:24:37 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 20:57:24 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ static int
 		return (0);
 	if (check_option(minishell->commands[i].command) == true)
 		return (1);
-	if (chdir(minishell->commands[i].command[1]) != 0)
+	if (chdir(minishell->commands[i].command[1]) == -1)
 	{
-		printf("couscous: %s: No such file or directory\n", \
-		minishell->commands[i].command[1]);
+		if (errno == ENOENT)
+			printf("couscous: %s: No such file or directory\n", \
+			minishell->commands[i].command[1]);
+		else if (errno == ENOTDIR)
+			printf("couscous: %s: Not a directory\n", \
+			minishell->commands[i].command[1]);
 		return (1);
 	}
 	return (-1);
