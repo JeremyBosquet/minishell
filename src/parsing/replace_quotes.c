@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 19:39:21 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/16 21:19:04 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 14:15:53 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char
 {
 	string[*i] = '\0';
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
-	while (string[*i] != '\'')
+	while (string[*i] != EOS && string[*i] != '\'')
 		*i += 1;
 	if (string[*i] == '\'')
 	{
@@ -32,7 +32,7 @@ static char
 {
 	string[*i] = '\0';
 	string = ft_strfjoin(string, &(string[*i + 1]), 1, minishell->garbage);
-	while (string[*i] != '"')
+	while (string[*i] != EOS && string[*i] != '"')
 		*i += 1;
 	if (string[*i] == '"')
 	{
