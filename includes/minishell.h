@@ -37,6 +37,7 @@ int							g_exit_code;
 //	~~	Defines ----------------------------------------------------------------
 
 # define S_ERROR "syntax error: "
+# define PDENIED "Permission denied"
 
 //	~~	Enums ------------------------------------------------------------------
 

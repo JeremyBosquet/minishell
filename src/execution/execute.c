@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 10:19:48 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 10:26:53 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void
 			error("dup fail", 1);
 		close(minishell->commands[i - 1].pipes[0]);
 	}
+	if (minishell->commands[i].do_open_out == false)
+		error_exe(minishell->commands[i].file_out, NULL, PDENIED, 1);
 	if (minishell->commands[i].file_out != NULL)
 		duplicate_redirection(minishell, i, 1, \
 		minishell->commands[i].type_outfile);
