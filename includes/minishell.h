@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:38:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:12:28 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,12 @@ find_line_of_name2(char **environnement, char *name);
 
 char
 **delete_line_in_export(char **environnement, char *name, t_list *g);
+
+void
+builtin_exit2(t_minishell *minishell, int i);
+
+void
+close_fd2(t_minishell *minishell, int i);
 
 // A SUPPRIMER A LA FIN
 

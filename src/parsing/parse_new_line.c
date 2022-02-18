@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/18 13:41:51 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:16:38 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,8 @@ void
 	replace_env(line_cmds, minishell);
 	cmds_split = parse_new_line2(minishell, line_cmds);
 	if (cmds_split == NULL)
-	{
-		free_array((void **) line_cmds, size_of_array(line_cmds));
-		return ;
-	}
+		return ((void)free_array((void **) line_cmds, \
+		size_of_array(line_cmds)));
 	fill_struct(minishell, cmds_split, minishell->garbage);
 	free(line);
 	redirections(minishell, j);

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 13:51:27 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:13:58 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ static void
 		close(minishell->commands[j].pipes[1]);
 		j += 1;
 	}
+	wait_exec(minishell);
+	signal(SIGINT, handle_signals);
+	signal(SIGQUIT, SIG_IGN);
+	free(minishell->pids);
 }
 
 static void
@@ -94,13 +98,10 @@ static void
 	j = 0;
 	signal(SIGINT, NULL);
 	signal(SIGQUIT, NULL);
-	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
-	if (minishell->commands[i].do_run == false \
-	AND minishell->commands[i].type_infile == HEREDOC)
+	if (minishell->commands[i].type_infile == HEREDOC \
+	&& minishell->commands[i].command[0] == NULL)
 		exit(g_exit_code);
-	else if (minishell->commands[i].command[0] == NULL)
-		exit(0);
 	if (minishell->commands[i].command[0] == NULL)
 	{
 		j += 1;
@@ -133,15 +134,15 @@ void
 		if (pipe(minishell->commands[i].pipes) == -1)
 			error("pipe fail", 1);
 		minishell->pids[i] = fork();
-		if (minishell->pids < 0)
-			error("fork fail", 1);
+		if (minishell->pids[i] < 0)
+		{
+			printf("couscous: fork: Resource temporarily unavailable\n");
+			break ;
+		}
 		else if (minishell->pids[i] == 0)
 			child(minishell, i);
+		close_fd2(minishell, i);
 		i += 1;
 	}
 	closefd(minishell, i + 1);
-	wait_exec(minishell);
-	signal(SIGINT, handle_signals);
-	signal(SIGQUIT, SIG_IGN);
-	free(minishell->pids);
 }

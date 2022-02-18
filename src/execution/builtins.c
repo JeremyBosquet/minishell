@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:32:32 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 15:40:36 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void
 	int	return_value;
 
 	return_value = 0;
-	if (ft_strcmp(command, "exit") == 0 AND minishell->number_of_commands == 1)
-		builtin_exit(minishell, i);
+	if (ft_strcmp(command, "exit") == 0)
+		builtin_exit2(minishell, i);
 	else if (ft_strcmp(command, "pwd") == 0)
 		builtin_pwd(minishell, i);
 	else if (ft_strcmp(command, "env") == 0)

@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:38:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 14:50:02 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 15:47:44 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ static int
 			{
 				minishell->environnement = add_to_environnement(\
 				minishell->environnement, command[i], minishell->garbage);
-				if (find_line_of_name2(minishell->env_export, command[i]) == -1)
-					minishell->env_export = add_to_export(\
-					minishell->env_export, command[i], minishell->garbage);
+				minishell->env_export = add_to_export(\
+				minishell->env_export, command[i], minishell->garbage);
 			}
 		}
 		else

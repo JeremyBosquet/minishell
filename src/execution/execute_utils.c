@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:50:17 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/16 22:29:56 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 17:17:59 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,31 @@ void
 	are_signal = false;
 	while (i < minishell->number_of_commands)
 	{
-		waitpid(minishell->pids[i++], &status, WUNTRACED);
-		if (WIFEXITED(status))
+		if (waitpid(minishell->pids[i++], &status, WUNTRACED) == -1)
+		{
+			printf("couscous: waitpid failed\n");
+			break ;
+		}
+		else if (WIFEXITED(status))
 			g_exit_code = WEXITSTATUS(status);
-		if (WIFSIGNALED(status) && are_signal == false)
+		else if (WIFSIGNALED(status) && are_signal == false)
 		{
 			signal_child(WTERMSIG(status));
 			are_signal = true;
 		}
+	}
+}
+
+void
+	close_fd2(t_minishell *minishell, int i)
+{
+	if (i <= 0)
+		return ;
+	else if (i == 1)
+		close(minishell->commands[i - 1].pipes[1]);
+	else
+	{
+		close(minishell->commands[i - 1].pipes[1]);
+		close(minishell->commands[i - 2].pipes[0]);
 	}
 }

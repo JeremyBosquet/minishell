@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:17:18 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/17 10:59:54 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 16:18:46 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char
 	if (memo)
 		string = ft_strfjoin(string, memo, 3, minishell->garbage);
 	free(tmp2);
+	free(subline);
 	return (string);
 }
 
