@@ -1,6 +1,6 @@
 ##	~~	Compilations -----------------------------------------------------------
 
-DEBUG_MODE			:=	yes
+DEBUG_MODE			:= no
 
 override	RL_LIB	:= -L$(shell brew --prefix readline)/lib
 override	RL_INC	:= -I$(shell brew --prefix readline)/include

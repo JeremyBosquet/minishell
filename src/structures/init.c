@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 20:39:51 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int
 
 	line = get_env_value("SHLVL", minishell);
 	if (line == NULL)
-		return (-1);
+		return (0);
 	number = ft_atoi(line);
 	if (number > 999)
 	{
@@ -64,16 +64,19 @@ bool
 	minishell->pids = NULL;
 	minishell->number_of_commands = 0;
 	minishell->garbage = NULL;
+	minishell->current_pwd = getcwd(NULL, 0);
+	if (minishell->current_pwd == NULL)
+		return (false);
 	minishell->environnement = copy_environnement(envp, 0, \
+	minishell->garbage);
+	minishell->environnement = add_to_environnement(minishell->environnement, \
+	ft_strjoin("PWD=", minishell->current_pwd, minishell->garbage), \
 	minishell->garbage);
 	minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, "OLDPWD", minishell->garbage);
 	set_shlvl(minishell);
 	minishell->env_export = copy_environnement(minishell->environnement, 0, \
 	minishell->garbage);
-	minishell->current_pwd = getcwd(NULL, 0);
-	if (minishell->current_pwd == NULL)
-		return (false);
 	g_exit_code = 0;
 	minishell->is_running = true;
 	return (true);

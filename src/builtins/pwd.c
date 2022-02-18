@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:30:39 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 20:18:24 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void
 		if (minishell->commands[i].command[1][0] == '-')
 			error_exe(minishell->commands[i].command[0], \
 			minishell->commands[i].command[1], "invalid option", 1);
+	free(minishell->current_pwd);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		pwd = ft_strdup(minishell->current_pwd, minishell->garbage);
