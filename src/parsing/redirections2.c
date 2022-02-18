@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 13:34:54 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 14:33:55 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static char
 		if (!final)
 			final = ft_strdup("", minishell->garbage);
 		final = ft_strfjoin(final, new_line, 3, minishell->garbage);
-		if (final == NULL)
-			return (NULL);
 	}
 	return (final);
 }
