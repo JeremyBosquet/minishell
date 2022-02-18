@@ -12,12 +12,18 @@ include		config/sources.mk
 override	CFLAGS			+=	$(sort $(addprefix -I./, $(dir ${HEADERS})))
 override	OBJS			:=	$(addprefix ${BINARIES_DIRECTORY}/, ${SOURCES:.c=.o})
 
+override	EXTENSIONS		:=	\
+	config/compilations.mk		\
+	config/prints.mk			\
+	config/properties.mk		\
+	config/sources.mk
+
 ##	~~	Rules ------------------------------------------------------------------
 
 .PHONY: all
 all: ${NAME}
 
-bin/%.o:	${SOURCES_DIRECTORY}/%.c ${HEADERS} Makefile
+bin/%.o:	${SOURCES_DIRECTORY}/%.c ${HEADERS} Makefile ${EXTENSIONS}
 	${MKDIR} $(dir $@)
 	${CC} ${CFLAGS} -c $< -o $@
 	${PRINT_COMPILING}
