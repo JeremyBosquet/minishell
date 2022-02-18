@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 23:16:03 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 17:14:11 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 19:51:49 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int
 	int	i;
 
 	i = 0;
-	if (!first_string)
+	if (first_string == NULL)
 		return (EXIT_FAILURE);
 	while (first_string[i] != EOS AND second_string[i] != EOS \
 	AND first_string[i] == second_string[i])

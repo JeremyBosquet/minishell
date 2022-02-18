@@ -6,7 +6,7 @@
 /*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 21:40:24 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 19:09:16 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:54:13 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char
 	char	*final;
 
 	final = NULL;
-	while (ft_strcmp(new_line, minishell->commands[i].command[j + 1]) != 0)
+	while (1)
 	{
 		new_line = readline("> ");
 		if (!new_line)

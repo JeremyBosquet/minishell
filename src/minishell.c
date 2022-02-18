@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 13:38:22 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 19:51:26 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void
 	i = 0;
 	while (i < minishell->number_of_commands)
 	{
-		if (access(minishell->commands[i].file_in, F_OK) == 0 && \
-		minishell->commands[i].type_infile == HEREDOC \
+		if (minishell->commands[i].type_infile == HEREDOC \
+		&& access(minishell->commands[i].file_in, F_OK) == 0 \
 		&& unlink(minishell->commands[i].file_in) != 0)
 			perror("unlink error");
 		if (minishell->commands[i].file_in)
