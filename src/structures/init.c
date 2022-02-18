@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:41:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 20:39:51 by jbosquet         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:24:46 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static void
 bool
 	init_minishell(t_minishell *minishell, char	**envp)
 {
+	char	*tmp;
+
 	minishell->commands = NULL;
 	minishell->pids = NULL;
 	minishell->number_of_commands = 0;
@@ -69,9 +71,10 @@ bool
 		return (false);
 	minishell->environnement = copy_environnement(envp, 0, \
 	minishell->garbage);
+	tmp = ft_strjoin("PWD=", minishell->current_pwd, minishell->garbage);
 	minishell->environnement = add_to_environnement(minishell->environnement, \
-	ft_strjoin("PWD=", minishell->current_pwd, minishell->garbage), \
-	minishell->garbage);
+	tmp, minishell->garbage);
+	free(tmp);
 	minishell->environnement = delete_line_in_environnement(\
 	minishell->environnement, "OLDPWD", minishell->garbage);
 	set_shlvl(minishell);
