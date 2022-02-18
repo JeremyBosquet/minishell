@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:15:41 by jbosquet          #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 13:41:51 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,17 @@ void
 	char	**line_cmds;
 	char	***cmds_split;
 	int		j;
+	char	*line;
 
 	j = 0;
-	new_line = check_new_line(new_line, minishell->garbage);
-	if (new_line == NULL)
+	line = ft_strdup(new_line, minishell->garbage);
+	line = check_new_line(line, minishell->garbage);
+	if (line == NULL)
 	{
 		g_exit_code = 258;
 		return ;
 	}
-	line_cmds = ft_split_with_quotes(new_line, '|', minishell->garbage);
+	line_cmds = ft_split_with_quotes(line, '|', minishell->garbage);
 	if (!line_cmds)
 		return ;
 	replace_env(line_cmds, minishell);
@@ -117,6 +119,6 @@ void
 		return ;
 	}
 	fill_struct(minishell, cmds_split, minishell->garbage);
-	free(new_line);
+	free(line);
 	redirections(minishell, j);
 }

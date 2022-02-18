@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 10:26:53 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 13:51:27 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,11 @@ static void
 	signal(SIGQUIT, NULL);
 	closefd(minishell, i);
 	duplicate_filedescriptor(minishell, i);
-	if ((minishell->commands[i].command[0] == NULL \
-	OR minishell->commands[i].do_run == false) \
+	if (minishell->commands[i].do_run == false \
 	AND minishell->commands[i].type_infile == HEREDOC)
 		exit(g_exit_code);
+	else if (minishell->commands[i].command[0] == NULL)
+		exit(0);
 	if (minishell->commands[i].command[0] == NULL)
 	{
 		j += 1;
@@ -126,6 +127,7 @@ void
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	print_commands(minishell);
 	while (i < minishell->number_of_commands)
 	{
 		if (pipe(minishell->commands[i].pipes) == -1)

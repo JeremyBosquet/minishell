@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 10:05:50 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 13:38:22 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ static void
 		new_line = readline(ORANGE"couscous-0.1$ "END);
 		if (new_line == NULL)
 			break ;
-		add_history(new_line);
 		if (new_line[0] != '\0')
+		{
+			add_history(new_line);
 			parse_new_line(minishell, new_line);
+		}
 		if (minishell->number_of_commands == 1 \
 		AND is_special_builtins(minishell->commands[0].command[0]) == true)
 			execute_special_builtins(minishell);

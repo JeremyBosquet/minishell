@@ -30,6 +30,8 @@ char
 	int		size;
 
 	size = ft_strlen(string) + 1;
+	if (size == 1)
+		return (NULL);
 	new = ft_calloc(size, sizeof(char), garbage);
 	if (new == NULL)
 		return (NULL);
