@@ -13,7 +13,7 @@ override	CFLAGS			+=	$(sort $(addprefix -I./, $(dir ${HEADERS})))
 override	OBJS			:=	$(addprefix ${BINARIES_DIRECTORY}/, ${SOURCES:.c=.o})
 
 override	EXTENSIONS		:=	\
-	config/compilations.mk		\
+	config/compilation.mk		\
 	config/prints.mk			\
 	config/properties.mk		\
 	config/sources.mk
