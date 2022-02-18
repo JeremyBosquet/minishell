@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:12:18 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 13:20:45 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 10:05:50 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void
 	while (i < minishell->number_of_commands)
 	{
 		if (access(minishell->commands[i].file_in, F_OK) == 0 && \
-		unlink(minishell->commands[i].file_in) != 0)
+		minishell->commands[i].type_infile == HEREDOC \
+		&& unlink(minishell->commands[i].file_in) != 0)
 			perror("unlink error");
 		if (minishell->commands[i].file_in)
 			free(minishell->commands[i].file_in);
