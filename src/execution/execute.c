@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/17 18:57:50 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/02/18 10:19:48 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static void
 static void
 	duplicate_filedescriptor(t_minishell *minishell, int i)
 {
+	if (minishell->commands[i].do_open_in == false)
+		error_exe(minishell->commands[i].file_in, NULL, \
+		"No such file or directory", 1);
 	if (minishell->commands[i].file_in != NULL)
 		duplicate_redirection(minishell, i, 0, \
 		minishell->commands[i].type_infile);
