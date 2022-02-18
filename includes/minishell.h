@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:09:26 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 17:12:28 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 19:10:14 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ char
 
 void
 replace_env(char **tabs, t_minishell *minishell);
+
+char
+*replace_values(char *string, t_minishell *minishell);
 
 void
 replace_quotes(char ***tabs, t_minishell *minishell);

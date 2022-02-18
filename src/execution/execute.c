@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jbosquet <jbosquet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:27:20 by mmosca            #+#    #+#             */
-/*   Updated: 2022/02/18 17:13:58 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/02/18 19:13:16 by jbosquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	print_commands(minishell);
 	while (i < minishell->number_of_commands)
 	{
 		if (pipe(minishell->commands[i].pipes) == -1)
