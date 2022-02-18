@@ -27,9 +27,9 @@
 # define OR ||
 # define EOS '\0'
 
-# define debug print_debug(__LINE__, __FILE__)
-# define sdebug(x) print_debug_str(x, __LINE__, __FILE__)
-# define idebug(x) print_debug_int(x, __LINE__, __FILE__)
+//# define debug print_debug(__LINE__, __FILE__)
+//# define sdebug(x) print_debug_str(x, __LINE__, __FILE__)
+//# define idebug(x) print_debug_int(x, __LINE__, __FILE__)
 
 # define RED "\033[0;31m"
 # define ORANGE "\033[0;33m"
